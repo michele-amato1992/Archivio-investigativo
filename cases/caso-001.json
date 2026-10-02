@@ -215,46 +215,46 @@
     {
       "id": "lounge",
       "name": "Business lounge",
-      "description": "La business lounge è stata usata da Andrea nelle ore precedenti al delitto. Postazioni di lavoro e documenti possono ricostruire ciò su cui stava indagando.",
+      "description": "La business lounge dispone di una vera postazione di lavoro con portatile, stampante e distruggidocumenti. Gli oggetti sono ora visibili nella scena e possono essere esaminati direttamente.",
       "hotspots": [
         {
           "id": "laptop",
           "label": "1",
           "title": "Portatile di Andrea",
-          "description": "Il computer è protetto da password, ma il tecnico aziendale può acquisirne un'immagine forense senza alterare i dati.",
-          "x": 23,
-          "y": 48,
+          "description": "Il computer portatile è ancora aperto sulla postazione di lavoro. Il tecnico aziendale può acquisirne un'immagine forense senza alterare i dati.",
+          "x": 14,
+          "y": 39,
+          "w": 17,
+          "h": 18,
           "unlocks": [
             "victim-laptop"
-          ],
-          "w": 20,
-          "h": 19
+          ]
         },
         {
           "id": "printer",
           "label": "2",
-          "title": "Coda della stampante",
-          "description": "Alle 22:12 Andrea ha stampato un documento di otto pagine intitolato «Riconciliazione fornitori Q3». Le copie cartacee non sono più nella vaschetta.",
-          "x": 62,
-          "y": 35,
+          "title": "Stampante della lounge",
+          "description": "La stampante è accanto al portatile. Nel registro interno risulta un documento inviato da Andrea alle 22:12: «Riconciliazione fornitori Q3», otto pagine. Le copie cartacee non sono più nella vaschetta.",
+          "x": 31,
+          "y": 34,
+          "w": 16,
+          "h": 18,
           "unlocks": [
             "printer-log"
-          ],
-          "w": 17,
-          "h": 23
+          ]
         },
         {
           "id": "shredder",
           "label": "3",
-          "title": "Distruggidocumenti",
-          "description": "Tra i frammenti si ricompongono parti di fatture intestate a una società chiamata M.E.C. Servizi.",
-          "x": 10,
-          "y": 58,
+          "title": "Distruggidocumenti sotto la scrivania",
+          "description": "Il distruggidocumenti è sotto il lato destro della scrivania. Nel cestello sono visibili strisce di carta che, ricomposte, mostrano frammenti di fatture intestate a M.E.C. Servizi.",
+          "x": 46,
+          "y": 61,
+          "w": 9,
+          "h": 25,
           "unlocks": [
             "mec-fragments"
-          ],
-          "w": 15,
-          "h": 29
+          ]
         }
       ],
       "image": "assets/locations/lounge.png"

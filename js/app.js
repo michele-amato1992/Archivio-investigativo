@@ -207,9 +207,13 @@
       const top = hasBox ? Number(h.y) : Number(h.y) - 4;
       const width = hasBox ? Number(h.w) : 6;
       const height = hasBox ? Number(h.h) : 8;
-      return `<button class="hotspot-region ${examined ? 'examined' : ''}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${left}%;top:${top}%;width:${width}%;height:${height}%" aria-label="Individua ${escapeHtml(h.title || h.label)}">
+      const tipClasses = [
+        top < 18 ? 'tip-below' : '',
+        left < 12 ? 'tip-align-left' : '',
+        (left + width) > 88 ? 'tip-align-right' : ''
+      ].filter(Boolean).join(' ');
+      return `<button class="hotspot-region ${examined ? 'examined' : ''} ${tipClasses}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${left}%;top:${top}%;width:${width}%;height:${height}%" aria-label="Individua ${escapeHtml(h.title || h.label)}">
         <span class="hotspot-frame" aria-hidden="true"></span>
-        <span class="hotspot-tooltip"><strong>${escapeHtml(h.title || 'Elemento da esaminare')}</strong><small>${examined ? 'Già esaminato · clicca per rileggere' : 'Clicca per osservare'}</small></span>
       </button>`;
     }).join('');
 
@@ -229,7 +233,7 @@
           <div><span class="eyebrow">${escapeHtml(location.name || location.label || 'LUOGO')}</span><h3>${escapeHtml(location.name || location.label || 'Luogo')}</h3><p>${escapeHtml(location.description || 'Osservate attentamente la scena.')}</p></div>
           <button id="revealHotspots" class="scene-search-help" type="button" aria-pressed="false"><span>⌕</span> Aiuto ricerca</button>
         </div>
-        <div id="sceneBox" class="scene-box scene-search-mode">${bg}<div class="scene-vignette"></div>${hotspots}<div class="scan-instruction"><span>⌖</span><strong>Esplora la scena</strong><small>Muovi il puntatore sugli oggetti</small></div></div>
+        <div id="sceneBox" class="scene-box scene-search-mode">${bg}<div class="scene-vignette"></div>${hotspots}<div id="sceneHoverTip" class="scene-hover-tip" role="status" aria-live="polite"></div><div class="scan-instruction"><span>⌖</span><strong>Esplora la scena</strong><small>Muovi il puntatore sugli oggetti</small></div></div>
       </section>
       <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Nessun elemento selezionato</h3><p>Esplora la fotografia. Quando il cursore incontra un elemento investigabile, questo verrà evidenziato senza anticiparti ciò che nasconde.</p></div></div>
       <div id="sceneResult"></div>`;
@@ -237,7 +241,33 @@
     document.querySelectorAll('[data-location]').forEach(btn => btn.addEventListener('click', () => renderScene(btn.dataset.location)));
 
     const sceneBox = document.getElementById('sceneBox');
+    const hoverTip = document.getElementById('sceneHoverTip');
     const helpBtn = document.getElementById('revealHotspots');
+
+    const positionHoverTip = (btn, hotspot) => {
+      if (!sceneBox || !hoverTip || !btn || !hotspot) return;
+      const examined = GameState.data.examinedHotspots.includes(`${location.id}:${hotspot.id}`);
+      hoverTip.innerHTML = `<strong>${escapeHtml(hotspot.title || 'Elemento da esaminare')}</strong><small>${examined ? 'Già esaminato · clicca per rileggere' : 'Clicca per osservare'}</small>`;
+      hoverTip.classList.add('show');
+      requestAnimationFrame(() => {
+        const box = sceneBox.getBoundingClientRect();
+        const r = btn.getBoundingClientRect();
+        const tw = hoverTip.offsetWidth || 210;
+        const th = hoverTip.offsetHeight || 56;
+        const pad = 10;
+        const centerX = (r.left - box.left) + r.width / 2;
+        let left = centerX - tw / 2;
+        left = Math.max(pad, Math.min(left, box.width - tw - pad));
+        const above = (r.top - box.top) - th - 10;
+        const below = (r.bottom - box.top) + 10;
+        let top = above >= pad ? above : below;
+        if (top + th > box.height - pad) top = Math.max(pad, box.height - th - pad);
+        hoverTip.style.left = `${left}px`;
+        hoverTip.style.top = `${top}px`;
+        hoverTip.classList.toggle('below', above < pad);
+      });
+    };
+    const hideHoverTip = () => hoverTip?.classList.remove('show');
     helpBtn?.addEventListener('click', () => {
       const on = sceneBox.classList.toggle('reveal-search');
       helpBtn.setAttribute('aria-pressed', String(on));
@@ -245,8 +275,15 @@
       helpBtn.innerHTML = on ? '<span>×</span> Nascondi aiuto' : '<span>⌕</span> Aiuto ricerca';
     });
 
-    document.querySelectorAll('[data-hotspot]').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-hotspot]').forEach(btn => {
       const hotspot = (location.hotspots || []).find(h => h.id === btn.dataset.hotspot);
+      if (!hotspot) return;
+      btn.addEventListener('pointerenter', () => positionHoverTip(btn, hotspot));
+      btn.addEventListener('focus', () => positionHoverTip(btn, hotspot));
+      btn.addEventListener('pointerleave', hideHoverTip);
+      btn.addEventListener('blur', hideHoverTip);
+      btn.addEventListener('click', () => {
+      hideHoverTip();
       if (!hotspot) return;
       document.querySelectorAll('.hotspot-region').forEach(x => x.classList.remove('selected'));
       btn.classList.add('selected');
@@ -279,7 +316,8 @@
         const tab = document.querySelector(`[data-location="${CSS.escape(location.id)}"] small`);
         if (tab) tab.textContent = `${count} esaminati`;
       });
-    }));
+      });
+    });
   }
 
   function renderEvidence() {

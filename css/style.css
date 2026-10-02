@@ -366,3 +366,36 @@ body{background:linear-gradient(180deg,#080b10 0%,#070a0e 100%);}
   .scan-instruction{left:9px;bottom:9px;max-width:calc(100% - 18px);}
   .hotspot-region .hotspot-tooltip{max-width:155px;white-space:normal;}
 }
+
+.hotspot-region .hotspot-tooltip::after{
+  content:"";position:absolute;left:24px;top:100%;border:6px solid transparent;border-top-color:#4a5660;
+}
+.hotspot-region.tip-below .hotspot-tooltip{bottom:auto;top:calc(100% + 10px);transform:translateY(-4px);}
+.hotspot-region.tip-below:hover .hotspot-tooltip,.hotspot-region.tip-below:focus-visible .hotspot-tooltip,.hotspot-region.tip-below.selected .hotspot-tooltip{transform:translateY(0);}
+.hotspot-region.tip-below .hotspot-tooltip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#4a5660;}
+.hotspot-region.tip-align-left .hotspot-tooltip{left:-1px;transform:translateY(6px);}
+.hotspot-region.tip-align-left:hover .hotspot-tooltip,.hotspot-region.tip-align-left:focus-visible .hotspot-tooltip,.hotspot-region.tip-align-left.selected .hotspot-tooltip{transform:translateY(0);}
+.hotspot-region.tip-align-left .hotspot-tooltip::after{left:18px;transform:none;}
+.hotspot-region.tip-align-right .hotspot-tooltip{left:auto;right:-1px;transform:translateY(6px);}
+.hotspot-region.tip-align-right:hover .hotspot-tooltip,.hotspot-region.tip-align-right:focus-visible .hotspot-tooltip,.hotspot-region.tip-align-right.selected .hotspot-tooltip{transform:translateY(0);}
+.hotspot-region.tip-align-right .hotspot-tooltip::after{left:auto;right:18px;transform:none;}
+.hotspot-region.tip-below.tip-align-left .hotspot-tooltip,.hotspot-region.tip-below.tip-align-right .hotspot-tooltip{transform:translateY(-4px);}
+.hotspot-region.tip-below.tip-align-left:hover .hotspot-tooltip,.hotspot-region.tip-below.tip-align-left:focus-visible .hotspot-tooltip,.hotspot-region.tip-below.tip-align-left.selected .hotspot-tooltip,.hotspot-region.tip-below.tip-align-right:hover .hotspot-tooltip,.hotspot-region.tip-below.tip-align-right:focus-visible .hotspot-tooltip,.hotspot-region.tip-below.tip-align-right.selected .hotspot-tooltip{transform:translateY(0);}
+
+/* V6.1 — tooltip sempre contenuto nella fotografia */
+.scene-hover-tip{
+  position:absolute;z-index:20;left:10px;top:10px;
+  width:max-content;max-width:min(260px,calc(100% - 20px));
+  padding:.56rem .72rem;border:1px solid #58646f;border-radius:8px;
+  background:rgba(6,10,14,.96);backdrop-filter:blur(10px);
+  color:#f6f0e5;box-shadow:0 14px 34px rgba(0,0,0,.48);
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(5px);
+  transition:opacity .12s ease,transform .12s ease,visibility .12s ease;
+  text-align:left;
+}
+.scene-hover-tip.show{opacity:1;visibility:visible;transform:translateY(0)}
+.scene-hover-tip strong{display:block;font-size:.8rem;line-height:1.25}
+.scene-hover-tip small{display:block;margin-top:.18rem;color:#9ca6af;font-size:.67rem;font-weight:600}
+/* I vecchi tooltip interni vengono disattivati: il tooltip flottante viene clamped via JS. */
+.hotspot-region>.hotspot-tooltip{display:none!important}
+@media(max-width:620px){.scene-hover-tip{max-width:min(210px,calc(100% - 20px));white-space:normal}}

@@ -1,8 +1,12 @@
-# Archivio Investigativo — V6
+# Archivio Investigativo — V6.1
 
 Portale web cooperativo per casi investigativi, pensato per essere giocato da un gruppo su un unico PC, tablet o telefono.
 
-## Novità V6
+## Novità V6.1
+
+- Tooltip degli hotspot ora **sempre contenuti nella fotografia**: vengono posizionati dinamicamente e non possono più uscire/tagliarsi sopra o ai lati della scena.
+- Business lounge rifatta con una nuova immagine coerente: **portatile, stampante e distruggidocumenti sono realmente visibili** e gli hotspot coincidono con gli oggetti.
+- Testi della lounge aggiornati per corrispondere esattamente alla scena.
 
 - Scene fotografiche realistiche per Stanza 317, bar, corridoio e business lounge.
 - Nessun marker numerato visibile sulle scene.
