@@ -97,7 +97,7 @@ const Investigation = {
     return steps.slice(0, 4);
   },
 
-  checkAccusation(suspectId, motive, method) {
+  checkAccusation(suspectId, motive, method, timeWindow = '', decisiveEvidenceId = '') {
     const solution = this.caseData.solution;
     const missingRequired = (solution.requiredEvidenceIds || []).filter(id => !this.hasEvidence(id));
     if (missingRequired.length) {
@@ -115,7 +115,12 @@ const Investigation = {
     const methodKeywords = solution.methodKeywords || [];
     const motiveOk = motiveKeywords.some(k => k && motiveText.includes(normalize(k)));
     const methodOk = !methodKeywords.length || methodKeywords.some(k => k && methodText.includes(normalize(k)));
-    const success = correctSuspect && motiveOk && methodOk;
+    const timeText = normalize(timeWindow);
+    const timeKeywords = solution.timeKeywords || [];
+    const timeOk = !timeKeywords.length || timeKeywords.some(k => k && timeText.includes(normalize(k)));
+    const decisiveIds = solution.decisiveEvidenceIds || [];
+    const decisiveOk = !decisiveIds.length || decisiveIds.includes(decisiveEvidenceId);
+    const success = correctSuspect && motiveOk && methodOk && timeOk && decisiveOk;
 
     if (success) {
       GameState.data.solved = true;

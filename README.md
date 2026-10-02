@@ -1,84 +1,20 @@
-# Archivio Investigativo — V4
+# Archivio Investigativo — V5
 
-Portale web statico per casi investigativi cooperativi, pensato per essere giocato da un gruppo su un solo PC, tablet o telefono.
+Portale investigativo cooperativo da usare su un unico PC, tablet o telefono e pubblicabile con GitHub Pages.
 
-## Novità V4
+## Novità V5
 
-- nuova grafica scura e professionale
-- immagini illustrate per i luoghi investigabili
-- hotspot visibili direttamente sulle scene
-- guida "Come si gioca" sempre accessibile
-- tutorial al primo accesso a un caso
-- sezione "Cosa fare adesso" con suggerimenti non risolutivi
-- Appunti di squadra con salvataggio automatico
-- campi separati per teoria, contraddizioni, domande aperte e movente
-- valutazione manuale di ogni sospettato
-- salvataggi separati per ogni caso nel browser
-- modalità cooperativa su un solo dispositivo
+- **Caso 001: La stanza 317** rifinito come caso completo da 90–120 minuti.
+- Sei sospettati con bugie e segreti che non coincidono automaticamente con la colpevolezza.
+- Nuove piste secondarie e nuovi elementi di verifica per Laura, Tommaso ed Elisa.
+- Nuova testimonianza dalla camera 315.
+- Interrogatori: le domande non ancora sbloccate sono ora **invisibili**, quindi il gioco non anticipa quali prove esistono.
+- Accusa finale più completa: responsabile, movente, metodo, finestra temporale e prova decisiva.
+- La sezione Accusa mostra solo il numero di reperti acquisiti, senza rivelare il totale delle prove presenti nel caso.
+- Salvataggi separati V5, con migrazione automatica dai salvataggi V4/V3/V2.
 
 ## Pubblicazione su GitHub Pages
 
-Sostituisci nel repository i file/cartelle della versione precedente con quelli contenuti in questa V4.
+Sostituisci i file del repository con il contenuto di questa cartella. Poi fai commit. GitHub Pages pubblicherà automaticamente la nuova versione.
 
-I file principali modificati sono:
-
-- `index.html`
-- `css/style.css`
-- `js/app.js`
-- `js/game-state.js`
-- `js/investigation.js`
-- `cases/caso-001.json`
-- `cases/caso-002.json`
-- `assets/ui/archive-bg.svg`
-- `assets/locations/room317.svg`
-- `assets/locations/bar.svg`
-- `assets/locations/corridor.svg`
-- `assets/locations/lounge.svg`
-- `assets/locations/taxi.svg`
-
-## Struttura dei casi
-
-`cases/index.json` contiene il catalogo.
-
-Ogni caso è un file JSON indipendente, ad esempio:
-
-- `cases/caso-001.json`
-- `cases/caso-002.json`
-
-Per aggiungere un nuovo caso crea un nuovo JSON e aggiungilo al catalogo.
-
-## Immagini delle scene
-
-Ogni luogo può avere una proprietà `image`:
-
-```json
-{
-  "id": "room317",
-  "name": "Stanza 317",
-  "image": "assets/locations/room317.svg"
-}
-```
-
-Gli hotspot usano coordinate percentuali `x` e `y`, quindi rimangono posizionati correttamente anche quando l'immagine cambia dimensione.
-
-## Salvataggi
-
-Lo stato viene salvato nel `localStorage` del browser. Il salvataggio include:
-
-- prove scoperte
-- hotspot esaminati
-- interrogatori effettuati
-- analisi eseguite
-- appunti della squadra
-- valutazioni dei sospettati
-- stato risolto/non risolto
-
-Non è necessario alcun backend per questa versione.
-
-
-## Novità V4
-- Tooltip nominativi sui marker delle scene.
-- Su touch: il primo tap seleziona l'elemento, poi si preme “Esamina elemento”.
-- Le prove non ancora scoperte non vengono più mostrate.
-- I nuovi reperti vengono evidenziati con badge NUOVO e notifica di scoperta.
-- Nuovo fascicolo/dashboard e restyling completo delle scene e dei reperti.
+Se avevi già iniziato il Caso 001, usa **Ricomincia caso** per testare la V5 da zero.

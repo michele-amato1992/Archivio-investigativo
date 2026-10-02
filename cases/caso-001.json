@@ -4,7 +4,7 @@
   "location": "Hotel Vesuvio Blu, Napoli",
   "timeFound": "23:42",
   "briefing": "Andrea Romano, socio fondatore della Romano & Esposito Consulting, viene trovato morto nella stanza 317 durante un congresso aziendale. La porta era chiusa, sul comodino ci sono due bicchieri e diverse persone presenti in hotel avevano ragioni per temere ciò che Andrea avrebbe annunciato la mattina seguente. Le prime testimonianze non coincidono.",
-  "instructions": "Il caso è pensato per essere risolto esplorando i luoghi, facendo analizzare le prove e tornando più volte sugli interrogatori. Non tutte le bugie indicano un omicida.",
+  "instructions": "Il caso è pensato per una squadra che gioca su un unico dispositivo. Esplorate, annotate, confrontate gli alibi e tornate sugli interrogatori quando emergono nuove contraddizioni. Non tutto ciò che viene nascosto riguarda l'omicidio.",
   "objectives": [
     "Identificare l'assassino",
     "Stabilire il vero movente",
@@ -171,6 +171,17 @@
           "unlocks": [
             "key-audit"
           ]
+        },
+        {
+          "id": "guest315",
+          "label": "4",
+          "title": "Camera 315",
+          "description": "L’ospite della camera 315 riferisce di aver sentito due voci maschili nel corridoio poco dopo le 23:10, senza vedere chi fosse nella 317.",
+          "x": 88,
+          "y": 58,
+          "unlocks": [
+            "corridor-witness"
+          ]
         }
       ],
       "image": "assets/locations/corridor.svg"
@@ -218,6 +229,13 @@
     }
   ],
   "evidence": [
+    {
+      "id": "scene-report",
+      "title": "Verbale di primo intervento",
+      "category": "VERBALE",
+      "initial": true,
+      "description": "Ore 23:42: il personale dell’hotel entra nella 317 dopo una segnalazione. Andrea Romano è a terra accanto al letto. La porta non presenta segni di effrazione; nella stanza ci sono due bicchieri, una bottiglietta di amaro aperta e lo smartphone della vittima."
+    },
     {
       "id": "cause",
       "title": "Primo esame medico-legale",
@@ -292,7 +310,8 @@
         "label": "Invia al laboratorio",
         "result": "Nel contenuto residuo viene trovato il medesimo glicoside cardiaco. La contaminazione è concentrata nella bottiglietta, non nelle altre bevande del minibar.",
         "unlocks": [
-          "bitter-residue"
+          "bitter-residue",
+          "cap-trace"
         ]
       }
     },
@@ -478,6 +497,41 @@
       "category": "TESTIMONIANZA",
       "description": "Confrontato con log Wi-Fi e videoconferenza, Marco ammette di essere salito al terzo piano ma sostiene di aver solo cercato Andrea senza entrare nella 317.",
       "initial": false
+    },
+    {
+      "id": "laura-envelope",
+      "title": "Busta recuperata da Laura",
+      "category": "DOCUMENTO",
+      "initial": false,
+      "description": "Laura ammette di aver preso dalla scrivania una busta con bozze relative alla separazione. Il gesto spiega perché aveva negato di essere salita nella 317, ma il contenuto non riguarda M.E.C. né la morte di Andrea."
+    },
+    {
+      "id": "tommaso-admission",
+      "title": "Ammissione di Tommaso",
+      "category": "TESTIMONIANZA",
+      "initial": false,
+      "description": "Tommaso ammette di aver sottratto alcune pagine dalla stampante della lounge per proteggere una fonte. I frammenti mancanti riguardano irregolarità aziendali generiche, non la sostanza trovata nella stanza."
+    },
+    {
+      "id": "elisa-alibi",
+      "title": "Alibi verificato di Elisa",
+      "category": "REGISTRO",
+      "initial": false,
+      "description": "Il gestionale reception registra operazioni effettuate con le credenziali personali di Elisa dalle 23:09 alle 23:31. Una telecamera interna la mostra al banco nello stesso intervallo."
+    },
+    {
+      "id": "cap-trace",
+      "title": "Traccia sul tappo dell’amaro",
+      "category": "LABORATORIO",
+      "initial": false,
+      "description": "La traccia sul tappo è troppo incompleta per un’identificazione certa. Il laboratorio può però escludere Laura, Sara e Davide. Da sola non consente di attribuire il reperto a Marco."
+    },
+    {
+      "id": "corridor-witness",
+      "title": "Testimonianza ospite camera 315",
+      "category": "TESTIMONIANZA",
+      "initial": false,
+      "description": "Un ospite ricorda di aver sentito due voci maschili provenire dalla zona della 317 poco dopo le 23:10, senza riuscire a distinguere le parole né vedere chi fosse presente."
     }
   ],
   "suspects": [
@@ -515,6 +569,18 @@
             "laura-admission"
           ],
           "answer": "Che non avrei più accettato di incontrarlo di nascosto per discutere della separazione. Il messaggio era rabbia, non una minaccia di morte."
+        },
+        {
+          "id": "envelope",
+          "question": "Hai preso qualcosa dalla stanza prima di andartene?",
+          "requiresEvidence": [
+            "laura-admission",
+            "torn-note"
+          ],
+          "answer": "Sì. Ho preso una busta dalla scrivania. Non volevo che Andrea usasse quei documenti contro di me nella separazione. Non c’entrano con i suoi conti aziendali.",
+          "unlocks": [
+            "laura-envelope"
+          ]
         }
       ]
     },
@@ -576,6 +642,18 @@
           "unlocks": [
             "marco-search"
           ]
+        },
+        {
+          "id": "final",
+          "question": "Andrea era ancora vivo alle 23:23, ma tu eri stato al terzo piano pochi minuti prima. Hai toccato la bottiglietta di amaro?",
+          "requiresEvidence": [
+            "accountant-message",
+            "bitter-residue",
+            "marco-wifi",
+            "financial-shell"
+          ],
+          "answer": "No. Sono salito per parlargli, questo ormai lo sapete. Ma non ho toccato niente. Se aveva qualcosa nel bicchiere, non sono stato io a mettercelo.",
+          "note": "Marco ammette la presenza ma continua a negare il contatto con la bevanda."
         }
       ]
     },
@@ -651,6 +729,17 @@
             "key-audit"
           ],
           "answer": "No. Questo significa che Andrea ha fatto entrare personalmente chiunque fosse con lui. La porta poi si richiude da sola."
+        },
+        {
+          "id": "desk",
+          "question": "Puoi dimostrare di essere rimasta alla reception?",
+          "requiresEvidence": [
+            "key-audit"
+          ],
+          "answer": "Controllate il gestionale e la telecamera dietro il banco. Ho lavorato tutta la sera con le mie credenziali.",
+          "unlocks": [
+            "elisa-alibi"
+          ]
         }
       ]
     },
@@ -675,6 +764,18 @@
             "mec-fragments"
           ],
           "answer": "Sì. Era proprio il nome che Andrea mi aveva fatto. Mi disse che il problema non era un dipendente qualsiasi, ma qualcuno con potere di autorizzazione sui pagamenti."
+        },
+        {
+          "id": "printer",
+          "question": "Sei stato tu a prendere le pagine stampate da Andrea?",
+          "requiresEvidence": [
+            "printer-log",
+            "mec-fragments"
+          ],
+          "answer": "Ne ho prese alcune, sì. Andrea mi aveva promesso materiale su certe irregolarità e poi aveva cambiato idea. Ho fatto una sciocchezza, ma quando l’ho visto l’ultima volta era vivo.",
+          "unlocks": [
+            "tommaso-admission"
+          ]
         }
       ]
     }
@@ -728,6 +829,14 @@
       "requiresEvidence": [
         "elevator-cctv",
         "marco-wifi"
+      ]
+    },
+    {
+      "time": "23:10",
+      "title": "Due voci maschili nel corridoio",
+      "description": "Un ospite della 315 sente una conversazione nella zona della 317.",
+      "requiresEvidence": [
+        "corridor-witness"
       ]
     },
     {
@@ -816,7 +925,23 @@
       "draft-board"
     ],
     "notEnoughEvidence": "L'ipotesi può essere plausibile, ma non avete ancora raccolto tutti gli elementi indispensabili per sostenerla. Continuate a verificare tossicologia, spostamenti, alibi e documenti finanziari.",
-    "failureHint": "L'accusa non ricostruisce correttamente tutti i punti chiave. Verificate chi aveva un movente urgente prima delle 08:30, chi ha mentito sui propri spostamenti e quale bevanda è stata contaminata.",
-    "reveal": "Caso risolto. Marco Esposito ha ucciso Andrea per impedire che il mattino successivo denunciasse al consiglio i 180.000 euro di pagamenti verso M.E.C. Servizi. Tra le 23:07 e le 23:16 Marco era al terzo piano, non in videoconferenza come aveva dichiarato. Andrea lo ha fatto entrare personalmente; Marco ha contaminato la bottiglietta di amaro con il composto poi rilevato nel sangue e nel bicchiere. È uscito normalmente e la porta auto-bloccante si è richiusa alle sue spalle. Laura aveva davvero incontrato Andrea e aveva mentito, ma era già tornata al bar prima della finestra decisiva. Sara e Davide avevano a loro volta ragioni personali per nascondere informazioni, creando piste plausibili ma incompatibili con la sequenza completa delle prove. Il messaggio di Andrea delle 23:23 dimostra inoltre che era ancora vivo dopo la partenza di Marco e che la minaccia per Marco era imminente: la segnalazione al consiglio era prevista per le 08:30 del mattino seguente."
-  }
+    "failureHint": "La ricostruzione non è ancora sufficientemente supportata. Controllate insieme movente urgente, presenza al terzo piano, contaminazione della bevanda e l’ultimo messaggio inviato da Andrea.",
+    "reveal": "Caso risolto. Marco Esposito aveva il movente più urgente: Andrea stava per presentare al consiglio, alle 08:30 del mattino seguente, la documentazione sui 180.000 euro trasferiti a M.E.C. Servizi. Marco aveva mentito sul proprio alibi: telecamera e Wi‑Fi lo collocano al terzo piano tra le 23:07 e le 23:16, mentre la videoconferenza inizia solo alle 23:21. Andrea lo fece entrare personalmente, motivo per cui non compare alcun accesso con tessera. Durante l’incontro Marco contaminò la bottiglietta di amaro; Andrea bevve più tardi, dopo che Marco era già uscito. Il messaggio delle 23:23 al commercialista dimostra infatti che Andrea era ancora vivo dopo la partenza di Marco. Tossicologia, residuo nella bottiglietta e nel tumbler, falso alibi e documenti M.E.C. formano la catena probatoria. Laura, Sara, Tommaso ed Elisa avevano nascosto fatti reali, ma per ragioni diverse dall’omicidio.",
+    "timeKeywords": [
+      "23:07",
+      "23:16",
+      "23:10",
+      "prima delle 23:23",
+      "23:23"
+    ],
+    "decisiveEvidenceIds": [
+      "financial-shell",
+      "draft-board",
+      "bitter-residue",
+      "marco-wifi",
+      "marco-call-log",
+      "accountant-message"
+    ]
+  },
+  "caseVersion": "5.0"
 }

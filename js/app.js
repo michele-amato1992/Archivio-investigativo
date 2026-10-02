@@ -279,13 +279,11 @@
   function renderInterrogations() {
     const suspectBlocks = data.suspects.map(s => {
       const topics = s.interrogation || [];
-      const rows = topics.map(t => {
-        const available = Investigation.availableTopic(t);
+      const rows = topics.filter(t => Investigation.availableTopic(t)).map(t => {
         const asked = GameState.data.askedTopics.includes(`${s.id}:${t.id}`);
-        const requirements = (t.requiresEvidence || []).map(id => data.evidence.find(e => e.id === id)?.title || id).join(', ');
-        return `<div class="topic-row ${available ? '' : 'locked-topic'}">
-          <div><strong>${escapeHtml(t.question)}</strong>${!available ? `<small>Si sblocca trovando: ${escapeHtml(requirements)}</small>` : asked ? `<small>Già discusso</small>` : '<small>Nuova domanda disponibile</small>'}</div>
-          <button class="btn secondary ask-topic" type="button" data-suspect="${escapeHtml(s.id)}" data-topic="${escapeHtml(t.id)}" ${available ? '' : 'disabled'}>${asked ? 'Rileggi' : 'Chiedi'}</button>
+        return `<div class="topic-row">
+          <div><strong>${escapeHtml(t.question)}</strong>${asked ? `<small>Già discusso</small>` : '<small>Nuova domanda disponibile</small>'}</div>
+          <button class="btn secondary ask-topic" type="button" data-suspect="${escapeHtml(s.id)}" data-topic="${escapeHtml(t.id)}">${asked ? 'Rileggi' : 'Chiedi'}</button>
         </div>`;
       }).join('');
       return card(`<p class="eyebrow">INTERROGATORIO</p><h3>${escapeHtml(s.name)}</h3><p class="muted">${escapeHtml(s.relationship)}</p><div class="topic-list">${rows || '<p>Nessuna domanda disponibile.</p>'}</div><div id="answer-${escapeHtml(s.id)}"></div>`);
@@ -362,11 +360,18 @@
   }
 
   function renderAccusation() {
-    const evidenceCount = GameState.data.unlockedEvidence.length;
-    view.innerHTML = card(`<p class="eyebrow">CHIUSURA DEL CASO</p><h2>Accusa finale</h2><p>Indicate chi ha ucciso ${escapeHtml(data.victim.name)}, perché e con quale metodo. L'accusa viene accettata solo quando avete raccolto gli elementi chiave.</p><p class="muted">Prove raccolte: ${evidenceCount}/${data.evidence.length}</p><label for="culprit">Colpevole</label><select id="culprit">${data.suspects.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('')}</select><label for="accuseMotive">Movente</label><input id="accuseMotive" type="text" placeholder="Perché avrebbe ucciso la vittima?"><label for="method">Metodo / dinamica</label><input id="method" type="text" placeholder="Come è stato commesso l'omicidio?"><div class="actions"><button class="btn danger" id="accuseBtn" type="button">Formula accusa</button></div><div id="accuseResult"></div>`);
+    const unlockedEvidence = (data.evidence || []).filter(e => Investigation.hasEvidence(e.id));
+    const evidenceOptions = unlockedEvidence.map(e => `<option value="${escapeHtml(e.id)}">${escapeHtml(e.title)}</option>`).join('');
+    view.innerHTML = card(`<p class="eyebrow">CHIUSURA DEL CASO</p><h2>Accusa finale</h2><p>La squadra deve presentare una ricostruzione completa: responsabile, movente, metodo, finestra temporale e prova decisiva.</p><p class="muted">Reperti acquisiti: ${unlockedEvidence.length}. Il sistema non indica quante prove esistono complessivamente.</p><label for="culprit">Responsabile</label><select id="culprit">${data.suspects.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('')}</select><label for="accuseMotive">Movente</label><input id="accuseMotive" type="text" placeholder="Perché avrebbe dovuto uccidere Andrea?"><label for="method">Metodo / dinamica</label><input id="method" type="text" placeholder="Come è stato commesso l'omicidio?"><label for="timeWindow">Finestra temporale / momento chiave</label><input id="timeWindow" type="text" placeholder="Es. tra le 23:07 e le 23:16"><label for="decisiveEvidence">Prova che ritenete decisiva</label><select id="decisiveEvidence"><option value="">Seleziona una prova acquisita</option>${evidenceOptions}</select><div class="actions"><button class="btn danger" id="accuseBtn" type="button">Presenta ricostruzione</button></div><div id="accuseResult"></div>`);
     document.getElementById('accuseMotive').value = GameState.data.noteBoard?.motive || '';
     document.getElementById('accuseBtn').addEventListener('click', () => {
-      const result = Investigation.checkAccusation(document.getElementById('culprit').value, document.getElementById('accuseMotive').value, document.getElementById('method').value);
+      const result = Investigation.checkAccusation(
+        document.getElementById('culprit').value,
+        document.getElementById('accuseMotive').value,
+        document.getElementById('method').value,
+        document.getElementById('timeWindow').value,
+        document.getElementById('decisiveEvidence').value
+      );
       document.getElementById('accuseResult').innerHTML = `<div class="result ${result.success ? 'success' : 'fail'}">${escapeHtml(result.text)}</div>`;
     });
   }

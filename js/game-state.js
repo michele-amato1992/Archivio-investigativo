@@ -25,11 +25,11 @@ const GameState = {
   },
 
   key(caseId = this.caseId) {
-    return `case-files-state-v4-${caseId}`;
+    return `case-files-state-v5-${caseId}`;
   },
 
   legacyKeys(caseId = this.caseId) {
-    return [`case-files-state-v3-${caseId}`, `case-files-state-v2-${caseId}`];
+    return [`case-files-state-v4-${caseId}`, `case-files-state-v3-${caseId}`, `case-files-state-v2-${caseId}`];
   },
 
   load(caseId) {
