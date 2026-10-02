@@ -1,8 +1,8 @@
-# Archivio Investigativo — V6.1
+# Archivio Investigativo — V7
 
 Portale web cooperativo per casi investigativi, pensato per essere giocato da un gruppo su un unico PC, tablet o telefono.
 
-## Novità V6.1
+## Novità V7
 
 - Tooltip degli hotspot ora **sempre contenuti nella fotografia**: vengono posizionati dinamicamente e non possono più uscire/tagliarsi sopra o ai lati della scena.
 - Business lounge rifatta con una nuova immagine coerente: **portatile, stampante e distruggidocumenti sono realmente visibili** e gli hotspot coincidono con gli oggetti.
@@ -29,3 +29,11 @@ Dopo l'aggiornamento è consigliato usare **Ricomincia caso** per testare il Cas
 - `js/` — motore dell'indagine e salvataggio locale
 - `cases/` — catalogo e contenuti dei casi
 - `assets/locations/` — fotografie/illustrazioni delle scene
+
+
+## V7
+- Schede sospettati ridisegnate in stile dossier, con ritratti coerenti.
+- Interrogatori trasformati in verbali progressivi: le domande non disponibili restano invisibili.
+- Risposte già ottenute restano consultabili come trascrizione.
+- Reperti con simbologia visiva diversa per categoria.
+- Migliore leggibilità su PC, tablet e telefono.

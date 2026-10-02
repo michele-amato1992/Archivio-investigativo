@@ -28,6 +28,20 @@
     return data?.evidence?.find(e => e.id === id) || null;
   }
 
+  function evidenceSymbol(category = '') {
+    const key = String(category).toUpperCase();
+    const map = {
+      'VERBALE':'▤','MEDICO':'✚','DOCUMENTO':'▧','REPERTO':'◇','TELEFONO':'▣','DIGITALE':'⌘',
+      'TECNICO':'⌁','VIDEO':'▶','REGISTRO':'≡','LABORATORIO':'⚗','FINANZIARIO':'€','E-MAIL':'@',
+      'TESTIMONIANZA':'❝'
+    };
+    return map[key] || '◆';
+  }
+
+  function suspectImage(s) {
+    return s?.image ? `<img src="${escapeHtml(s.image)}" alt="Ritratto investigativo di ${escapeHtml(s.name)}">` : escapeHtml(initials(s?.name || ''));
+  }
+
   function showToast(title, text = '') {
     let toast = document.getElementById('discoveryToast');
     if (!toast) {
@@ -330,7 +344,7 @@
       const actionHtml = e.action ? `<button class="btn secondary evidence-action" data-evidence-action="${escapeHtml(e.id)}" type="button" ${actionDone ? 'disabled' : ''}>${actionDone ? 'Analisi completata' : escapeHtml(e.action.label)}</button>` : '';
       return `<article class="evidence-file ${isNew ? 'is-new' : ''}" data-evidence-card="${escapeHtml(e.id)}">
         <div class="evidence-file-top"><span class="evidence-code">REP-${String(index + 1).padStart(3,'0')}</span>${isNew ? '<span class="new-ribbon">NUOVO</span>' : `<span class="evidence-category">${escapeHtml(e.category || 'REPERTO')}</span>`}</div>
-        <div class="evidence-visual"><span>${escapeHtml((e.category || 'E').slice(0,1).toUpperCase())}</span><small>${escapeHtml(e.category || 'Reperto')}</small></div>
+        <div class="evidence-visual evidence-${escapeHtml(String(e.category || 'reperto').toLowerCase())}"><span>${escapeHtml(evidenceSymbol(e.category))}</span><small>${escapeHtml(e.category || 'Reperto')}</small><i aria-hidden="true"></i></div>
         <div class="evidence-content"><h3>${escapeHtml(e.title)}</h3><p>${escapeHtml(e.description)}</p>${actionHtml}${actionDone && e.action?.result ? `<div class="analysis-result"><span>RISULTATO ANALISI</span>${escapeHtml(e.action.result)}</div>` : ''}</div>
       </article>`;
     }).join('');
@@ -351,30 +365,46 @@
 
   function renderSuspects() {
     const statuses = GameState.data.noteBoard?.suspectStatuses || {};
-    view.innerHTML = `<div class="section-head"><div><p class="eyebrow">PERSONE DI INTERESSE</p><h2>Sospettati</h2><p class="muted">Il possibile movente non equivale a colpevolezza. Confrontate alibi e prove.</p></div></div><div class="grid">${data.suspects.map(s => card(`
-      <div class="suspect-head"><div class="suspect-avatar" aria-hidden="true">${escapeHtml(initials(s.name))}</div><div><h3>${escapeHtml(s.name)}</h3><span class="badge">${escapeHtml(statuses[s.id] || 'Da valutare')}</span></div></div>
-      <div class="suspect-meta"><span><strong>Età:</strong> ${escapeHtml(s.age)}</span><span><strong>Rapporto:</strong> ${escapeHtml(s.relationship)}</span><span><strong>Alibi dichiarato:</strong> ${escapeHtml(s.alibi)}</span><span><strong>Possibile movente:</strong> ${escapeHtml(s.motive)}</span>${s.note ? `<span class="muted">${escapeHtml(s.note)}</span>` : ''}</div>`, 'suspect-card')).join('')}</div>`;
+    view.innerHTML = `<div class="section-head"><div><p class="eyebrow">PERSONE DI INTERESSE</p><h2>Sospettati</h2><p class="muted">Il possibile movente non equivale a colpevolezza. Le schede raccolgono solo informazioni già note alla squadra.</p></div></div><div class="suspect-grid-v7">${data.suspects.map((s, idx) => {
+      const asked = (s.interrogation || []).filter(t => GameState.data.askedTopics.includes(`${s.id}:${t.id}`)).length;
+      const available = (s.interrogation || []).filter(t => Investigation.availableTopic(t) && !GameState.data.askedTopics.includes(`${s.id}:${t.id}`)).length;
+      return `<article class="suspect-dossier">
+        <div class="suspect-photo"><span class="suspect-index">SOG-${String(idx+1).padStart(2,'0')}</span>${suspectImage(s)}</div>
+        <div class="suspect-body">
+          <div class="suspect-title-row"><div><p class="eyebrow">PERSONA DI INTERESSE</p><h3>${escapeHtml(s.name)}</h3></div><span class="badge">${escapeHtml(statuses[s.id] || 'Da valutare')}</span></div>
+          <div class="suspect-facts"><span><small>ETÀ</small><strong>${escapeHtml(s.age)}</strong></span><span><small>RAPPORTO</small><strong>${escapeHtml(s.relationship)}</strong></span></div>
+          <div class="suspect-block"><small>ALIBI DICHIARATO</small><p>${escapeHtml(s.alibi)}</p></div>
+          <div class="suspect-block"><small>POSSIBILE MOVENTE</small><p>${escapeHtml(s.motive)}</p></div>
+          ${s.interviewProfile ? `<div class="suspect-profile"><small>PROFILO INTERROGATORIO</small><p>${escapeHtml(s.interviewProfile)}</p></div>` : ''}
+          <div class="suspect-foot"><span>${asked} domande verbalizzate</span>${available ? `<b>${available} nuove domande</b>` : '<span>Nessuna nuova domanda</span>'}</div>
+        </div>
+      </article>`;
+    }).join('')}</div>`;
   }
 
   function renderInterrogations() {
-    const suspectBlocks = data.suspects.map(s => {
+    const suspectBlocks = data.suspects.map((s, idx) => {
       const topics = s.interrogation || [];
-      const rows = topics.filter(t => Investigation.availableTopic(t)).map(t => {
-        const asked = GameState.data.askedTopics.includes(`${s.id}:${t.id}`);
-        return `<div class="topic-row">
-          <div><strong>${escapeHtml(t.question)}</strong>${asked ? `<small>Già discusso</small>` : '<small>Nuova domanda disponibile</small>'}</div>
-          <button class="btn secondary ask-topic" type="button" data-suspect="${escapeHtml(s.id)}" data-topic="${escapeHtml(t.id)}">${asked ? 'Rileggi' : 'Chiedi'}</button>
-        </div>`;
-      }).join('');
-      return card(`<p class="eyebrow">INTERROGATORIO</p><h3>${escapeHtml(s.name)}</h3><p class="muted">${escapeHtml(s.relationship)}</p><div class="topic-list">${rows || '<p>Nessuna domanda disponibile.</p>'}</div><div id="answer-${escapeHtml(s.id)}"></div>`);
+      const availableTopics = topics.filter(t => Investigation.availableTopic(t));
+      const askedTopics = availableTopics.filter(t => GameState.data.askedTopics.includes(`${s.id}:${t.id}`));
+      const pendingTopics = availableTopics.filter(t => !GameState.data.askedTopics.includes(`${s.id}:${t.id}`));
+      const transcript = askedTopics.map(t => `<div class="transcript-entry"><div class="transcript-q"><span>INVESTIGATORE</span><p>${escapeHtml(t.question)}</p></div><div class="transcript-a"><span>${escapeHtml(s.name.toUpperCase())}</span><p>${escapeHtml(t.answer)}</p>${t.note ? `<small>${escapeHtml(t.note)}</small>` : ''}</div></div>`).join('');
+      const rows = pendingTopics.map(t => `<button class="interview-question ask-topic" type="button" data-suspect="${escapeHtml(s.id)}" data-topic="${escapeHtml(t.id)}"><span>Nuova linea di domanda</span><strong>${escapeHtml(t.question)}</strong><i>→</i></button>`).join('');
+      return `<article class="interview-file">
+        <header class="interview-head"><div class="interview-photo">${suspectImage(s)}</div><div><p class="eyebrow">VERBALE INTERROGATORIO · SOG-${String(idx+1).padStart(2,'0')}</p><h3>${escapeHtml(s.name)}</h3><p>${escapeHtml(s.relationship)}</p></div><div class="interview-count"><strong>${askedTopics.length}</strong><span>verbalizzate</span></div></header>
+        ${transcript ? `<div class="transcript">${transcript}</div>` : `<div class="interview-empty"><span>●</span><p>Nessuna risposta ancora verbalizzata per questo soggetto.</p></div>`}
+        <div class="interview-actions"><p class="eyebrow">DOMANDE DISPONIBILI</p>${rows || '<p class="muted">Nessuna nuova domanda disponibile. Altre linee possono emergere raccogliendo prove.</p>'}</div>
+      </article>`;
     }).join('');
-    view.innerHTML = `<div class="section-head"><div><p class="eyebrow">SALA INTERROGATORI</p><h2>Interrogatori</h2><p class="muted">Nuove domande diventano disponibili quando trovate elementi con cui confrontare i sospettati.</p></div></div><div class="stack">${suspectBlocks}</div>`;
+    view.innerHTML = `<div class="section-head"><div><p class="eyebrow">SALA INTERROGATORI</p><h2>Interrogatori</h2><p class="muted">Le domande future restano completamente nascoste. Compaiono soltanto quando una prova rende possibile quella linea di interrogatorio.</p></div></div><div class="interview-stack">${suspectBlocks}</div>`;
     document.querySelectorAll('.ask-topic').forEach(btn => btn.addEventListener('click', () => {
       const topic = Investigation.askTopic(btn.dataset.suspect, btn.dataset.topic);
       if (!topic) return;
-      const target = document.getElementById(`answer-${btn.dataset.suspect}`);
-      target.innerHTML = `<div class="statement"><strong>Risposta verbalizzata</strong><p>${escapeHtml(topic.answer)}</p>${topic.note ? `<p class="muted">${escapeHtml(topic.note)}</p>` : ''}</div>`;
-      btn.textContent = 'Rileggi';
+      if (topic.newlyUnlocked?.length) {
+        const first = evidenceById(topic.newlyUnlocked[0]);
+        showToast(first?.title || 'Nuova informazione', topic.newlyUnlocked.length > 1 ? `+${topic.newlyUnlocked.length - 1} altri elementi` : 'Acquisita durante l’interrogatorio');
+      }
+      renderInterrogations();
     }));
   }
 

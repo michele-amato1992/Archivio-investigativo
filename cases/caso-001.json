@@ -614,7 +614,9 @@
             "laura-envelope"
           ]
         }
-      ]
+      ],
+      "image": "assets/suspects/laura.svg",
+      "interviewProfile": "Emotiva, inizialmente sulla difensiva. Ammette dettagli personali solo quando messa davanti a prove concrete."
     },
     {
       "id": "marco",
@@ -687,7 +689,9 @@
           "answer": "No. Sono salito per parlargli, questo ormai lo sapete. Ma non ho toccato niente. Se aveva qualcosa nel bicchiere, non sono stato io a mettercelo.",
           "note": "Marco ammette la presenza ma continua a negare il contatto con la bevanda."
         }
-      ]
+      ],
+      "image": "assets/suspects/marco.svg",
+      "interviewProfile": "Controllato e preciso. Tende a minimizzare le incongruenze temporali e a spostare l’attenzione su altri."
     },
     {
       "id": "sara",
@@ -713,7 +717,9 @@
             "sara-admission"
           ]
         }
-      ]
+      ],
+      "image": "assets/suspects/sara.svg",
+      "interviewProfile": "Tesa ma collaborativa. Protegge soprattutto la propria reputazione e la relazione passata con Andrea."
     },
     {
       "id": "davide",
@@ -739,7 +745,9 @@
             "davide-alibi"
           ]
         }
-      ]
+      ],
+      "image": "assets/suspects/davide.svg",
+      "interviewProfile": "Diretto e irritabile. La tensione familiare è reale, ma il suo racconto è verificabile."
     },
     {
       "id": "elisa",
@@ -773,7 +781,9 @@
             "elisa-alibi"
           ]
         }
-      ]
+      ],
+      "image": "assets/suspects/elisa.svg",
+      "interviewProfile": "Professionale e prudente. Difende l’hotel, anche a costo di omettere dettagli imbarazzanti."
     },
     {
       "id": "tommaso",
@@ -809,7 +819,9 @@
             "tommaso-admission"
           ]
         }
-      ]
+      ],
+      "image": "assets/suspects/tommaso.svg",
+      "interviewProfile": "Curioso e ambiguo. Nasconde una fonte e un contatto con Andrea per proteggere il proprio lavoro."
     }
   ],
   "timeline": [
