@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Archivio Investigativo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">ARCHIVIO INVESTIGATIVO</p>
+      <h1 id="pageTitle">Casi disponibili</h1>
+    </div>
+    <div class="top-actions">
+      <button id="homeBtn" class="btn secondary hidden" type="button">← Archivio</button>
+      <button id="resetBtn" class="btn secondary hidden" type="button">Ricomincia caso</button>
+    </div>
+  </header>
+
+  <main id="portalView" class="portal"></main>
+
+  <main id="caseView" class="layout hidden">
+    <nav class="sidebar" aria-label="Sezioni del caso">
+      <button class="nav-btn active" data-view="briefing">Fascicolo</button>
+      <button class="nav-btn" data-view="scene">Scena del crimine</button>
+      <button class="nav-btn" data-view="evidence">Prove</button>
+      <button class="nav-btn" data-view="suspects">Sospettati</button>
+      <button class="nav-btn" data-view="notes">Appunti</button>
+      <button class="nav-btn danger" data-view="accusation">Accusa finale</button>
+    </nav>
+    <section class="content"><div id="view"></div></section>
+  </main>
+
+  <script src="js/game-state.js"></script>
+  <script src="js/investigation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

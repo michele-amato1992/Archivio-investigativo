@@ -1,0 +1,33 @@
+{
+  "caseNumber": "002",
+  "title": "L'ultima corsa",
+  "location": "Capolinea taxi, Napoli",
+  "timeFound": "02:15",
+  "briefing": "Il tassista Carlo Ferri viene trovato senza vita nella propria auto al capolinea. Il tassametro è ancora acceso e sul sedile posteriore c'è una borsa che non appartiene alla vittima. Tre persone risultano collegate alle sue ultime ore.",
+  "victim": { "name": "Carlo Ferri", "age": 51 },
+  "scene": {
+    "label": "Taxi 27 — capolinea",
+    "hotspots": [
+      { "id": "meter", "label": "1", "title": "Tassametro", "description": "Il tassametro mostra 18,40 euro. L'ultima corsa risulta iniziata alle 01:31.", "x": 62, "y": 42, "unlocks": ["meter-log"] },
+      { "id": "bag", "label": "2", "title": "Borsa sul sedile", "description": "Nella borsa c'è uno scontrino di un bar emesso alle 01:12 e una tessera palestra intestata a Giulia Serra.", "x": 35, "y": 66, "unlocks": ["bag-id"] },
+      { "id": "mirror", "label": "3", "title": "Specchietto", "description": "Sul bordo dello specchietto interno c'è una piccola macchia di sangue non appartenente alla vittima.", "x": 47, "y": 24, "unlocks": ["blood"] }
+    ]
+  },
+  "evidence": [
+    { "id": "cause", "title": "Primo referto", "description": "Il decesso è compatibile con un trauma alla testa avvenuto tra le 01:40 e le 02:00.", "initial": true },
+    { "id": "meter-log", "title": "Registro tassametro", "description": "L'ultima corsa è iniziata alle 01:31 ed è durata 17 minuti.", "initial": false },
+    { "id": "bag-id", "title": "Tessera nella borsa", "description": "La borsa appartiene a Giulia Serra, che sostiene di non essere salita sul taxi quella notte.", "initial": false },
+    { "id": "blood", "title": "Traccia biologica", "description": "La macchia sullo specchietto non appartiene a Carlo Ferri.", "initial": false }
+  ],
+  "suspects": [
+    { "id": "giulia", "name": "Giulia Serra", "age": 29, "relationship": "Ultima cliente nota", "alibi": "Dice di aver trascorso tutta la notte nel bar vicino alla stazione.", "motive": "Nega di conoscere personalmente la vittima." },
+    { "id": "antonio", "name": "Antonio Riva", "age": 46, "relationship": "Collega tassista", "alibi": "Sostiene di aver terminato il turno alle 01:20.", "motive": "Conflitto per i turni e i clienti abituali." },
+    { "id": "lucia", "name": "Lucia Ferri", "age": 48, "relationship": "Ex moglie", "alibi": "Era a casa e dice di non aver visto Carlo da giorni.", "motive": "Contenzioso economico ancora aperto." }
+  ],
+  "solution": {
+    "culpritId": "giulia",
+    "motiveKeywords": ["ricatto", "denaro"],
+    "failureHint": "La ricostruzione non coincide ancora con gli indizi raccolti. Controllate la borsa e gli orari dell'ultima corsa.",
+    "reveal": "Accusa corretta. Giulia era l'ultima passeggera. La discussione è degenerata durante un tentativo di ricatto legato a del denaro. La borsa dimenticata e gli orari del tassametro collocano Giulia nel taxi nel momento compatibile con la morte. Questo secondo caso è volutamente breve e serve soprattutto come esempio di caricamento multiplo."
+  }
+}

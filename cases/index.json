@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "id": "caso-001",
+      "file": "caso-001.json",
+      "caseNumber": "001",
+      "title": "La stanza 317",
+      "subtitle": "Una porta chiusa, due bicchieri, una sola vittima.",
+      "location": "Napoli",
+      "difficulty": "Media",
+      "duration": "60-90 min",
+      "players": "2-8",
+      "status": "available"
+    },
+    {
+      "id": "caso-002",
+      "file": "caso-002.json",
+      "caseNumber": "002",
+      "title": "L'ultima corsa",
+      "subtitle": "Un tassista viene trovato morto al capolinea. Il tassametro è ancora acceso.",
+      "location": "Napoli",
+      "difficulty": "Facile",
+      "duration": "45-60 min",
+      "players": "2-6",
+      "status": "available"
+    }
+  ]
+}

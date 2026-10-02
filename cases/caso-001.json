@@ -1,0 +1,32 @@
+{
+  "caseNumber": "001",
+  "title": "La stanza 317",
+  "location": "Hotel Vesuvio Blu, Napoli",
+  "timeFound": "23:42",
+  "briefing": "Andrea Romano viene trovato morto nella stanza 317. La porta risulta chiusa e nella stanza ci sono due bicchieri. Sei persone presenti in hotel avevano un motivo per volergli male. Il vostro compito è ricostruire cosa è successo.",
+  "victim": { "name": "Andrea Romano", "age": 42 },
+  "scene": {
+    "hotspots": [
+      { "id": "glass", "label": "1", "title": "Due bicchieri", "description": "Sul comodino ci sono due bicchieri. Uno presenta una lieve traccia di rossetto sul bordo.", "x": 66, "y": 56, "unlocks": ["lipstick"] },
+      { "id": "phone", "label": "2", "title": "Telefono della vittima", "description": "Il telefono è bloccato, ma nella schermata notifiche compare un messaggio ricevuto alle 23:18: 'Dobbiamo parlare. È l'ultima volta.'", "x": 33, "y": 64, "unlocks": ["message"] },
+      { "id": "window", "label": "3", "title": "Finestra", "description": "La finestra è socchiusa, ma non ci sono segni di effrazione. Il davanzale esterno è bagnato dalla pioggia.", "x": 18, "y": 24, "unlocks": [] }
+    ]
+  },
+  "evidence": [
+    { "id": "cause", "title": "Primo referto medico", "description": "La morte è compatibile con un'intossicazione avvenuta circa 20-40 minuti prima del ritrovamento.", "initial": true },
+    { "id": "lipstick", "title": "Traccia sul bicchiere", "description": "Sul secondo bicchiere viene rilevata una traccia di rossetto color borgogna.", "initial": false },
+    { "id": "message", "title": "Messaggio delle 23:18", "description": "Messaggio ricevuto da un contatto salvato come 'L.'. Il testo: 'Dobbiamo parlare. È l'ultima volta.'", "initial": false }
+  ],
+  "suspects": [
+    { "id": "laura", "name": "Laura De Santis", "age": 39, "relationship": "Ex compagna", "alibi": "Dice di essere rimasta al bar dell'hotel dalle 22:50 alle 23:35.", "motive": "Contenzioso economico dopo la separazione." },
+    { "id": "marco", "name": "Marco Esposito", "age": 45, "relationship": "Socio in affari", "alibi": "Sostiene di aver partecipato a una telefonata di lavoro in camera propria.", "motive": "Un investimento andato male." },
+    { "id": "sara", "name": "Sara Vitale", "age": 32, "relationship": "Collega", "alibi": "Dice di essere uscita dall'hotel alle 23:00.", "motive": "Una promozione bloccata dalla vittima." },
+    { "id": "davide", "name": "Davide Romano", "age": 37, "relationship": "Fratello", "alibi": "Era nella hall e sostiene di non essere salito ai piani.", "motive": "Una disputa sull'eredità di famiglia." }
+  ],
+  "solution": {
+    "culpritId": "laura",
+    "motiveKeyword": "econom",
+    "failureHint": "L'accusa non combacia con tutti gli elementi disponibili. Ricontrollate alibi, orari e prove.",
+    "reveal": "Accusa corretta. Laura ha incontrato Andrea nella stanza poco prima delle 23:20. Il secondo bicchiere e il messaggio collegano la sua presenza alla stanza. Il movente è il contenzioso economico nato dalla separazione. Nella versione completa del caso aggiungeremo prove e interrogatori sufficienti a dimostrare la dinamica senza ambiguità."
+  }
+}
