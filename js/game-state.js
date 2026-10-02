@@ -5,6 +5,7 @@ const GameState = {
   defaultData() {
     return {
       unlockedEvidence: [],
+      seenEvidence: [],
       examinedHotspots: [],
       askedTopics: [],
       evidenceActions: [],

@@ -24,6 +24,34 @@
 
   function card(html, cls = '') { return `<article class="card ${cls}">${html}</article>`; }
 
+  function evidenceById(id) {
+    return data?.evidence?.find(e => e.id === id) || null;
+  }
+
+  function showToast(title, text = '') {
+    let toast = document.getElementById('discoveryToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'discoveryToast';
+      toast.className = 'discovery-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<span class="discovery-toast-kicker">NUOVA SCOPERTA</span><strong>${escapeHtml(title)}</strong>${text ? `<small>${escapeHtml(text)}</small>` : ''}`;
+    toast.classList.add('show');
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.classList.remove('show'), 4200);
+  }
+
+  function markEvidenceSeen(id) {
+    GameState.data.seenEvidence ||= [];
+    if (!GameState.data.seenEvidence.includes(id)) {
+      GameState.data.seenEvidence.push(id);
+      GameState.save();
+    }
+  }
+
   function showGuide() {
     if (typeof guideDialog.showModal === 'function') guideDialog.showModal();
     else alert('Leggete il fascicolo, esplorate i luoghi, analizzate le prove, interrogate i sospettati e formulate un\'accusa finale.');
@@ -129,27 +157,34 @@
 
   function renderBriefing() {
     const objectives = (data.objectives || ['Identificare il colpevole', 'Stabilire il movente', 'Ricostruire la dinamica']).map(x => `<li>${escapeHtml(x)}</li>`).join('');
+    const discovered = (data.evidence || []).filter(e => Investigation.hasEvidence(e.id)).length;
+    const explored = GameState.data.examinedHotspots.length;
+    const asked = GameState.data.askedTopics.length;
     view.innerHTML = `
-      <div class="case-brief">
-        ${card(`
-          <div class="case-brief-main">
-            <span class="badge new">CASO ${escapeHtml(data.caseNumber)}</span>
+      <section class="case-dashboard">
+        <div class="case-hero">
+          <div class="case-hero-copy">
+            <div class="case-id-row"><span class="case-stamp">CASO ${escapeHtml(data.caseNumber)}</span><span class="case-status-dot">INDAGINE APERTA</span></div>
             <h2>${escapeHtml(data.title)}</h2>
-            <p>${escapeHtml(data.briefing)}</p>
-            <hr>
-            <div class="grid">
-              <div><strong>Vittima</strong><p class="muted">${escapeHtml(data.victim.name)}, ${escapeHtml(data.victim.age)} anni</p></div>
-              <div><strong>Luogo</strong><p class="muted">${escapeHtml(data.location)}</p></div>
-              <div><strong>Ora del ritrovamento</strong><p class="muted">${escapeHtml(data.timeFound)}</p></div>
-              <div><strong>Modalità</strong><p class="muted">Cooperativa · un solo dispositivo</p></div>
-            </div>
-            ${data.instructions ? `<hr><p class="muted">${escapeHtml(data.instructions)}</p>` : ''}
-          </div>`)}
-        <div class="stack">
-          ${card(`<div class="objective-panel"><p class="eyebrow">OBIETTIVI</p><ul class="compact-list">${objectives}</ul></div>`)}
-          ${card(`<p class="eyebrow">COSA FARE ADESSO</p><div class="next-steps">${renderNextSteps()}</div><div class="quick-actions"><button class="btn primary" id="goScenes" type="button">Vai ai luoghi</button><button class="btn secondary" id="briefGuide" type="button">Apri la guida</button></div>`)}
+            <p class="case-lead">${escapeHtml(data.briefing)}</p>
+          </div>
+          <div class="case-file-meta">
+            <div><span>VITTIMA</span><strong>${escapeHtml(data.victim.name)}</strong><small>${escapeHtml(data.victim.age)} anni</small></div>
+            <div><span>LUOGO</span><strong>${escapeHtml(data.location)}</strong><small>Scena primaria</small></div>
+            <div><span>RITROVAMENTO</span><strong>${escapeHtml(data.timeFound)}</strong><small>Orario registrato</small></div>
+            <div><span>MODALITÀ</span><strong>Cooperativa</strong><small>Un dispositivo</small></div>
+          </div>
         </div>
-      </div>`;
+        <div class="intel-strip">
+          <div><span>REPERTI ACQUISITI</span><strong>${discovered}</strong></div>
+          <div><span>ELEMENTI ESAMINATI</span><strong>${explored}</strong></div>
+          <div><span>DOMANDE POSTE</span><strong>${asked}</strong></div>
+        </div>
+        <div class="dashboard-grid">
+          ${card(`<p class="eyebrow">OBIETTIVI DELL'INDAGINE</p><ul class="objective-list">${objectives}</ul>${data.instructions ? `<div class="briefing-note">${escapeHtml(data.instructions)}</div>` : ''}`,'paper-card')}
+          ${card(`<p class="eyebrow">PROSSIME POSSIBILITÀ</p><div class="next-steps">${renderNextSteps()}</div><div class="quick-actions"><button class="btn primary" id="goScenes" type="button">Esplora i luoghi</button><button class="btn secondary" id="briefGuide" type="button">Come si gioca</button></div>`,'next-actions-card')}
+        </div>
+      </section>`;
     document.getElementById('goScenes')?.addEventListener('click', () => activateView('scene'));
     document.getElementById('briefGuide')?.addEventListener('click', showGuide);
   }
@@ -159,36 +194,78 @@
     const location = locations.find(l => l.id === locationId) || locations[0];
     if (!location) { view.innerHTML = card('<h2>Nessun luogo investigabile</h2>'); return; }
     currentLocationId = location.id;
-    const tabs = locations.map(l => `<button class="location-tab ${l.id === location.id ? 'active' : ''}" data-location="${escapeHtml(l.id)}" type="button">${escapeHtml(l.name || l.label || 'Luogo')}</button>`).join('');
+    const tabs = locations.map(l => {
+      const done = (l.hotspots || []).filter(h => GameState.data.examinedHotspots.includes(`${l.id}:${h.id}`)).length;
+      return `<button class="location-tab ${l.id === location.id ? 'active' : ''}" data-location="${escapeHtml(l.id)}" type="button"><span>${escapeHtml(l.name || l.label || 'Luogo')}</span><small>${done}/${(l.hotspots || []).length}</small></button>`;
+    }).join('');
     const hotspots = (location.hotspots || []).map(h => {
       const examined = GameState.data.examinedHotspots.includes(`${location.id}:${h.id}`);
-      return `<button class="hotspot ${examined ? 'examined' : ''}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${Number(h.x)}%;top:${Number(h.y)}%" aria-label="Esamina ${escapeHtml(h.title || h.label)}" title="${escapeHtml(h.title || 'Punto da esaminare')}">${escapeHtml(h.label)}</button>`;
+      return `<button class="hotspot ${examined ? 'examined' : ''}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${Number(h.x)}%;top:${Number(h.y)}%" aria-label="Seleziona ${escapeHtml(h.title || h.label)}"><span class="hotspot-number">${escapeHtml(h.label)}</span><span class="hotspot-tooltip">${escapeHtml(h.title || 'Punto da esaminare')}<small>${examined ? 'Già esaminato' : 'Tocca per vedere'}</small></span></button>`;
     }).join('');
-    const bg = location.image ? `<img class="scene-image" src="${escapeHtml(location.image)}" alt="${escapeHtml(location.name || 'Luogo investigativo')}">` : `<div class="scene-placeholder"><strong>${escapeHtml(location.name || location.label || 'Luogo')}</strong><span>${escapeHtml(location.description || 'Esamina i punti numerati.')}</span></div>`;
+    const bg = location.image ? `<img class="scene-image" src="${escapeHtml(location.image)}" alt="${escapeHtml(location.name || 'Luogo investigativo')}">` : `<div class="scene-placeholder"><strong>${escapeHtml(location.name || location.label || 'Luogo')}</strong><span>${escapeHtml(location.description || 'Esamina i punti indicati.')}</span></div>`;
     const examinedCount = (location.hotspots || []).filter(h => GameState.data.examinedHotspots.includes(`${location.id}:${h.id}`)).length;
     view.innerHTML = `
-      ${card(`<div class="scene-intro"><div><p class="eyebrow">SCENA INVESTIGATIVA</p><h2>Luoghi</h2></div><span class="badge">${examinedCount}/${(location.hotspots || []).length} esaminati</span></div><div class="location-tabs">${tabs}</div><p class="muted">${escapeHtml(location.description || 'Tocca i marcatori numerati per esaminare gli elementi disponibili.')}</p><div class="scene-legend"><span>Da esaminare</span><span class="done">Già esaminato</span></div>`)}
-      <div class="scene-box">${bg}${hotspots}</div>
+      <div class="scene-page-head">
+        <div><p class="eyebrow">SCENE E LUOGHI</p><h2>Esplorazione della scena</h2><p>Seleziona un indicatore per sapere cosa stai osservando. <strong>L'esame vero avviene solo quando premi “Esamina elemento”.</strong></p></div>
+        <span class="scene-progress">${examinedCount}/${(location.hotspots || []).length} elementi esaminati</span>
+      </div>
+      <div class="location-tabs location-tabs-v4">${tabs}</div>
+      <section class="scene-stage">
+        <div class="scene-caption"><div><span class="eyebrow">${escapeHtml(location.name || location.label || 'LUOGO')}</span><h3>${escapeHtml(location.name || location.label || 'Luogo')}</h3><p>${escapeHtml(location.description || 'Osservate attentamente la scena.')}</p></div><div class="scene-key"><span><i></i>Da esaminare</span><span class="done"><i></i>Esaminato</span></div></div>
+        <div class="scene-box">${bg}<div class="scene-vignette"></div>${hotspots}</div>
+      </section>
+      <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Seleziona un punto</h3><p>Prima di esaminare un elemento puoi leggerne il nome. In questo modo sai sempre su cosa stai cliccando senza anticipare ciò che scoprirai.</p></div></div>
       <div id="sceneResult"></div>`;
     document.querySelectorAll('[data-location]').forEach(btn => btn.addEventListener('click', () => renderScene(btn.dataset.location)));
     document.querySelectorAll('[data-hotspot]').forEach(btn => btn.addEventListener('click', () => {
-      const h = Investigation.examineHotspot(location.id, btn.dataset.hotspot);
-      if (!h) return;
-      btn.classList.add('examined');
-      document.getElementById('sceneResult').innerHTML = card(`<p class="eyebrow">ELEMENTO ESAMINATO</p><h3>${escapeHtml(h.title)}</h3><p>${escapeHtml(h.description)}</p><p class="muted">${h.unlocks?.length ? 'Il fascicolo delle prove è stato aggiornato.' : 'Elemento registrato nell\'indagine.'}</p>`, 'discovery-card');
+      const hotspot = (location.hotspots || []).find(h => h.id === btn.dataset.hotspot);
+      if (!hotspot) return;
+      document.querySelectorAll('.hotspot').forEach(x => x.classList.remove('selected'));
+      btn.classList.add('selected');
+      const examined = GameState.data.examinedHotspots.includes(`${location.id}:${hotspot.id}`);
+      const inspector = document.getElementById('sceneInspector');
+      inspector.className = 'scene-inspector';
+      inspector.innerHTML = `<div><span class="eyebrow">ELEMENTO ${escapeHtml(hotspot.label)}</span><h3>${escapeHtml(hotspot.title)}</h3><p>${examined ? 'Questo elemento è già stato esaminato. Puoi rileggere il risultato senza modificare l’indagine.' : 'Elemento individuato nella scena. Esaminalo quando la squadra è pronta.'}</p></div><button class="btn ${examined ? 'secondary' : 'primary'}" id="inspectSelected" type="button">${examined ? 'Rileggi risultato' : 'Esamina elemento'}</button>`;
+      document.getElementById('inspectSelected')?.addEventListener('click', () => {
+        const before = new Set(GameState.data.unlockedEvidence);
+        const h = Investigation.examineHotspot(location.id, hotspot.id);
+        if (!h) return;
+        btn.classList.add('examined');
+        const newly = (h.newlyUnlocked || []).filter(id => !before.has(id));
+        document.getElementById('sceneResult').innerHTML = card(`<div class="discovery-head"><span class="discovery-icon">✦</span><div><p class="eyebrow">ELEMENTO ESAMINATO</p><h3>${escapeHtml(h.title)}</h3></div></div><p class="discovery-text">${escapeHtml(h.description)}</p>${newly.length ? `<div class="new-evidence-list"><strong>${newly.length === 1 ? 'Nuovo reperto acquisito' : 'Nuovi reperti acquisiti'}</strong>${newly.map(id => `<span>${escapeHtml(evidenceById(id)?.title || id)}</span>`).join('')}</div>` : '<p class="muted">Nessun nuovo reperto, ma l’osservazione è stata registrata.</p>'}`, 'discovery-card');
+        if (newly.length) { const first = evidenceById(newly[0]); showToast(first?.title || 'Nuovo reperto', newly.length > 1 ? `+${newly.length - 1} altri elementi` : 'Aggiunto alla sezione Prove'); }
+        const count = (location.hotspots || []).filter(x => GameState.data.examinedHotspots.includes(`${location.id}:${x.id}`)).length;
+        document.querySelector('.scene-progress').textContent = `${count}/${(location.hotspots || []).length} elementi esaminati`;
+      });
     }));
   }
 
   function renderEvidence() {
-    view.innerHTML = `<div class="section-head"><div><p class="eyebrow">REPERTI E ANALISI</p><h2>Prove</h2><p class="muted">Gli elementi bloccati si sbloccano esplorando luoghi, eseguendo analisi e interrogando i sospettati.</p></div><span class="badge">${GameState.data.unlockedEvidence.length}/${data.evidence.length}</span></div><div class="grid" id="evidenceGrid">${data.evidence.map(e => {
-      const unlocked = Investigation.hasEvidence(e.id);
+    GameState.data.seenEvidence ||= [];
+    const unlocked = (data.evidence || []).filter(e => Investigation.hasEvidence(e.id));
+    const unseenCount = unlocked.filter(e => !GameState.data.seenEvidence.includes(e.id)).length;
+    const cardsHtml = unlocked.map((e, index) => {
+      const isNew = !GameState.data.seenEvidence.includes(e.id);
       const actionDone = GameState.data.evidenceActions.includes(e.id);
-      const actionHtml = unlocked && e.action ? `<button class="btn secondary evidence-action" data-evidence-action="${escapeHtml(e.id)}" type="button" ${actionDone ? 'disabled' : ''}>${actionDone ? 'Analisi completata' : escapeHtml(e.action.label)}</button>` : '';
-      return card(`<span class="badge ${unlocked ? 'new' : ''}">${unlocked ? escapeHtml(e.category || 'DISPONIBILE') : 'BLOCCATA'}</span><h3>${escapeHtml(e.title)}</h3><p>${unlocked ? escapeHtml(e.description) : 'Questa prova non è ancora stata scoperta.'}</p>${actionHtml}${unlocked && actionDone && e.action?.result ? `<div class="mini-result">${escapeHtml(e.action.result)}</div>` : ''}`, `evidence-item ${unlocked ? 'unlocked' : 'locked'}`);
-    }).join('')}</div>`;
+      const actionHtml = e.action ? `<button class="btn secondary evidence-action" data-evidence-action="${escapeHtml(e.id)}" type="button" ${actionDone ? 'disabled' : ''}>${actionDone ? 'Analisi completata' : escapeHtml(e.action.label)}</button>` : '';
+      return `<article class="evidence-file ${isNew ? 'is-new' : ''}" data-evidence-card="${escapeHtml(e.id)}">
+        <div class="evidence-file-top"><span class="evidence-code">REP-${String(index + 1).padStart(3,'0')}</span>${isNew ? '<span class="new-ribbon">NUOVO</span>' : `<span class="evidence-category">${escapeHtml(e.category || 'REPERTO')}</span>`}</div>
+        <div class="evidence-visual"><span>${escapeHtml((e.category || 'E').slice(0,1).toUpperCase())}</span><small>${escapeHtml(e.category || 'Reperto')}</small></div>
+        <div class="evidence-content"><h3>${escapeHtml(e.title)}</h3><p>${escapeHtml(e.description)}</p>${actionHtml}${actionDone && e.action?.result ? `<div class="analysis-result"><span>RISULTATO ANALISI</span>${escapeHtml(e.action.result)}</div>` : ''}</div>
+      </article>`;
+    }).join('');
+    view.innerHTML = `<div class="section-head evidence-head"><div><p class="eyebrow">REPERTI ACQUISITI</p><h2>Prove</h2><p class="muted">Qui compaiono <strong>solo</strong> gli elementi che avete realmente scoperto. Le prove ancora sconosciute non vengono mostrate.</p></div><div class="evidence-summary"><strong>${unlocked.length}</strong><span>acquisite</span>${unseenCount ? `<b>${unseenCount} nuove</b>` : ''}</div></div>${unlocked.length ? `<div class="evidence-grid-v4">${cardsHtml}</div>` : `<div class="empty-state"><span>⌕</span><h3>Nessun reperto acquisito</h3><p>Esplorate i luoghi e interagite con gli elementi della scena. Le prove appariranno qui solo dopo la scoperta.</p><button class="btn primary" id="emptyGoScenes" type="button">Vai ai luoghi</button></div>`}`;
+    document.getElementById('emptyGoScenes')?.addEventListener('click', () => activateView('scene'));
+    document.querySelectorAll('[data-evidence-card]').forEach(el => el.addEventListener('click', evt => {
+      if (evt.target.closest('button')) return;
+      markEvidenceSeen(el.dataset.evidenceCard);
+      el.classList.remove('is-new');
+      el.querySelector('.new-ribbon')?.replaceWith(Object.assign(document.createElement('span'), {className:'evidence-category', textContent: evidenceById(el.dataset.evidenceCard)?.category || 'REPERTO'}));
+    }));
     document.querySelectorAll('[data-evidence-action]').forEach(btn => btn.addEventListener('click', () => {
       const action = Investigation.runEvidenceAction(btn.dataset.evidenceAction);
-      if (action) renderEvidence();
+      if (action?.newlyUnlocked?.length) { const first = evidenceById(action.newlyUnlocked[0]); showToast(first?.title || 'Nuovo reperto', 'Risultato di un’analisi'); }
+      renderEvidence();
     }));
   }
 

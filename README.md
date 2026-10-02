@@ -1,8 +1,8 @@
-# Archivio Investigativo — V3
+# Archivio Investigativo — V4
 
 Portale web statico per casi investigativi cooperativi, pensato per essere giocato da un gruppo su un solo PC, tablet o telefono.
 
-## Novità V3
+## Novità V4
 
 - nuova grafica scura e professionale
 - immagini illustrate per i luoghi investigabili
@@ -18,7 +18,7 @@ Portale web statico per casi investigativi cooperativi, pensato per essere gioca
 
 ## Pubblicazione su GitHub Pages
 
-Sostituisci nel repository i file/cartelle della versione precedente con quelli contenuti in questa V3.
+Sostituisci nel repository i file/cartelle della versione precedente con quelli contenuti in questa V4.
 
 I file principali modificati sono:
 
@@ -74,3 +74,11 @@ Lo stato viene salvato nel `localStorage` del browser. Il salvataggio include:
 - stato risolto/non risolto
 
 Non è necessario alcun backend per questa versione.
+
+
+## Novità V4
+- Tooltip nominativi sui marker delle scene.
+- Su touch: il primo tap seleziona l'elemento, poi si preme “Esamina elemento”.
+- Le prove non ancora scoperte non vengono più mostrate.
+- I nuovi reperti vengono evidenziati con badge NUOVO e notifica di scoperta.
+- Nuovo fascicolo/dashboard e restyling completo delle scene e dei reperti.

@@ -12,10 +12,15 @@ const Investigation = {
   },
 
   unlockEvidence(ids = []) {
+    const newlyUnlocked = [];
     ids.forEach(id => {
-      if (!GameState.data.unlockedEvidence.includes(id)) GameState.data.unlockedEvidence.push(id);
+      if (!GameState.data.unlockedEvidence.includes(id)) {
+        GameState.data.unlockedEvidence.push(id);
+        newlyUnlocked.push(id);
+      }
     });
     GameState.save();
+    return newlyUnlocked;
   },
 
   locations() {
@@ -30,9 +35,9 @@ const Investigation = {
     if (!hotspot) return null;
     const stateId = `${locationId}:${hotspotId}`;
     if (!GameState.data.examinedHotspots.includes(stateId)) GameState.data.examinedHotspots.push(stateId);
-    this.unlockEvidence(hotspot.unlocks || []);
+    const newlyUnlocked = this.unlockEvidence(hotspot.unlocks || []);
     GameState.save();
-    return hotspot;
+    return { ...hotspot, newlyUnlocked };
   },
 
   availableTopic(topic) {
@@ -45,18 +50,18 @@ const Investigation = {
     if (!topic || !this.availableTopic(topic)) return null;
     const stateId = `${suspectId}:${topicId}`;
     if (!GameState.data.askedTopics.includes(stateId)) GameState.data.askedTopics.push(stateId);
-    this.unlockEvidence(topic.unlocks || []);
+    const newlyUnlocked = this.unlockEvidence(topic.unlocks || []);
     GameState.save();
-    return topic;
+    return { ...topic, newlyUnlocked };
   },
 
   runEvidenceAction(evidenceId) {
     const evidence = this.caseData.evidence.find(e => e.id === evidenceId);
     if (!evidence?.action || !this.hasEvidence(evidenceId)) return null;
     if (!GameState.data.evidenceActions.includes(evidenceId)) GameState.data.evidenceActions.push(evidenceId);
-    this.unlockEvidence(evidence.action.unlocks || []);
+    const newlyUnlocked = this.unlockEvidence(evidence.action.unlocks || []);
     GameState.save();
-    return evidence.action;
+    return { ...evidence.action, newlyUnlocked };
   },
 
   visibleTimeline() {
