@@ -1,68 +1,73 @@
 # Archivio Investigativo
 
-Portale web statico per ospitare più casi investigativi. È pronto per GitHub Pages e non richiede backend.
+Portale web statico per giocare più casi investigativi. È pensato per funzionare su GitHub Pages senza backend.
 
-## Struttura
+## Cosa contiene
 
-- `index.html` — portale + motore del caso
-- `cases/index.json` — catalogo pubblico dei casi
-- `cases/caso-001.json` — contenuto del caso 001
-- `cases/caso-002.json` — secondo caso dimostrativo
-- `js/app.js` — routing, catalogo e interfaccia
-- `js/game-state.js` — salvataggi separati per ogni caso in localStorage
-- `js/investigation.js` — logica investigativa
-- `css/style.css` — interfaccia responsive
-- `assets/` — immagini di scene, sospettati, prove e documenti
+- Catalogo di più casi
+- Salvataggio separato per ogni caso nel browser
+- Più luoghi investigabili per caso
+- Hotspot interattivi
+- Prove che si sbloccano progressivamente
+- Analisi di laboratorio / acquisizioni digitali
+- Sospettati e interrogatori progressivi
+- Domande che si sbloccano solo dopo aver trovato determinate prove
+- Cronologia ricostruita automaticamente
+- Appunti del gruppo
+- Accusa finale con verifica di colpevole, movente, metodo e prove chiave
 
-## Come aggiungere un nuovo caso
+## Casi inclusi
 
-1. Duplica `cases/caso-002.json` e rinominalo, ad esempio `caso-003.json`.
-2. Cambia titolo, vittima, scena, prove, sospettati e soluzione.
-3. Aggiungi il caso a `cases/index.json`:
+### Caso 001 — La stanza 317
+Caso completo di difficoltà medio/alta, progettato per circa 90-120 minuti e 2-8 giocatori.
 
-```json
-{
-  "id": "caso-003",
-  "file": "caso-003.json",
-  "caseNumber": "003",
-  "title": "Titolo del caso",
-  "subtitle": "Breve introduzione senza spoiler.",
-  "location": "Napoli",
-  "difficulty": "Media",
-  "duration": "90 min",
-  "players": "2-8",
-  "status": "available"
-}
-```
+### Caso 002 — L'ultima corsa
+Caso breve dimostrativo/tutorial.
 
-Per mostrare una scheda non ancora giocabile usa `"status": "coming-soon"`.
+## Pubblicazione su GitHub Pages
 
-## URL diretti
+Carica tutti i file nella root del repository. La root deve contenere direttamente:
 
-Ogni caso può essere aperto direttamente con:
+- `index.html`
+- `css/`
+- `js/`
+- `cases/`
 
-`https://TUO-UTENTE.github.io/TUO-REPOSITORY/?case=caso-001`
+Poi vai su GitHub:
 
-## Avvio locale
+1. `Settings`
+2. `Pages`
+3. `Build and deployment`
+4. Source: `Deploy from a branch`
+5. Branch: `main`
+6. Folder: `/ (root)`
+7. `Save`
 
-I browser possono bloccare `fetch()` se apri `index.html` con `file://`.
-Avvia quindi un server locale dalla cartella del progetto, per esempio:
+## Aggiornare un progetto già pubblicato
 
-```bash
-python -m http.server 8000
-```
+Se il repository contiene già la versione precedente, sostituisci questi file con quelli presenti in questo pacchetto:
 
-Poi visita `http://localhost:8000`.
+- `index.html`
+- `css/style.css`
+- `js/app.js`
+- `js/game-state.js`
+- `js/investigation.js`
+- `cases/index.json`
+- `cases/caso-001.json`
 
-## GitHub Pages
+`cases/caso-002.json` può essere sostituito anch'esso, anche se resta il caso demo.
 
-1. Crea un repository GitHub.
-2. Carica **il contenuto** della cartella `murder-mystery` nella root del repository.
-3. Apri **Settings → Pages**.
-4. Scegli **Deploy from a branch**.
-5. Seleziona `main` e `/ (root)`.
-6. Salva e usa l'URL fornito da GitHub Pages.
+Dopo il commit, GitHub Pages aggiorna normalmente il sito in pochi minuti.
 
-## Evoluzioni consigliate
+## Aggiungere un nuovo caso
 
-Il motore è predisposto per essere esteso con interrogatori, più scene per caso, inventario prove, laboratorio, timeline, documenti, audio/video e in seguito un backend multiplayer (Firebase o Supabase).
+1. Copia un file esistente in `cases/`, ad esempio `caso-001.json`.
+2. Rinominalo, per esempio `caso-003.json`.
+3. Cambia contenuti, sospettati, prove, luoghi, interrogatori e soluzione.
+4. Aggiungi il caso a `cases/index.json`.
+
+Il motore del portale non deve essere modificato se il nuovo caso segue lo stesso formato JSON.
+
+## Nota sul salvataggio
+
+I progressi vengono salvati con `localStorage`, quindi sono legati al browser e al dispositivo usato. Non esiste ancora sincronizzazione multiplayer tra telefoni diversi.

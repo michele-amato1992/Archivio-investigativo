@@ -71,3 +71,35 @@ hr { border:0; border-top:1px solid var(--border); margin:1rem 0; }
   .content { padding:1rem; }
   .case-meta { grid-template-columns:1fr; }
 }
+
+.section-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+.section-head h2 { margin:0 0 .25rem; }
+.location-tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0 .35rem; }
+.location-tab { border:1px solid var(--border); background:#0c1322; color:var(--text); border-radius:999px; padding:.55rem .8rem; cursor:pointer; }
+.location-tab.active { border-color:var(--accent); color:var(--accent); }
+.scene-placeholder { flex-direction:column; gap:.5rem; }
+.hotspot.examined { background:var(--accent); color:#17120a; }
+.compact-list { margin:.35rem 0 0; padding-left:1.1rem; color:var(--muted); }
+.compact-list li { margin:.2rem 0; }
+.stack { display:grid; gap:1rem; }
+.topic-list { display:grid; gap:.55rem; }
+.topic-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.7rem 0; border-top:1px solid var(--border); }
+.topic-row:first-child { border-top:0; }
+.topic-row small { display:block; color:var(--muted); margin-top:.2rem; }
+.locked-topic { opacity:.5; }
+.statement { margin-top:1rem; padding:1rem; border-left:3px solid var(--accent); background:#0c1322; border-radius:0 10px 10px 0; }
+.statement p { margin:.45rem 0 0; line-height:1.6; }
+.mini-result { margin-top:.75rem; padding:.75rem; border:1px solid #485979; border-radius:9px; background:#0c1322; color:var(--muted); }
+.timeline { position:relative; display:grid; gap:0; margin-top:1rem; }
+.timeline:before { content:""; position:absolute; left:67px; top:8px; bottom:8px; width:1px; background:var(--border); }
+.timeline-item { display:grid; grid-template-columns:52px 1fr; gap:2rem; padding:.75rem 0; position:relative; }
+.timeline-item:after { content:""; position:absolute; left:63px; top:1.2rem; width:9px; height:9px; border-radius:50%; background:var(--accent); }
+.timeline-item time { color:var(--accent); font-weight:800; }
+.timeline-item p { margin:.25rem 0 0; color:var(--muted); line-height:1.5; }
+@media (max-width:760px) {
+  .section-head { align-items:center; }
+  .topic-row { align-items:flex-start; }
+  .timeline:before { left:57px; }
+  .timeline-item { grid-template-columns:44px 1fr; gap:1.6rem; }
+  .timeline-item:after { left:53px; }
+}
