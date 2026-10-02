@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0b1020">
+  <meta name="theme-color" content="#0a0d12">
   <title>Archivio Investigativo</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="site-backdrop" aria-hidden="true"></div>
+
   <header class="topbar">
-    <div>
+    <div class="brand-block">
       <p class="eyebrow">ARCHIVIO INVESTIGATIVO</p>
       <h1 id="pageTitle">Casi disponibili</h1>
     </div>
     <div class="top-actions">
+      <button id="guideBtn" class="btn secondary" type="button">? Come si gioca</button>
       <button id="homeBtn" class="btn secondary hidden" type="button">← Archivio</button>
       <button id="resetBtn" class="btn secondary hidden" type="button">Ricomincia caso</button>
     </div>
@@ -29,11 +32,49 @@
       <button class="nav-btn" data-view="suspects">Sospettati</button>
       <button class="nav-btn" data-view="interrogations">Interrogatori</button>
       <button class="nav-btn" data-view="timeline">Cronologia</button>
-      <button class="nav-btn" data-view="notes">Appunti</button>
+      <button class="nav-btn" data-view="notes">Appunti di squadra</button>
       <button class="nav-btn danger" data-view="accusation">Accusa finale</button>
     </nav>
     <section class="content"><div id="view"></div></section>
   </main>
+
+  <dialog id="guideDialog" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">GUIDA OPERATIVA</p>
+          <h2>Come si gioca</h2>
+        </div>
+        <button class="icon-btn" value="close" aria-label="Chiudi guida">×</button>
+      </div>
+      <div class="guide-flow">
+        <section><span class="step-num">1</span><div><h3>Leggete il fascicolo</h3><p>Scoprite chi è la vittima, dove è avvenuto il fatto e quali sono gli obiettivi dell'indagine.</p></div></section>
+        <section><span class="step-num">2</span><div><h3>Esplorate i luoghi</h3><p>Toccate i marcatori sulle immagini. Alcuni oggetti sbloccano prove o nuove piste investigative.</p></div></section>
+        <section><span class="step-num">3</span><div><h3>Analizzate le prove</h3><p>Alcuni reperti possono essere inviati al laboratorio o sottoposti ad altre verifiche. Le analisi possono sbloccare nuovi elementi.</p></div></section>
+        <section><span class="step-num">4</span><div><h3>Interrogate i sospettati</h3><p>Nuove domande diventano disponibili quando trovate elementi con cui mettere alla prova una testimonianza.</p></div></section>
+        <section><span class="step-num">5</span><div><h3>Prendete appunti insieme</h3><p>Usate la sezione Appunti di squadra per annotare teorie, contraddizioni, moventi e domande ancora aperte.</p></div></section>
+        <section><span class="step-num">6</span><div><h3>Formulate l'accusa</h3><p>Quando avete una ricostruzione coerente, indicate colpevole, movente e dinamica del delitto.</p></div></section>
+      </div>
+      <div class="guide-note"><strong>Regola importante:</strong> una persona può mentire senza essere l'assassino. Non tutti gli indizi hanno lo stesso peso.</div>
+      <div class="actions"><button class="btn primary" value="close">Ho capito</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="onboardingDialog" class="modal onboarding-modal">
+    <form method="dialog" class="modal-card">
+      <p class="eyebrow">PRIMO ACCESSO AL CASO</p>
+      <h2>Benvenuti nell'indagine</h2>
+      <p>Giocate tutti insieme su questo dispositivo. Discutete ogni scelta prima di procedere: il sito salva automaticamente i progressi.</p>
+      <div class="starter-path">
+        <div><strong>1</strong><span>Leggete il Fascicolo</span></div>
+        <div><strong>2</strong><span>Aprite Luoghi</span></div>
+        <div><strong>3</strong><span>Esaminate i marker</span></div>
+        <div><strong>4</strong><span>Controllate Prove e Interrogatori</span></div>
+      </div>
+      <p class="muted">Non dovete trovare tutto in ordine. L'indagine diventa libera dopo i primi passi.</p>
+      <div class="actions"><button class="btn primary" value="close">Inizia l'indagine</button></div>
+    </form>
+  </dialog>
 
   <script src="js/game-state.js"></script>
   <script src="js/investigation.js"></script>

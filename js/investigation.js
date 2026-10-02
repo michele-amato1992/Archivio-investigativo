@@ -63,6 +63,35 @@ const Investigation = {
     return (this.caseData.timeline || []).filter(item => this.hasAllEvidence(item.requiresEvidence || []));
   },
 
+  nextSteps() {
+    const steps = [];
+    const locations = this.locations();
+    const unexplored = [];
+    locations.forEach(location => {
+      (location.hotspots || []).forEach(h => {
+        if (!GameState.data.examinedHotspots.includes(`${location.id}:${h.id}`)) unexplored.push(location);
+      });
+    });
+    if (unexplored.length) {
+      const first = unexplored[0];
+      steps.push(`Esplorate ${first.name || first.label || 'un luogo'}: ci sono ancora elementi non esaminati.`);
+    }
+
+    const pendingActions = (this.caseData.evidence || []).filter(e => this.hasEvidence(e.id) && e.action && !GameState.data.evidenceActions.includes(e.id));
+    if (pendingActions.length) steps.push(`Avete ${pendingActions.length} prova${pendingActions.length === 1 ? '' : 'e'} che può essere analizzata ulteriormente.`);
+
+    let availableQuestions = 0;
+    (this.caseData.suspects || []).forEach(s => (s.interrogation || []).forEach(t => {
+      const stateId = `${s.id}:${t.id}`;
+      if (this.availableTopic(t) && !GameState.data.askedTopics.includes(stateId)) availableQuestions++;
+    }));
+    if (availableQuestions) steps.push(`Sono disponibili ${availableQuestions} nuove domande negli interrogatori.`);
+
+    if (!steps.length && !GameState.data.solved) steps.push('Rivedete cronologia e appunti: potreste avere già abbastanza elementi per formulare una teoria.');
+    if (GameState.data.solved) steps.push('Caso risolto. Potete rileggere la ricostruzione finale e confrontarla con i vostri appunti.');
+    return steps.slice(0, 4);
+  },
+
   checkAccusation(suspectId, motive, method) {
     const solution = this.caseData.solution;
     const missingRequired = (solution.requiredEvidenceIds || []).filter(id => !this.hasEvidence(id));

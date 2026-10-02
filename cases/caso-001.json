@@ -11,85 +11,474 @@
     "Ricostruire la finestra temporale tra le 22:30 e le 23:42",
     "Spiegare perché alcuni sospettati hanno mentito pur essendo innocenti"
   ],
-  "victim": { "name": "Andrea Romano", "age": 42, "occupation": "Consulente e socio fondatore" },
+  "victim": {
+    "name": "Andrea Romano",
+    "age": 42,
+    "occupation": "Consulente e socio fondatore"
+  },
   "locations": [
     {
       "id": "room317",
       "name": "Stanza 317",
       "description": "La camera della vittima. Nessun segno di effrazione; la serratura elettronica si blocca automaticamente quando la porta si chiude.",
       "hotspots": [
-        { "id": "glasses", "label": "1", "title": "I due bicchieri", "description": "Un calice da vino presenta una traccia di rossetto borgogna. Un tumbler contiene residui di amaro. Le impronte visibili vengono repertate separatamente.", "x": 68, "y": 58, "unlocks": ["lipstick-glass", "tumbler"] },
-        { "id": "phone", "label": "2", "title": "Telefono di Andrea", "description": "Lo smartphone è bloccato. Nella schermata notifiche compare un messaggio delle 23:18 da 'L.': «Dobbiamo parlare. È l'ultima volta.»", "x": 35, "y": 64, "unlocks": ["laura-message", "victim-phone"] },
-        { "id": "minibar", "label": "3", "title": "Minibar", "description": "Una bottiglietta di amaro è aperta e quasi vuota. Il tappo è appoggiato sul ripiano, non avvitato.", "x": 20, "y": 47, "unlocks": ["minibar-bottle"] },
-        { "id": "door", "label": "4", "title": "Serratura elettronica", "description": "La porta non era chiusa con catenaccio o blocco interno. Il sistema registra solo aperture tramite tessera, non quando la porta viene aperta dall'interno.", "x": 10, "y": 37, "unlocks": ["door-log"] },
-        { "id": "desk", "label": "5", "title": "Scrivania", "description": "Nel cestino c'è un foglio strappato con la sigla «M.E.C.» e una cifra: 180.000. Il portatile della vittima non è nella stanza.", "x": 48, "y": 35, "unlocks": ["torn-note"] },
-        { "id": "watch", "label": "6", "title": "Smartwatch", "description": "Il dispositivo registra un aumento anomalo della frequenza cardiaca alle 23:27 e l'ultimo movimento significativo alle 23:33.", "x": 58, "y": 70, "unlocks": ["watch-data"] }
-      ]
+        {
+          "id": "glasses",
+          "label": "1",
+          "title": "I due bicchieri",
+          "description": "Un calice da vino presenta una traccia di rossetto borgogna. Un tumbler contiene residui di amaro. Le impronte visibili vengono repertate separatamente.",
+          "x": 68,
+          "y": 58,
+          "unlocks": [
+            "lipstick-glass",
+            "tumbler"
+          ]
+        },
+        {
+          "id": "phone",
+          "label": "2",
+          "title": "Telefono di Andrea",
+          "description": "Lo smartphone è bloccato. Nella schermata notifiche compare un messaggio delle 23:18 da 'L.': «Dobbiamo parlare. È l'ultima volta.»",
+          "x": 35,
+          "y": 64,
+          "unlocks": [
+            "laura-message",
+            "victim-phone"
+          ]
+        },
+        {
+          "id": "minibar",
+          "label": "3",
+          "title": "Minibar",
+          "description": "Una bottiglietta di amaro è aperta e quasi vuota. Il tappo è appoggiato sul ripiano, non avvitato.",
+          "x": 20,
+          "y": 47,
+          "unlocks": [
+            "minibar-bottle"
+          ]
+        },
+        {
+          "id": "door",
+          "label": "4",
+          "title": "Serratura elettronica",
+          "description": "La porta non era chiusa con catenaccio o blocco interno. Il sistema registra solo aperture tramite tessera, non quando la porta viene aperta dall'interno.",
+          "x": 10,
+          "y": 37,
+          "unlocks": [
+            "door-log"
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "5",
+          "title": "Scrivania",
+          "description": "Nel cestino c'è un foglio strappato con la sigla «M.E.C.» e una cifra: 180.000. Il portatile della vittima non è nella stanza.",
+          "x": 48,
+          "y": 35,
+          "unlocks": [
+            "torn-note"
+          ]
+        },
+        {
+          "id": "watch",
+          "label": "6",
+          "title": "Smartwatch",
+          "description": "Il dispositivo registra un aumento anomalo della frequenza cardiaca alle 23:27 e l'ultimo movimento significativo alle 23:33.",
+          "x": 58,
+          "y": 70,
+          "unlocks": [
+            "watch-data"
+          ]
+        }
+      ],
+      "image": "assets/locations/room317.svg"
     },
     {
       "id": "bar",
       "name": "Bar dell'hotel",
       "description": "Il bar al piano terra era aperto fino a mezzanotte. Il barista ricorda diversi membri del gruppo aziendale.",
       "hotspots": [
-        { "id": "receipt", "label": "1", "title": "Scontrino delle 22:36", "description": "Due calici di vino rosso risultano pagati da Laura De Santis alle 22:36. Il barista ricorda che li ha portati via su un vassoio piccolo.", "x": 28, "y": 58, "unlocks": ["bar-receipt"] },
-        { "id": "camera", "label": "2", "title": "Telecamera del bar", "description": "Le registrazioni mostrano Laura tornare al bar alle 23:05 senza bicchieri e restarvi fino alle 23:34.", "x": 78, "y": 22, "unlocks": ["bar-cctv"] },
-        { "id": "bartender", "label": "3", "title": "Registro personale", "description": "Il barista annota una richiesta insolita: alle 23:17 Marco Esposito telefona dalla sua camera chiedendo ghiaccio, poi annulla l'ordine due minuti dopo.", "x": 60, "y": 65, "unlocks": ["ice-call"] }
-      ]
+        {
+          "id": "receipt",
+          "label": "1",
+          "title": "Scontrino delle 22:36",
+          "description": "Due calici di vino rosso risultano pagati da Laura De Santis alle 22:36. Il barista ricorda che li ha portati via su un vassoio piccolo.",
+          "x": 28,
+          "y": 58,
+          "unlocks": [
+            "bar-receipt"
+          ]
+        },
+        {
+          "id": "camera",
+          "label": "2",
+          "title": "Telecamera del bar",
+          "description": "Le registrazioni mostrano Laura tornare al bar alle 23:05 senza bicchieri e restarvi fino alle 23:34.",
+          "x": 78,
+          "y": 22,
+          "unlocks": [
+            "bar-cctv"
+          ]
+        },
+        {
+          "id": "bartender",
+          "label": "3",
+          "title": "Registro personale",
+          "description": "Il barista annota una richiesta insolita: alle 23:17 Marco Esposito telefona dalla sua camera chiedendo ghiaccio, poi annulla l'ordine due minuti dopo.",
+          "x": 60,
+          "y": 65,
+          "unlocks": [
+            "ice-call"
+          ]
+        }
+      ],
+      "image": "assets/locations/bar.svg"
     },
     {
       "id": "corridor",
       "name": "Terzo piano e corridoio",
       "description": "Il corridoio delle camere 301-320 ha una telecamera all'ascensore e copertura Wi-Fi separata per piano.",
       "hotspots": [
-        { "id": "elevatorcam", "label": "1", "title": "Telecamera ascensore", "description": "La telecamera riprende Marco Esposito uscire dall'ascensore al terzo piano alle 23:07 e rientrarvi alle 23:16. Non viene ripreso davanti alla 317, fuori dall'inquadratura.", "x": 32, "y": 28, "unlocks": ["elevator-cctv"] },
-        { "id": "wifi", "label": "2", "title": "Access point del terzo piano", "description": "Il log Wi-Fi colloca il telefono di Marco sul nodo del terzo piano dalle 23:08 alle 23:15. Il suo telefono si ricollega al quarto piano alle 23:19.", "x": 72, "y": 25, "unlocks": ["marco-wifi"] },
-        { "id": "keylog", "label": "3", "title": "Console serrature", "description": "Tra le 22:30 e le 23:42 nessuna chiave master apre la 317. La tessera di Andrea apre la camera alle 22:31; poi non risultano altri accessi con tessera fino al ritrovamento.", "x": 52, "y": 67, "unlocks": ["key-audit"] }
-      ]
+        {
+          "id": "elevatorcam",
+          "label": "1",
+          "title": "Telecamera ascensore",
+          "description": "La telecamera riprende Marco Esposito uscire dall'ascensore al terzo piano alle 23:07 e rientrarvi alle 23:16. Non viene ripreso davanti alla 317, fuori dall'inquadratura.",
+          "x": 32,
+          "y": 28,
+          "unlocks": [
+            "elevator-cctv"
+          ]
+        },
+        {
+          "id": "wifi",
+          "label": "2",
+          "title": "Access point del terzo piano",
+          "description": "Il log Wi-Fi colloca il telefono di Marco sul nodo del terzo piano dalle 23:08 alle 23:15. Il suo telefono si ricollega al quarto piano alle 23:19.",
+          "x": 72,
+          "y": 25,
+          "unlocks": [
+            "marco-wifi"
+          ]
+        },
+        {
+          "id": "keylog",
+          "label": "3",
+          "title": "Console serrature",
+          "description": "Tra le 22:30 e le 23:42 nessuna chiave master apre la 317. La tessera di Andrea apre la camera alle 22:31; poi non risultano altri accessi con tessera fino al ritrovamento.",
+          "x": 52,
+          "y": 67,
+          "unlocks": [
+            "key-audit"
+          ]
+        }
+      ],
+      "image": "assets/locations/corridor.svg"
     },
     {
       "id": "lounge",
       "name": "Business lounge",
       "description": "Andrea aveva lavorato qui prima di salire in camera. Il suo portatile e una stampante condivisa sono ancora presenti.",
       "hotspots": [
-        { "id": "laptop", "label": "1", "title": "Portatile di Andrea", "description": "Il computer è protetto da password, ma il tecnico aziendale può acquisirne un'immagine forense senza alterare i dati.", "x": 40, "y": 55, "unlocks": ["victim-laptop"] },
-        { "id": "printer", "label": "2", "title": "Coda della stampante", "description": "Alle 22:12 Andrea ha stampato un documento di otto pagine intitolato «Riconciliazione fornitori Q3». Le copie cartacee non sono più nella vaschetta.", "x": 72, "y": 49, "unlocks": ["printer-log"] },
-        { "id": "shredder", "label": "3", "title": "Distruggidocumenti", "description": "Tra i frammenti si ricompongono parti di fatture intestate a una società chiamata M.E.C. Servizi.", "x": 20, "y": 68, "unlocks": ["mec-fragments"] }
-      ]
+        {
+          "id": "laptop",
+          "label": "1",
+          "title": "Portatile di Andrea",
+          "description": "Il computer è protetto da password, ma il tecnico aziendale può acquisirne un'immagine forense senza alterare i dati.",
+          "x": 40,
+          "y": 55,
+          "unlocks": [
+            "victim-laptop"
+          ]
+        },
+        {
+          "id": "printer",
+          "label": "2",
+          "title": "Coda della stampante",
+          "description": "Alle 22:12 Andrea ha stampato un documento di otto pagine intitolato «Riconciliazione fornitori Q3». Le copie cartacee non sono più nella vaschetta.",
+          "x": 72,
+          "y": 49,
+          "unlocks": [
+            "printer-log"
+          ]
+        },
+        {
+          "id": "shredder",
+          "label": "3",
+          "title": "Distruggidocumenti",
+          "description": "Tra i frammenti si ricompongono parti di fatture intestate a una società chiamata M.E.C. Servizi.",
+          "x": 20,
+          "y": 68,
+          "unlocks": [
+            "mec-fragments"
+          ]
+        }
+      ],
+      "image": "assets/locations/lounge.svg"
     }
   ],
   "evidence": [
-    { "id": "cause", "title": "Primo esame medico-legale", "category": "MEDICO", "description": "Il decesso è compatibile con un evento cardiaco acuto non spontaneo. La finestra più probabile è tra le 23:25 e le 23:38. Sono necessari esami tossicologici.", "initial": true, "action": { "label": "Richiedi tossicologia", "result": "Il laboratorio identifica una concentrazione anomala di un glicoside cardiaco, incompatibile con un'esposizione accidentale.", "unlocks": ["toxicology"] } },
-    { "id": "guest-list", "title": "Elenco presenti al congresso", "category": "DOCUMENTO", "description": "I sei sospettati risultano tutti in hotel tra le 22:30 e le 23:42.", "initial": true },
-    { "id": "lipstick-glass", "title": "Calice con rossetto", "category": "REPERTO", "description": "La tonalità borgogna è compatibile con il rossetto di Laura. Sul calice sono presenti impronte di Andrea e Laura.", "initial": false },
-    { "id": "tumbler", "title": "Tumbler con amaro", "category": "REPERTO", "description": "Sul bicchiere ci sono impronte di Andrea e una traccia parziale non sufficiente per un'identificazione immediata.", "initial": false, "action": { "label": "Analizza il contenuto", "result": "Nel residuo dell'amaro è presente lo stesso composto rilevato nel sangue di Andrea.", "unlocks": ["tumbler-toxic"] } },
-    { "id": "laura-message", "title": "Messaggio delle 23:18", "category": "TELEFONO", "description": "Laura scrive: «Dobbiamo parlare. È l'ultima volta.» Il messaggio è successivo al suo ritorno al bar.", "initial": false },
-    { "id": "victim-phone", "title": "Telefono della vittima", "category": "DIGITALE", "description": "Il telefono può essere acquisito dal reparto informatico.", "initial": false, "action": { "label": "Esegui acquisizione forense", "result": "Viene recuperato un messaggio inviato da Andrea al commercialista alle 23:23: «Domattina chiudiamo la storia M.E.C. e porto tutto al consiglio». Viene recuperata anche una chiamata di 38 secondi con Sara alle 22:58.", "unlocks": ["accountant-message", "sara-call"] } },
-    { "id": "minibar-bottle", "title": "Bottiglietta di amaro", "category": "REPERTO", "description": "La bottiglietta aperta viene repertata. Sul collo non ci sono impronte utili; il tappo presenta una traccia parziale.", "initial": false, "action": { "label": "Invia al laboratorio", "result": "Nel contenuto residuo viene trovato il medesimo glicoside cardiaco. La contaminazione è concentrata nella bottiglietta, non nelle altre bevande del minibar.", "unlocks": ["bitter-residue"] } },
-    { "id": "door-log", "title": "Caratteristiche della porta", "category": "TECNICO", "description": "La serratura è auto-bloccante: chiunque sia uscito dalla stanza avrebbe potuto lasciare la porta apparentemente chiusa senza usare una chiave.", "initial": false },
-    { "id": "torn-note", "title": "Foglio strappato: M.E.C. 180.000", "category": "DOCUMENTO", "description": "La sigla M.E.C. e la cifra 180.000 sembrano riferirsi a un controllo contabile.", "initial": false },
-    { "id": "watch-data", "title": "Dati smartwatch", "category": "DIGITALE", "description": "Picco cardiaco alle 23:27; perdita progressiva di attività; ultimo movimento significativo alle 23:33.", "initial": false },
-    { "id": "bar-receipt", "title": "Scontrino del bar", "category": "DOCUMENTO", "description": "Laura acquista due calici di vino alle 22:36 e li porta fuori dal bar.", "initial": false },
-    { "id": "bar-cctv", "title": "Video del bar", "category": "VIDEO", "description": "Laura ricompare al bar alle 23:05 e rimane visibile quasi continuativamente fino alle 23:34.", "initial": false },
-    { "id": "ice-call", "title": "Telefonata per il ghiaccio", "category": "REGISTRO", "description": "Dalla camera 411 di Marco parte una chiamata al bar alle 23:17; l'ordine viene annullato alle 23:19.", "initial": false },
-    { "id": "elevator-cctv", "title": "Video ascensore", "category": "VIDEO", "description": "Marco è al terzo piano tra le 23:07 e le 23:16, in contrasto con il suo alibi iniziale.", "initial": false },
-    { "id": "marco-wifi", "title": "Log Wi-Fi di Marco", "category": "DIGITALE", "description": "Il telefono di Marco risulta collegato al nodo del terzo piano dalle 23:08 alle 23:15 e al quarto piano dalle 23:19.", "initial": false },
-    { "id": "key-audit", "title": "Audit delle chiavi elettroniche", "category": "TECNICO", "description": "Nessun accesso tramite master key alla 317 prima del ritrovamento. Il dato non esclude l'ingresso di una persona fatta entrare da Andrea.", "initial": false },
-    { "id": "victim-laptop", "title": "Portatile della vittima", "category": "DIGITALE", "description": "È disponibile per un'acquisizione forense.", "initial": false, "action": { "label": "Analizza il portatile", "result": "Emergono trasferimenti per 180.000 euro verso M.E.C. Servizi e una bozza di e-mail al consiglio con allegati contabili. La società risulta riconducibile a un prestanome legato a Marco.", "unlocks": ["financial-shell", "draft-board"] } },
-    { "id": "printer-log", "title": "Registro stampante", "category": "DIGITALE", "description": "Andrea stampa alle 22:12 otto pagine della riconciliazione fornitori. Il documento non viene più trovato integro.", "initial": false },
-    { "id": "mec-fragments", "title": "Frammenti di fatture M.E.C.", "category": "DOCUMENTO", "description": "Le fatture ricostruite mostrano servizi generici e importi ripetuti. Una sigla di autorizzazione corrisponde alle iniziali di Marco Esposito.", "initial": false },
-    { "id": "toxicology", "title": "Tossicologia completa", "category": "MEDICO", "description": "Nel sangue di Andrea è presente una dose elevata di un glicoside cardiaco. L'effetto è compatibile con l'alterazione del ritmo cardiaco osservata dallo smartwatch.", "initial": false },
-    { "id": "tumbler-toxic", "title": "Amaro contaminato", "category": "LABORATORIO", "description": "Il tumbler contiene tracce dello stesso composto trovato nel sangue. Il vino non presenta contaminazioni.", "initial": false },
-    { "id": "accountant-message", "title": "Messaggio al commercialista", "category": "TELEFONO", "description": "Alle 23:23 Andrea scrive: «Domattina chiudiamo la storia M.E.C. e porto tutto al consiglio». È l'ultimo messaggio inviato dalla vittima.", "initial": false },
-    { "id": "sara-call", "title": "Chiamata con Sara", "category": "TELEFONO", "description": "Alle 22:58 Andrea e Sara parlano per 38 secondi. Sara inizialmente aveva negato contatti dopo le 22:30.", "initial": false },
-    { "id": "bitter-residue", "title": "Contaminazione della bottiglietta", "category": "LABORATORIO", "description": "Il composto è presente nella bottiglietta di amaro ma assente nelle altre bevande del minibar: è stato introdotto deliberatamente.", "initial": false },
-    { "id": "financial-shell", "title": "Flussi verso M.E.C. Servizi", "category": "FINANZIARIO", "description": "In nove mesi 180.000 euro sono stati trasferiti a M.E.C. Servizi per consulenze difficili da verificare. I documenti collegano la società a un prestanome vicino a Marco.", "initial": false },
-    { "id": "draft-board", "title": "Bozza al consiglio", "category": "E-MAIL", "description": "Andrea aveva preparato una segnalazione formale per il consiglio d'amministrazione, da inviare alle 08:30 del mattino successivo, indicando Marco come responsabile dei pagamenti sospetti.", "initial": false },
-    { "id": "marco-call-log", "title": "Log della videoconferenza", "category": "DIGITALE", "description": "Marco entra nella riunione di lavoro alle 23:21, non alle 22:55 come aveva dichiarato. Resta collegato fino alle 23:39 con microfono disattivato per la maggior parte del tempo.", "initial": false },
-    { "id": "marco-search", "title": "Cronologia del tablet di Marco", "category": "DIGITALE", "description": "Nel pomeriggio Marco aveva consultato pagine riguardanti interazioni pericolose tra farmaci cardiaci e alcol. La ricerca da sola non dimostra il delitto, ma acquista peso insieme alla tossicologia.", "initial": false },
-    { "id": "laura-admission", "title": "Ammissione di Laura", "category": "TESTIMONIANZA", "description": "Laura ammette di essere stata nella 317 dalle 22:42 circa alle 23:03. Aveva mentito per nascondere una discussione privata con l'ex compagno.", "initial": false },
-    { "id": "sara-admission", "title": "Ammissione di Sara", "category": "TESTIMONIANZA", "description": "Sara ammette la telefonata delle 22:58: voleva dimettersi e temeva che Andrea rendesse pubblica una loro relazione passata. Non risulta al terzo piano nella finestra del delitto.", "initial": false },
-    { "id": "davide-alibi", "title": "Alibi verificato di Davide", "category": "VIDEO", "description": "Le telecamere della hall mostrano Davide quasi continuamente dalle 23:02 alle 23:38, salvo un intervallo di meno di un minuto vicino ai distributori automatici al piano terra.", "initial": false },
-    { "id": "marco-contradiction", "title": "Contraddizione nell'alibi di Marco", "category": "TESTIMONIANZA", "description": "Confrontato con log Wi-Fi e videoconferenza, Marco ammette di essere salito al terzo piano ma sostiene di aver solo cercato Andrea senza entrare nella 317.", "initial": false }
+    {
+      "id": "cause",
+      "title": "Primo esame medico-legale",
+      "category": "MEDICO",
+      "description": "Il decesso è compatibile con un evento cardiaco acuto non spontaneo. La finestra più probabile è tra le 23:25 e le 23:38. Sono necessari esami tossicologici.",
+      "initial": true,
+      "action": {
+        "label": "Richiedi tossicologia",
+        "result": "Il laboratorio identifica una concentrazione anomala di un glicoside cardiaco, incompatibile con un'esposizione accidentale.",
+        "unlocks": [
+          "toxicology"
+        ]
+      }
+    },
+    {
+      "id": "guest-list",
+      "title": "Elenco presenti al congresso",
+      "category": "DOCUMENTO",
+      "description": "I sei sospettati risultano tutti in hotel tra le 22:30 e le 23:42.",
+      "initial": true
+    },
+    {
+      "id": "lipstick-glass",
+      "title": "Calice con rossetto",
+      "category": "REPERTO",
+      "description": "La tonalità borgogna è compatibile con il rossetto di Laura. Sul calice sono presenti impronte di Andrea e Laura.",
+      "initial": false
+    },
+    {
+      "id": "tumbler",
+      "title": "Tumbler con amaro",
+      "category": "REPERTO",
+      "description": "Sul bicchiere ci sono impronte di Andrea e una traccia parziale non sufficiente per un'identificazione immediata.",
+      "initial": false,
+      "action": {
+        "label": "Analizza il contenuto",
+        "result": "Nel residuo dell'amaro è presente lo stesso composto rilevato nel sangue di Andrea.",
+        "unlocks": [
+          "tumbler-toxic"
+        ]
+      }
+    },
+    {
+      "id": "laura-message",
+      "title": "Messaggio delle 23:18",
+      "category": "TELEFONO",
+      "description": "Laura scrive: «Dobbiamo parlare. È l'ultima volta.» Il messaggio è successivo al suo ritorno al bar.",
+      "initial": false
+    },
+    {
+      "id": "victim-phone",
+      "title": "Telefono della vittima",
+      "category": "DIGITALE",
+      "description": "Il telefono può essere acquisito dal reparto informatico.",
+      "initial": false,
+      "action": {
+        "label": "Esegui acquisizione forense",
+        "result": "Viene recuperato un messaggio inviato da Andrea al commercialista alle 23:23: «Domattina chiudiamo la storia M.E.C. e porto tutto al consiglio». Viene recuperata anche una chiamata di 38 secondi con Sara alle 22:58.",
+        "unlocks": [
+          "accountant-message",
+          "sara-call"
+        ]
+      }
+    },
+    {
+      "id": "minibar-bottle",
+      "title": "Bottiglietta di amaro",
+      "category": "REPERTO",
+      "description": "La bottiglietta aperta viene repertata. Sul collo non ci sono impronte utili; il tappo presenta una traccia parziale.",
+      "initial": false,
+      "action": {
+        "label": "Invia al laboratorio",
+        "result": "Nel contenuto residuo viene trovato il medesimo glicoside cardiaco. La contaminazione è concentrata nella bottiglietta, non nelle altre bevande del minibar.",
+        "unlocks": [
+          "bitter-residue"
+        ]
+      }
+    },
+    {
+      "id": "door-log",
+      "title": "Caratteristiche della porta",
+      "category": "TECNICO",
+      "description": "La serratura è auto-bloccante: chiunque sia uscito dalla stanza avrebbe potuto lasciare la porta apparentemente chiusa senza usare una chiave.",
+      "initial": false
+    },
+    {
+      "id": "torn-note",
+      "title": "Foglio strappato: M.E.C. 180.000",
+      "category": "DOCUMENTO",
+      "description": "La sigla M.E.C. e la cifra 180.000 sembrano riferirsi a un controllo contabile.",
+      "initial": false
+    },
+    {
+      "id": "watch-data",
+      "title": "Dati smartwatch",
+      "category": "DIGITALE",
+      "description": "Picco cardiaco alle 23:27; perdita progressiva di attività; ultimo movimento significativo alle 23:33.",
+      "initial": false
+    },
+    {
+      "id": "bar-receipt",
+      "title": "Scontrino del bar",
+      "category": "DOCUMENTO",
+      "description": "Laura acquista due calici di vino alle 22:36 e li porta fuori dal bar.",
+      "initial": false
+    },
+    {
+      "id": "bar-cctv",
+      "title": "Video del bar",
+      "category": "VIDEO",
+      "description": "Laura ricompare al bar alle 23:05 e rimane visibile quasi continuativamente fino alle 23:34.",
+      "initial": false
+    },
+    {
+      "id": "ice-call",
+      "title": "Telefonata per il ghiaccio",
+      "category": "REGISTRO",
+      "description": "Dalla camera 411 di Marco parte una chiamata al bar alle 23:17; l'ordine viene annullato alle 23:19.",
+      "initial": false
+    },
+    {
+      "id": "elevator-cctv",
+      "title": "Video ascensore",
+      "category": "VIDEO",
+      "description": "Marco è al terzo piano tra le 23:07 e le 23:16, in contrasto con il suo alibi iniziale.",
+      "initial": false
+    },
+    {
+      "id": "marco-wifi",
+      "title": "Log Wi-Fi di Marco",
+      "category": "DIGITALE",
+      "description": "Il telefono di Marco risulta collegato al nodo del terzo piano dalle 23:08 alle 23:15 e al quarto piano dalle 23:19.",
+      "initial": false
+    },
+    {
+      "id": "key-audit",
+      "title": "Audit delle chiavi elettroniche",
+      "category": "TECNICO",
+      "description": "Nessun accesso tramite master key alla 317 prima del ritrovamento. Il dato non esclude l'ingresso di una persona fatta entrare da Andrea.",
+      "initial": false
+    },
+    {
+      "id": "victim-laptop",
+      "title": "Portatile della vittima",
+      "category": "DIGITALE",
+      "description": "È disponibile per un'acquisizione forense.",
+      "initial": false,
+      "action": {
+        "label": "Analizza il portatile",
+        "result": "Emergono trasferimenti per 180.000 euro verso M.E.C. Servizi e una bozza di e-mail al consiglio con allegati contabili. La società risulta riconducibile a un prestanome legato a Marco.",
+        "unlocks": [
+          "financial-shell",
+          "draft-board"
+        ]
+      }
+    },
+    {
+      "id": "printer-log",
+      "title": "Registro stampante",
+      "category": "DIGITALE",
+      "description": "Andrea stampa alle 22:12 otto pagine della riconciliazione fornitori. Il documento non viene più trovato integro.",
+      "initial": false
+    },
+    {
+      "id": "mec-fragments",
+      "title": "Frammenti di fatture M.E.C.",
+      "category": "DOCUMENTO",
+      "description": "Le fatture ricostruite mostrano servizi generici e importi ripetuti. Una sigla di autorizzazione corrisponde alle iniziali di Marco Esposito.",
+      "initial": false
+    },
+    {
+      "id": "toxicology",
+      "title": "Tossicologia completa",
+      "category": "MEDICO",
+      "description": "Nel sangue di Andrea è presente una dose elevata di un glicoside cardiaco. L'effetto è compatibile con l'alterazione del ritmo cardiaco osservata dallo smartwatch.",
+      "initial": false
+    },
+    {
+      "id": "tumbler-toxic",
+      "title": "Amaro contaminato",
+      "category": "LABORATORIO",
+      "description": "Il tumbler contiene tracce dello stesso composto trovato nel sangue. Il vino non presenta contaminazioni.",
+      "initial": false
+    },
+    {
+      "id": "accountant-message",
+      "title": "Messaggio al commercialista",
+      "category": "TELEFONO",
+      "description": "Alle 23:23 Andrea scrive: «Domattina chiudiamo la storia M.E.C. e porto tutto al consiglio». È l'ultimo messaggio inviato dalla vittima.",
+      "initial": false
+    },
+    {
+      "id": "sara-call",
+      "title": "Chiamata con Sara",
+      "category": "TELEFONO",
+      "description": "Alle 22:58 Andrea e Sara parlano per 38 secondi. Sara inizialmente aveva negato contatti dopo le 22:30.",
+      "initial": false
+    },
+    {
+      "id": "bitter-residue",
+      "title": "Contaminazione della bottiglietta",
+      "category": "LABORATORIO",
+      "description": "Il composto è presente nella bottiglietta di amaro ma assente nelle altre bevande del minibar: è stato introdotto deliberatamente.",
+      "initial": false
+    },
+    {
+      "id": "financial-shell",
+      "title": "Flussi verso M.E.C. Servizi",
+      "category": "FINANZIARIO",
+      "description": "In nove mesi 180.000 euro sono stati trasferiti a M.E.C. Servizi per consulenze difficili da verificare. I documenti collegano la società a un prestanome vicino a Marco.",
+      "initial": false
+    },
+    {
+      "id": "draft-board",
+      "title": "Bozza al consiglio",
+      "category": "E-MAIL",
+      "description": "Andrea aveva preparato una segnalazione formale per il consiglio d'amministrazione, da inviare alle 08:30 del mattino successivo, indicando Marco come responsabile dei pagamenti sospetti.",
+      "initial": false
+    },
+    {
+      "id": "marco-call-log",
+      "title": "Log della videoconferenza",
+      "category": "DIGITALE",
+      "description": "Marco entra nella riunione di lavoro alle 23:21, non alle 22:55 come aveva dichiarato. Resta collegato fino alle 23:39 con microfono disattivato per la maggior parte del tempo.",
+      "initial": false
+    },
+    {
+      "id": "marco-search",
+      "title": "Cronologia del tablet di Marco",
+      "category": "DIGITALE",
+      "description": "Nel pomeriggio Marco aveva consultato pagine riguardanti interazioni pericolose tra farmaci cardiaci e alcol. La ricerca da sola non dimostra il delitto, ma acquista peso insieme alla tossicologia.",
+      "initial": false
+    },
+    {
+      "id": "laura-admission",
+      "title": "Ammissione di Laura",
+      "category": "TESTIMONIANZA",
+      "description": "Laura ammette di essere stata nella 317 dalle 22:42 circa alle 23:03. Aveva mentito per nascondere una discussione privata con l'ex compagno.",
+      "initial": false
+    },
+    {
+      "id": "sara-admission",
+      "title": "Ammissione di Sara",
+      "category": "TESTIMONIANZA",
+      "description": "Sara ammette la telefonata delle 22:58: voleva dimettersi e temeva che Andrea rendesse pubblica una loro relazione passata. Non risulta al terzo piano nella finestra del delitto.",
+      "initial": false
+    },
+    {
+      "id": "davide-alibi",
+      "title": "Alibi verificato di Davide",
+      "category": "VIDEO",
+      "description": "Le telecamere della hall mostrano Davide quasi continuamente dalle 23:02 alle 23:38, salvo un intervallo di meno di un minuto vicino ai distributori automatici al piano terra.",
+      "initial": false
+    },
+    {
+      "id": "marco-contradiction",
+      "title": "Contraddizione nell'alibi di Marco",
+      "category": "TESTIMONIANZA",
+      "description": "Confrontato con log Wi-Fi e videoconferenza, Marco ammette di essere salito al terzo piano ma sostiene di aver solo cercato Andrea senza entrare nella 317.",
+      "initial": false
+    }
   ],
   "suspects": [
     {
@@ -101,9 +490,32 @@
       "motive": "Contenzioso economico dopo la separazione.",
       "note": "Indossa un rossetto color borgogna.",
       "interrogation": [
-        { "id": "basic", "question": "Quando hai visto Andrea l'ultima volta?", "answer": "Al pomeriggio. La sera non sono salita da lui. Sono stata al bar quasi tutto il tempo." },
-        { "id": "glasses", "question": "Come spieghi il tuo rossetto sul bicchiere?", "requiresEvidence": ["lipstick-glass", "bar-receipt"], "answer": "Va bene. Sono salita da Andrea con due bicchieri. Abbiamo litigato per i soldi della casa. Sono uscita poco dopo le undici e sono tornata al bar. Non l'ho avvelenato.", "unlocks": ["laura-admission"] },
-        { "id": "message", "question": "Cosa significava «È l'ultima volta»?", "requiresEvidence": ["laura-message", "laura-admission"], "answer": "Che non avrei più accettato di incontrarlo di nascosto per discutere della separazione. Il messaggio era rabbia, non una minaccia di morte." }
+        {
+          "id": "basic",
+          "question": "Quando hai visto Andrea l'ultima volta?",
+          "answer": "Al pomeriggio. La sera non sono salita da lui. Sono stata al bar quasi tutto il tempo."
+        },
+        {
+          "id": "glasses",
+          "question": "Come spieghi il tuo rossetto sul bicchiere?",
+          "requiresEvidence": [
+            "lipstick-glass",
+            "bar-receipt"
+          ],
+          "answer": "Va bene. Sono salita da Andrea con due bicchieri. Abbiamo litigato per i soldi della casa. Sono uscita poco dopo le undici e sono tornata al bar. Non l'ho avvelenato.",
+          "unlocks": [
+            "laura-admission"
+          ]
+        },
+        {
+          "id": "message",
+          "question": "Cosa significava «È l'ultima volta»?",
+          "requiresEvidence": [
+            "laura-message",
+            "laura-admission"
+          ],
+          "answer": "Che non avrei più accettato di incontrarlo di nascosto per discutere della separazione. Il messaggio era rabbia, non una minaccia di morte."
+        }
       ]
     },
     {
@@ -114,11 +526,57 @@
       "alibi": "Sostiene di essere stato in videoconferenza nella camera 411 dalle 22:55 alle 23:35.",
       "motive": "Andrea stava controllando alcuni pagamenti aziendali.",
       "interrogation": [
-        { "id": "basic", "question": "Dove eri tra le 23:00 e le 23:30?", "answer": "In camera mia, in videoconferenza con Milano. Non sono sceso né salito altrove." },
-        { "id": "floor", "question": "Il tuo telefono e la telecamera ti collocano al terzo piano. Perché?", "requiresEvidence": ["marco-wifi", "elevator-cctv"], "answer": "Sono salito per cercare Andrea. Dovevo chiedergli una firma. Non l'ho trovato e sono tornato su. Forse la rete ha agganciato il terzo piano mentre ero in ascensore.", "unlocks": ["marco-contradiction"] },
-        { "id": "meeting", "question": "La videoconferenza risulta iniziata solo alle 23:21. Confermi?", "requiresEvidence": ["marco-contradiction", "ice-call"], "answer": "Mi sono collegato tardi, sì. Avevo problemi con la connessione. Ho esagerato sull'orario perché non volevo sembrare irresponsabile.", "unlocks": ["marco-call-log"] },
-        { "id": "money", "question": "Che cos'è M.E.C. Servizi?", "requiresEvidence": ["financial-shell", "draft-board"], "answer": "Un fornitore. Andrea vedeva complotti ovunque. Le mie iniziali non significano nulla. Non avevo motivo di fargli del male." },
-        { "id": "poison", "question": "Perché avevi cercato informazioni su farmaci cardiaci e alcol?", "requiresEvidence": ["toxicology", "marco-call-log", "financial-shell"], "answer": "Mio padre prende farmaci per il cuore. Avevo letto alcune cose perché ero preoccupato. Non c'entra Andrea.", "unlocks": ["marco-search"] }
+        {
+          "id": "basic",
+          "question": "Dove eri tra le 23:00 e le 23:30?",
+          "answer": "In camera mia, in videoconferenza con Milano. Non sono sceso né salito altrove."
+        },
+        {
+          "id": "floor",
+          "question": "Il tuo telefono e la telecamera ti collocano al terzo piano. Perché?",
+          "requiresEvidence": [
+            "marco-wifi",
+            "elevator-cctv"
+          ],
+          "answer": "Sono salito per cercare Andrea. Dovevo chiedergli una firma. Non l'ho trovato e sono tornato su. Forse la rete ha agganciato il terzo piano mentre ero in ascensore.",
+          "unlocks": [
+            "marco-contradiction"
+          ]
+        },
+        {
+          "id": "meeting",
+          "question": "La videoconferenza risulta iniziata solo alle 23:21. Confermi?",
+          "requiresEvidence": [
+            "marco-contradiction",
+            "ice-call"
+          ],
+          "answer": "Mi sono collegato tardi, sì. Avevo problemi con la connessione. Ho esagerato sull'orario perché non volevo sembrare irresponsabile.",
+          "unlocks": [
+            "marco-call-log"
+          ]
+        },
+        {
+          "id": "money",
+          "question": "Che cos'è M.E.C. Servizi?",
+          "requiresEvidence": [
+            "financial-shell",
+            "draft-board"
+          ],
+          "answer": "Un fornitore. Andrea vedeva complotti ovunque. Le mie iniziali non significano nulla. Non avevo motivo di fargli del male."
+        },
+        {
+          "id": "poison",
+          "question": "Perché avevi cercato informazioni su farmaci cardiaci e alcol?",
+          "requiresEvidence": [
+            "toxicology",
+            "marco-call-log",
+            "financial-shell"
+          ],
+          "answer": "Mio padre prende farmaci per il cuore. Avevo letto alcune cose perché ero preoccupato. Non c'entra Andrea.",
+          "unlocks": [
+            "marco-search"
+          ]
+        }
       ]
     },
     {
@@ -129,8 +587,22 @@
       "alibi": "Dice di essere uscita dall'hotel alle 23:00 e di non aver più parlato con Andrea.",
       "motive": "Una promozione bloccata e una relazione passata che voleva tenere nascosta.",
       "interrogation": [
-        { "id": "basic", "question": "Hai parlato con Andrea quella sera?", "answer": "Solo durante il congresso. Dopo le dieci e mezza non abbiamo avuto contatti." },
-        { "id": "call", "question": "C'è una chiamata tra voi alle 22:58.", "requiresEvidence": ["sara-call"], "answer": "Sì. Ho mentito. Gli ho detto che volevo lasciare l'azienda. Tra noi c'era stata una relazione mesi fa e temevo che la usasse contro di me. Sono uscita subito dopo.", "unlocks": ["sara-admission"] }
+        {
+          "id": "basic",
+          "question": "Hai parlato con Andrea quella sera?",
+          "answer": "Solo durante il congresso. Dopo le dieci e mezza non abbiamo avuto contatti."
+        },
+        {
+          "id": "call",
+          "question": "C'è una chiamata tra voi alle 22:58.",
+          "requiresEvidence": [
+            "sara-call"
+          ],
+          "answer": "Sì. Ho mentito. Gli ho detto che volevo lasciare l'azienda. Tra noi c'era stata una relazione mesi fa e temevo che la usasse contro di me. Sono uscita subito dopo.",
+          "unlocks": [
+            "sara-admission"
+          ]
+        }
       ]
     },
     {
@@ -141,8 +613,22 @@
       "alibi": "Dichiara di essere rimasto nella hall dalle 23:00 fino al ritrovamento.",
       "motive": "Lite su una proprietà ereditata dai genitori.",
       "interrogation": [
-        { "id": "basic", "question": "Perché eri in hotel?", "answer": "Andrea mi aveva chiesto di passare. Dovevamo chiarire una questione familiare, ma continuava a rimandare. Sono rimasto ad aspettare in hall." },
-        { "id": "verify", "question": "Possiamo verificare il tuo alibi con le telecamere?", "requiresEvidence": ["bar-cctv"], "answer": "Certo. Non ho nulla da nascondere. Chiedete pure alla reception.", "unlocks": ["davide-alibi"] }
+        {
+          "id": "basic",
+          "question": "Perché eri in hotel?",
+          "answer": "Andrea mi aveva chiesto di passare. Dovevamo chiarire una questione familiare, ma continuava a rimandare. Sono rimasto ad aspettare in hall."
+        },
+        {
+          "id": "verify",
+          "question": "Possiamo verificare il tuo alibi con le telecamere?",
+          "requiresEvidence": [
+            "bar-cctv"
+          ],
+          "answer": "Certo. Non ho nulla da nascondere. Chiedete pure alla reception.",
+          "unlocks": [
+            "davide-alibi"
+          ]
+        }
       ]
     },
     {
@@ -153,8 +639,19 @@
       "alibi": "Era tra reception e ufficio amministrativo.",
       "motive": "Andrea aveva minacciato un reclamo per una violazione della privacy avvenuta durante un precedente soggiorno.",
       "interrogation": [
-        { "id": "basic", "question": "Chi poteva entrare nella 317?", "answer": "Andrea con la sua tessera e il personale autorizzato con master key. Ma ogni uso della master viene registrato." },
-        { "id": "keys", "question": "C'è stato un accesso con chiave master?", "requiresEvidence": ["key-audit"], "answer": "No. Questo significa che Andrea ha fatto entrare personalmente chiunque fosse con lui. La porta poi si richiude da sola." }
+        {
+          "id": "basic",
+          "question": "Chi poteva entrare nella 317?",
+          "answer": "Andrea con la sua tessera e il personale autorizzato con master key. Ma ogni uso della master viene registrato."
+        },
+        {
+          "id": "keys",
+          "question": "C'è stato un accesso con chiave master?",
+          "requiresEvidence": [
+            "key-audit"
+          ],
+          "answer": "No. Questo significa che Andrea ha fatto entrare personalmente chiunque fosse con lui. La porta poi si richiude da sola."
+        }
       ]
     },
     {
@@ -165,31 +662,159 @@
       "alibi": "Dice di aver lasciato l'hotel alle 22:50.",
       "motive": "Andrea gli aveva promesso documenti su irregolarità aziendali e poi aveva cambiato idea.",
       "interrogation": [
-        { "id": "basic", "question": "Perché volevi incontrare Andrea?", "answer": "Stavo seguendo una storia su fatture sospette. Andrea mi aveva detto che forse avrebbe parlato, poi si è tirato indietro." },
-        { "id": "mec", "question": "Conosci la sigla M.E.C.?", "requiresEvidence": ["torn-note", "mec-fragments"], "answer": "Sì. Era proprio il nome che Andrea mi aveva fatto. Mi disse che il problema non era un dipendente qualsiasi, ma qualcuno con potere di autorizzazione sui pagamenti." }
+        {
+          "id": "basic",
+          "question": "Perché volevi incontrare Andrea?",
+          "answer": "Stavo seguendo una storia su fatture sospette. Andrea mi aveva detto che forse avrebbe parlato, poi si è tirato indietro."
+        },
+        {
+          "id": "mec",
+          "question": "Conosci la sigla M.E.C.?",
+          "requiresEvidence": [
+            "torn-note",
+            "mec-fragments"
+          ],
+          "answer": "Sì. Era proprio il nome che Andrea mi aveva fatto. Mi disse che il problema non era un dipendente qualsiasi, ma qualcuno con potere di autorizzazione sui pagamenti."
+        }
       ]
     }
   ],
   "timeline": [
-    { "time": "22:12", "title": "Andrea stampa la riconciliazione fornitori", "description": "Otto pagine relative ai pagamenti sospetti.", "requiresEvidence": ["printer-log"] },
-    { "time": "22:31", "title": "Andrea entra nella stanza 317", "description": "La sua tessera apre la porta.", "requiresEvidence": ["key-audit"] },
-    { "time": "22:36", "title": "Laura compra due calici di vino", "description": "Li porta fuori dal bar.", "requiresEvidence": ["bar-receipt"] },
-    { "time": "22:42", "title": "Laura entra nella 317", "description": "Lo ammette dopo il confronto con le prove.", "requiresEvidence": ["laura-admission"] },
-    { "time": "23:03", "title": "Laura lascia Andrea", "description": "Pochi minuti dopo viene ripresa nuovamente al bar.", "requiresEvidence": ["laura-admission", "bar-cctv"] },
-    { "time": "23:07", "title": "Marco arriva al terzo piano", "description": "Telecamera dell'ascensore e Wi-Fi concordano sulla sua presenza.", "requiresEvidence": ["elevator-cctv", "marco-wifi"] },
-    { "time": "23:16", "title": "Marco lascia il terzo piano", "description": "Rientra nell'ascensore diretto verso il quarto piano.", "requiresEvidence": ["elevator-cctv"] },
-    { "time": "23:18", "title": "Laura invia il messaggio minaccioso", "description": "È già al bar quando lo invia.", "requiresEvidence": ["laura-message", "bar-cctv"] },
-    { "time": "23:21", "title": "Marco entra in videoconferenza", "description": "Il log contraddice l'orario da lui dichiarato.", "requiresEvidence": ["marco-call-log"] },
-    { "time": "23:23", "title": "Andrea scrive al commercialista", "description": "Annuncia che il mattino dopo avrebbe chiuso la vicenda M.E.C.", "requiresEvidence": ["accountant-message"] },
-    { "time": "23:27", "title": "Anomalia cardiaca", "description": "Lo smartwatch registra il primo forte picco.", "requiresEvidence": ["watch-data"] },
-    { "time": "23:33", "title": "Ultimo movimento significativo", "description": "Dopo questo momento lo smartwatch non registra attività normale.", "requiresEvidence": ["watch-data"] },
-    { "time": "23:42", "title": "Ritrovamento", "description": "Il personale apre la camera e trova Andrea privo di vita.", "requiresEvidence": [] }
+    {
+      "time": "22:12",
+      "title": "Andrea stampa la riconciliazione fornitori",
+      "description": "Otto pagine relative ai pagamenti sospetti.",
+      "requiresEvidence": [
+        "printer-log"
+      ]
+    },
+    {
+      "time": "22:31",
+      "title": "Andrea entra nella stanza 317",
+      "description": "La sua tessera apre la porta.",
+      "requiresEvidence": [
+        "key-audit"
+      ]
+    },
+    {
+      "time": "22:36",
+      "title": "Laura compra due calici di vino",
+      "description": "Li porta fuori dal bar.",
+      "requiresEvidence": [
+        "bar-receipt"
+      ]
+    },
+    {
+      "time": "22:42",
+      "title": "Laura entra nella 317",
+      "description": "Lo ammette dopo il confronto con le prove.",
+      "requiresEvidence": [
+        "laura-admission"
+      ]
+    },
+    {
+      "time": "23:03",
+      "title": "Laura lascia Andrea",
+      "description": "Pochi minuti dopo viene ripresa nuovamente al bar.",
+      "requiresEvidence": [
+        "laura-admission",
+        "bar-cctv"
+      ]
+    },
+    {
+      "time": "23:07",
+      "title": "Marco arriva al terzo piano",
+      "description": "Telecamera dell'ascensore e Wi-Fi concordano sulla sua presenza.",
+      "requiresEvidence": [
+        "elevator-cctv",
+        "marco-wifi"
+      ]
+    },
+    {
+      "time": "23:16",
+      "title": "Marco lascia il terzo piano",
+      "description": "Rientra nell'ascensore diretto verso il quarto piano.",
+      "requiresEvidence": [
+        "elevator-cctv"
+      ]
+    },
+    {
+      "time": "23:18",
+      "title": "Laura invia il messaggio minaccioso",
+      "description": "È già al bar quando lo invia.",
+      "requiresEvidence": [
+        "laura-message",
+        "bar-cctv"
+      ]
+    },
+    {
+      "time": "23:21",
+      "title": "Marco entra in videoconferenza",
+      "description": "Il log contraddice l'orario da lui dichiarato.",
+      "requiresEvidence": [
+        "marco-call-log"
+      ]
+    },
+    {
+      "time": "23:23",
+      "title": "Andrea scrive al commercialista",
+      "description": "Annuncia che il mattino dopo avrebbe chiuso la vicenda M.E.C.",
+      "requiresEvidence": [
+        "accountant-message"
+      ]
+    },
+    {
+      "time": "23:27",
+      "title": "Anomalia cardiaca",
+      "description": "Lo smartwatch registra il primo forte picco.",
+      "requiresEvidence": [
+        "watch-data"
+      ]
+    },
+    {
+      "time": "23:33",
+      "title": "Ultimo movimento significativo",
+      "description": "Dopo questo momento lo smartwatch non registra attività normale.",
+      "requiresEvidence": [
+        "watch-data"
+      ]
+    },
+    {
+      "time": "23:42",
+      "title": "Ritrovamento",
+      "description": "Il personale apre la camera e trova Andrea privo di vita.",
+      "requiresEvidence": []
+    }
   ],
   "solution": {
     "culpritId": "marco",
-    "motiveKeywords": ["180", "mec", "soldi", "denaro", "frode", "pagamenti", "appropriazione", "consiglio"],
-    "methodKeywords": ["amaro", "bottiglia", "bicchiere", "veleno", "glicoside", "avvelen"],
-    "requiredEvidenceIds": ["toxicology", "bitter-residue", "marco-wifi", "elevator-cctv", "marco-call-log", "financial-shell", "draft-board"],
+    "motiveKeywords": [
+      "180",
+      "mec",
+      "soldi",
+      "denaro",
+      "frode",
+      "pagamenti",
+      "appropriazione",
+      "consiglio"
+    ],
+    "methodKeywords": [
+      "amaro",
+      "bottiglia",
+      "bicchiere",
+      "veleno",
+      "glicoside",
+      "avvelen"
+    ],
+    "requiredEvidenceIds": [
+      "toxicology",
+      "bitter-residue",
+      "marco-wifi",
+      "elevator-cctv",
+      "marco-call-log",
+      "financial-shell",
+      "draft-board"
+    ],
     "notEnoughEvidence": "L'ipotesi può essere plausibile, ma non avete ancora raccolto tutti gli elementi indispensabili per sostenerla. Continuate a verificare tossicologia, spostamenti, alibi e documenti finanziari.",
     "failureHint": "L'accusa non ricostruisce correttamente tutti i punti chiave. Verificate chi aveva un movente urgente prima delle 08:30, chi ha mentito sui propri spostamenti e quale bevanda è stata contaminata.",
     "reveal": "Caso risolto. Marco Esposito ha ucciso Andrea per impedire che il mattino successivo denunciasse al consiglio i 180.000 euro di pagamenti verso M.E.C. Servizi. Tra le 23:07 e le 23:16 Marco era al terzo piano, non in videoconferenza come aveva dichiarato. Andrea lo ha fatto entrare personalmente; Marco ha contaminato la bottiglietta di amaro con il composto poi rilevato nel sangue e nel bicchiere. È uscito normalmente e la porta auto-bloccante si è richiusa alle sue spalle. Laura aveva davvero incontrato Andrea e aveva mentito, ma era già tornata al bar prima della finestra decisiva. Sara e Davide avevano a loro volta ragioni personali per nascondere informazioni, creando piste plausibili ma incompatibili con la sequenza completa delle prove. Il messaggio di Andrea delle 23:23 dimostra inoltre che era ancora vivo dopo la partenza di Marco e che la minaccia per Marco era imminente: la segnalazione al consiglio era prevista per le 08:30 del mattino seguente."

@@ -1,73 +1,76 @@
-# Archivio Investigativo
+# Archivio Investigativo — V3
 
-Portale web statico per giocare più casi investigativi. È pensato per funzionare su GitHub Pages senza backend.
+Portale web statico per casi investigativi cooperativi, pensato per essere giocato da un gruppo su un solo PC, tablet o telefono.
 
-## Cosa contiene
+## Novità V3
 
-- Catalogo di più casi
-- Salvataggio separato per ogni caso nel browser
-- Più luoghi investigabili per caso
-- Hotspot interattivi
-- Prove che si sbloccano progressivamente
-- Analisi di laboratorio / acquisizioni digitali
-- Sospettati e interrogatori progressivi
-- Domande che si sbloccano solo dopo aver trovato determinate prove
-- Cronologia ricostruita automaticamente
-- Appunti del gruppo
-- Accusa finale con verifica di colpevole, movente, metodo e prove chiave
-
-## Casi inclusi
-
-### Caso 001 — La stanza 317
-Caso completo di difficoltà medio/alta, progettato per circa 90-120 minuti e 2-8 giocatori.
-
-### Caso 002 — L'ultima corsa
-Caso breve dimostrativo/tutorial.
+- nuova grafica scura e professionale
+- immagini illustrate per i luoghi investigabili
+- hotspot visibili direttamente sulle scene
+- guida "Come si gioca" sempre accessibile
+- tutorial al primo accesso a un caso
+- sezione "Cosa fare adesso" con suggerimenti non risolutivi
+- Appunti di squadra con salvataggio automatico
+- campi separati per teoria, contraddizioni, domande aperte e movente
+- valutazione manuale di ogni sospettato
+- salvataggi separati per ogni caso nel browser
+- modalità cooperativa su un solo dispositivo
 
 ## Pubblicazione su GitHub Pages
 
-Carica tutti i file nella root del repository. La root deve contenere direttamente:
+Sostituisci nel repository i file/cartelle della versione precedente con quelli contenuti in questa V3.
 
-- `index.html`
-- `css/`
-- `js/`
-- `cases/`
-
-Poi vai su GitHub:
-
-1. `Settings`
-2. `Pages`
-3. `Build and deployment`
-4. Source: `Deploy from a branch`
-5. Branch: `main`
-6. Folder: `/ (root)`
-7. `Save`
-
-## Aggiornare un progetto già pubblicato
-
-Se il repository contiene già la versione precedente, sostituisci questi file con quelli presenti in questo pacchetto:
+I file principali modificati sono:
 
 - `index.html`
 - `css/style.css`
 - `js/app.js`
 - `js/game-state.js`
 - `js/investigation.js`
-- `cases/index.json`
 - `cases/caso-001.json`
+- `cases/caso-002.json`
+- `assets/ui/archive-bg.svg`
+- `assets/locations/room317.svg`
+- `assets/locations/bar.svg`
+- `assets/locations/corridor.svg`
+- `assets/locations/lounge.svg`
+- `assets/locations/taxi.svg`
 
-`cases/caso-002.json` può essere sostituito anch'esso, anche se resta il caso demo.
+## Struttura dei casi
 
-Dopo il commit, GitHub Pages aggiorna normalmente il sito in pochi minuti.
+`cases/index.json` contiene il catalogo.
 
-## Aggiungere un nuovo caso
+Ogni caso è un file JSON indipendente, ad esempio:
 
-1. Copia un file esistente in `cases/`, ad esempio `caso-001.json`.
-2. Rinominalo, per esempio `caso-003.json`.
-3. Cambia contenuti, sospettati, prove, luoghi, interrogatori e soluzione.
-4. Aggiungi il caso a `cases/index.json`.
+- `cases/caso-001.json`
+- `cases/caso-002.json`
 
-Il motore del portale non deve essere modificato se il nuovo caso segue lo stesso formato JSON.
+Per aggiungere un nuovo caso crea un nuovo JSON e aggiungilo al catalogo.
 
-## Nota sul salvataggio
+## Immagini delle scene
 
-I progressi vengono salvati con `localStorage`, quindi sono legati al browser e al dispositivo usato. Non esiste ancora sincronizzazione multiplayer tra telefoni diversi.
+Ogni luogo può avere una proprietà `image`:
+
+```json
+{
+  "id": "room317",
+  "name": "Stanza 317",
+  "image": "assets/locations/room317.svg"
+}
+```
+
+Gli hotspot usano coordinate percentuali `x` e `y`, quindi rimangono posizionati correttamente anche quando l'immagine cambia dimensione.
+
+## Salvataggi
+
+Lo stato viene salvato nel `localStorage` del browser. Il salvataggio include:
+
+- prove scoperte
+- hotspot esaminati
+- interrogatori effettuati
+- analisi eseguite
+- appunti della squadra
+- valutazioni dei sospettati
+- stato risolto/non risolto
+
+Non è necessario alcun backend per questa versione.

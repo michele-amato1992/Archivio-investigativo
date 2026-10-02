@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs><linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#303741"/><stop offset="1" stop-color="#11161b"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#c)"/>
+  <polygon points="0,80 470,210 470,675 0,675" fill="#262d35"/><polygon points="1200,80 730,210 730,675 1200,675" fill="#222831"/><polygon points="470,210 730,210 920,675 280,675" fill="#191d22"/>
+  <rect x="540" y="165" width="120" height="210" fill="#11151a" stroke="#66717a" stroke-width="4"/><line x1="600" y1="170" x2="600" y2="370" stroke="#59636c" stroke-width="3"/>
+  <rect x="284" y="175" width="110" height="230" fill="#171b20" stroke="#626d76" stroke-width="3"/><text x="316" y="205" fill="#c9bd9f" font-family="Arial" font-size="20">317</text>
+  <rect x="805" y="175" width="110" height="230" fill="#171b20" stroke="#626d76" stroke-width="3"/><text x="837" y="205" fill="#c9bd9f" font-family="Arial" font-size="20">318</text>
+  <rect x="315" y="85" width="68" height="42" rx="5" fill="#080b0e" stroke="#737d85" stroke-width="3"/><circle cx="349" cy="106" r="12" fill="#202932"/>
+  <rect x="835" y="78" width="75" height="18" rx="9" fill="#13191f" stroke="#7d878f"/><path d="M850 100q23-22 46 0M860 111q13-12 26 0" fill="none" stroke="#85919a" stroke-width="4"/>
+  <rect x="542" y="430" width="120" height="74" rx="6" fill="#202830" stroke="#707b85" stroke-width="3"/><rect x="565" y="450" width="75" height="12" fill="#78838d"/><rect x="565" y="475" width="55" height="10" fill="#78838d"/>
+  <text x="42" y="54" fill="#d8d2c4" font-family="Arial" font-size="28" font-weight="700">TERZO PIANO</text>
+  <text x="42" y="82" fill="#9098a0" font-family="Arial" font-size="16">Corridoio camere 301–320</text>
+</svg>

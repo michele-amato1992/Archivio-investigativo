@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2b3035"/><stop offset="1" stop-color="#101418"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#b)"/>
+  <rect x="0" y="420" width="1200" height="255" fill="#1b1816"/>
+  <rect x="135" y="235" width="890" height="200" rx="7" fill="#342a23" stroke="#6c5b49" stroke-width="3"/>
+  <rect x="100" y="420" width="980" height="95" rx="8" fill="#4a392a" stroke="#7e674f" stroke-width="3"/>
+  <rect x="190" y="120" width="430" height="120" fill="#151a1f" stroke="#56616a" stroke-width="3"/>
+  <g fill="#876c4a"><rect x="225" y="145" width="24" height="70"/><rect x="285" y="135" width="28" height="80"/><rect x="350" y="150" width="24" height="65"/><rect x="415" y="132" width="28" height="83"/><rect x="485" y="142" width="24" height="73"/></g>
+  <rect x="700" y="95" width="74" height="46" rx="6" fill="#090d10" stroke="#7b858e" stroke-width="3"/><circle cx="737" cy="118" r="15" fill="#202a32"/><path d="M736 140v38" stroke="#78838c" stroke-width="5"/>
+  <rect x="260" y="468" width="170" height="50" rx="6" fill="#ddd2b8" transform="rotate(-4 345 493)"/>
+  <path d="M285 486h112M285 500h85" stroke="#777064" stroke-width="5"/>
+  <rect x="665" y="458" width="200" height="58" rx="5" fill="#20262d" stroke="#68727b"/>
+  <path d="M690 478h145M690 494h110" stroke="#8d98a2" stroke-width="5"/>
+  <text x="42" y="54" fill="#d8d2c4" font-family="Arial" font-size="28" font-weight="700">BAR DELL'HOTEL</text>
+  <text x="42" y="82" fill="#9098a0" font-family="Arial" font-size="16">Area aperta fino alle 00:00</text>
+</svg>

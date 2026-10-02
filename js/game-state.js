@@ -9,27 +9,47 @@ const GameState = {
       askedTopics: [],
       evidenceActions: [],
       notes: '',
+      noteBoard: {
+        theories: '',
+        contradictions: '',
+        questions: '',
+        motive: '',
+        suspectStatuses: {}
+      },
       solved: false,
+      onboardingSeen: false,
       startedAt: null,
       updatedAt: null
     };
   },
 
   key(caseId = this.caseId) {
-    return `case-files-state-v3-${caseId}`;
+    return `case-files-state-v4-${caseId}`;
   },
 
-  legacyKey(caseId = this.caseId) {
-    return `case-files-state-v2-${caseId}`;
+  legacyKeys(caseId = this.caseId) {
+    return [`case-files-state-v3-${caseId}`, `case-files-state-v2-${caseId}`];
   },
 
   load(caseId) {
     this.caseId = caseId;
     this.data = this.defaultData();
     let raw = localStorage.getItem(this.key());
-    if (!raw) raw = localStorage.getItem(this.legacyKey());
+    if (!raw) {
+      for (const key of this.legacyKeys()) {
+        raw = localStorage.getItem(key);
+        if (raw) break;
+      }
+    }
     if (raw) {
-      try { this.data = { ...this.data, ...JSON.parse(raw) }; } catch (_) {}
+      try {
+        const parsed = JSON.parse(raw);
+        this.data = {
+          ...this.data,
+          ...parsed,
+          noteBoard: { ...this.data.noteBoard, ...(parsed.noteBoard || {}) }
+        };
+      } catch (_) {}
     }
     if (!this.data.startedAt) this.data.startedAt = new Date().toISOString();
     this.save();
@@ -37,9 +57,19 @@ const GameState = {
   },
 
   peek(caseId) {
-    const raw = localStorage.getItem(this.key(caseId)) || localStorage.getItem(this.legacyKey(caseId));
+    let raw = localStorage.getItem(this.key(caseId));
+    if (!raw) {
+      for (const key of this.legacyKeys(caseId)) {
+        raw = localStorage.getItem(key);
+        if (raw) break;
+      }
+    }
     if (!raw) return null;
-    try { return { ...this.defaultData(), ...JSON.parse(raw) }; } catch (_) { return null; }
+    try {
+      const parsed = JSON.parse(raw);
+      const defaults = this.defaultData();
+      return { ...defaults, ...parsed, noteBoard: { ...defaults.noteBoard, ...(parsed.noteBoard || {}) } };
+    } catch (_) { return null; }
   },
 
   save() {
@@ -51,7 +81,7 @@ const GameState = {
   reset(caseId = this.caseId) {
     if (!caseId) return;
     localStorage.removeItem(this.key(caseId));
-    localStorage.removeItem(this.legacyKey(caseId));
+    this.legacyKeys(caseId).forEach(key => localStorage.removeItem(key));
     if (caseId === this.caseId) this.data = this.defaultData();
   }
 };
