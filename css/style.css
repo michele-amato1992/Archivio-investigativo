@@ -260,3 +260,109 @@ body{background:linear-gradient(180deg,#080b10 0%,#070a0e 100%);}
 @media(max-width:1000px){.case-file-meta{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr}.evidence-grid-v4{grid-template-columns:1fr}.scene-box{min-height:400px}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.content{padding:1rem}.sidebar{padding:.55rem .7rem}.scene-page-head{align-items:flex-start}.scene-caption{align-items:flex-start}.case-file-meta{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.case-hero{padding:1.1rem}.case-hero h2{font-size:2.25rem}.case-file-meta{grid-template-columns:1fr 1fr}.intel-strip{grid-template-columns:1fr}.intel-strip>div{border-right:0;border-bottom:1px solid #2a3540}.intel-strip>div:last-child{border-bottom:0}.scene-page-head,.scene-caption,.scene-inspector{display:grid}.scene-progress{white-space:normal;width:max-content}.scene-key{flex-wrap:wrap}.scene-box{min-height:340px;aspect-ratio:4/3}.hotspot{width:36px;height:36px}.hotspot-tooltip{white-space:normal;max-width:170px;min-width:130px}.scene-inspector .btn{width:100%}.evidence-file{grid-template-columns:92px 1fr;min-height:240px}.evidence-visual span{width:48px;height:62px}.evidence-content{padding-left:.85rem}.evidence-summary{display:none}.discovery-toast{right:12px;bottom:12px;width:calc(100% - 24px)}}
+
+
+/* =========================================================
+   V6 — IMMERSIVE SCENE SEARCH
+   Hotspots are invisible until hover/focus. The player sees
+   the scene first, not game markers.
+   ========================================================= */
+.scene-stage{background:#090e13;border-color:#33404b;}
+.scene-caption{align-items:center;}
+.scene-caption>div{min-width:0;}
+.scene-search-help{
+  flex:0 0 auto;min-height:42px;padding:.58rem .82rem;border:1px solid #46525d;border-radius:9px;
+  background:#101720;color:#c5ced6;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer;
+  display:inline-flex;align-items:center;gap:.45rem;transition:.18s ease;
+}
+.scene-search-help:hover,.scene-search-help:focus-visible,.scene-search-help.active{
+  border-color:#c8a65f;color:#f7e4b8;background:#171a18;outline:none;
+}
+.scene-search-help span{font-size:1rem;color:#d8b566;}
+.scene-box.scene-search-mode{cursor:crosshair;isolation:isolate;}
+.scene-box.scene-search-mode::before{
+  content:"";position:absolute;z-index:2;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0%,rgba(226,192,119,.025) 49%,rgba(226,192,119,.07) 50%,rgba(226,192,119,.025) 51%,transparent 100%);
+  background-size:220% 100%;opacity:0;transition:opacity .2s ease;
+}
+.scene-box.scene-search-mode:hover::before{opacity:.7;animation:sceneScan 6s linear infinite;}
+@keyframes sceneScan{from{background-position:100% 0}to{background-position:-100% 0}}
+.scene-image{filter:saturate(.88) contrast(1.04) brightness(.92);transform:scale(1.001);}
+.scene-box:hover .scene-image{filter:saturate(.96) contrast(1.045) brightness(.96);}
+.scene-vignette{z-index:3;background:radial-gradient(ellipse at center,transparent 58%,rgba(2,4,7,.24) 100%),linear-gradient(180deg,rgba(0,0,0,.06),transparent 22%,rgba(0,0,0,.11));}
+.scan-instruction{
+  position:absolute;z-index:5;left:16px;bottom:14px;display:flex;align-items:center;gap:.45rem;
+  padding:.48rem .62rem;border:1px solid rgba(255,255,255,.11);border-radius:8px;
+  background:rgba(5,8,11,.62);backdrop-filter:blur(8px);color:#d7dde2;pointer-events:none;
+  opacity:.72;transition:opacity .2s ease;
+}
+.scan-instruction span{color:#e0bb6a;font-size:1.05rem}.scan-instruction strong{font-size:.74rem}.scan-instruction small{font-size:.68rem;color:#939da6;border-left:1px solid #4b545c;padding-left:.45rem;}
+.scene-box:hover .scan-instruction{opacity:.22;}
+
+.hotspot-region{
+  position:absolute;z-index:7;margin:0;padding:0;border:1px solid transparent;border-radius:8px;
+  background:transparent;color:inherit;cursor:pointer;outline:none;box-shadow:none;
+  transition:border-color .14s ease,background .14s ease,box-shadow .16s ease,transform .16s ease;
+}
+.hotspot-region .hotspot-frame{
+  position:absolute;inset:0;border:1px solid transparent;border-radius:7px;pointer-events:none;
+  transition:inherit;
+}
+.hotspot-region:hover,.hotspot-region:focus-visible,.hotspot-region.selected{
+  border-color:rgba(245,213,142,.92);
+  background:linear-gradient(135deg,rgba(230,188,96,.08),rgba(255,241,205,.025));
+  box-shadow:0 0 0 1px rgba(255,237,194,.16) inset,0 0 0 4px rgba(218,176,86,.06),0 0 24px rgba(218,176,86,.18);
+}
+.hotspot-region:hover .hotspot-frame,.hotspot-region:focus-visible .hotspot-frame,.hotspot-region.selected .hotspot-frame{
+  border-color:rgba(255,242,205,.35);box-shadow:0 0 18px rgba(230,190,101,.12) inset;
+}
+.hotspot-region.examined:hover,.hotspot-region.examined:focus-visible,.hotspot-region.examined.selected{
+  border-color:rgba(154,184,160,.82);background:rgba(101,145,112,.075);box-shadow:0 0 0 4px rgba(111,157,121,.05),0 0 20px rgba(111,157,121,.12);
+}
+.hotspot-region::before,.hotspot-region::after{
+  content:"";position:absolute;width:14px;height:14px;opacity:0;pointer-events:none;transition:opacity .14s ease;
+}
+.hotspot-region::before{left:-2px;top:-2px;border-left:2px solid #ffe3a2;border-top:2px solid #ffe3a2;border-radius:3px 0 0 0;}
+.hotspot-region::after{right:-2px;bottom:-2px;border-right:2px solid #ffe3a2;border-bottom:2px solid #ffe3a2;border-radius:0 0 3px 0;}
+.hotspot-region:hover::before,.hotspot-region:hover::after,.hotspot-region:focus-visible::before,.hotspot-region:focus-visible::after,.hotspot-region.selected::before,.hotspot-region.selected::after{opacity:1;}
+.hotspot-region.examined::before,.hotspot-region.examined::after{border-color:#bad0bf;}
+.hotspot-region .hotspot-tooltip{
+  position:absolute;left:50%;bottom:calc(100% + 9px);z-index:4;transform:translateX(-50%) translateY(5px);
+  width:max-content;max-width:230px;padding:.52rem .68rem;border:1px solid #55616c;border-radius:7px;
+  background:rgba(6,10,14,.94);backdrop-filter:blur(9px);color:#f6f0e5;box-shadow:0 12px 32px rgba(0,0,0,.42);
+  opacity:0;visibility:hidden;pointer-events:none;transition:.14s ease;text-align:left;
+}
+.hotspot-region .hotspot-tooltip strong{display:block;font-size:.77rem;line-height:1.25;}
+.hotspot-region .hotspot-tooltip small{display:block;margin-top:.16rem;color:#9ca6af;font-size:.66rem;font-weight:600;}
+.hotspot-region:hover .hotspot-tooltip,.hotspot-region:focus-visible .hotspot-tooltip,.hotspot-region.selected .hotspot-tooltip{
+  opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+}
+.hotspot-region .hotspot-tooltip::after{
+  content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#55616c;
+}
+
+/* Optional assistance: never on by default. */
+.scene-box.reveal-search .hotspot-region{
+  border-color:rgba(227,197,131,.28);background:rgba(221,183,99,.025);box-shadow:0 0 0 1px rgba(255,255,255,.025) inset;
+}
+.scene-box.reveal-search .hotspot-region::before,.scene-box.reveal-search .hotspot-region::after{opacity:.45;}
+.scene-box.reveal-search .hotspot-region.examined{border-color:rgba(141,173,149,.3);}
+
+.scene-inspector-active{animation:inspectorReveal .2s ease-out;}
+@keyframes inspectorReveal{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+@media (hover:none),(pointer:coarse){
+  .scene-box.scene-search-mode{cursor:default;}
+  .scan-instruction small{display:none;}
+  .scan-instruction strong::after{content:" · usa Aiuto ricerca";color:#9aa5ae;font-weight:600;}
+  .scene-search-help{border-color:#6b624e;color:#ead7aa;}
+  .hotspot-region:hover{border-color:transparent;background:transparent;box-shadow:none;}
+  .hotspot-region.selected{border-color:rgba(245,213,142,.92);background:rgba(230,188,96,.07);box-shadow:0 0 0 4px rgba(218,176,86,.06),0 0 24px rgba(218,176,86,.18);}
+  .hotspot-region.selected .hotspot-tooltip{opacity:1;visibility:visible;}
+}
+@media(max-width:620px){
+  .scene-caption{display:grid;}.scene-search-help{width:100%;justify-content:center;}
+  .scene-box{aspect-ratio:16/11;min-height:310px;}
+  .scan-instruction{left:9px;bottom:9px;max-width:calc(100% - 18px);}
+  .hotspot-region .hotspot-tooltip{max-width:155px;white-space:normal;}
+}

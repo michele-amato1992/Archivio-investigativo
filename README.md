@@ -1,20 +1,27 @@
-# Archivio Investigativo — V5
+# Archivio Investigativo — V6
 
-Portale investigativo cooperativo da usare su un unico PC, tablet o telefono e pubblicabile con GitHub Pages.
+Portale web cooperativo per casi investigativi, pensato per essere giocato da un gruppo su un unico PC, tablet o telefono.
 
-## Novità V5
+## Novità V6
 
-- **Caso 001: La stanza 317** rifinito come caso completo da 90–120 minuti.
-- Sei sospettati con bugie e segreti che non coincidono automaticamente con la colpevolezza.
-- Nuove piste secondarie e nuovi elementi di verifica per Laura, Tommaso ed Elisa.
-- Nuova testimonianza dalla camera 315.
-- Interrogatori: le domande non ancora sbloccate sono ora **invisibili**, quindi il gioco non anticipa quali prove esistono.
-- Accusa finale più completa: responsabile, movente, metodo, finestra temporale e prova decisiva.
-- La sezione Accusa mostra solo il numero di reperti acquisiti, senza rivelare il totale delle prove presenti nel caso.
-- Salvataggi separati V5, con migrazione automatica dai salvataggi V4/V3/V2.
+- Scene fotografiche realistiche per Stanza 317, bar, corridoio e business lounge.
+- Nessun marker numerato visibile sulle scene.
+- Su PC gli oggetti investigabili si evidenziano solo al passaggio del mouse.
+- L'hover mostra soltanto il nome dell'oggetto: l'indizio resta segreto fino a **Esamina elemento**.
+- Su dispositivi touch è disponibile **Aiuto ricerca**, che mostra temporaneamente le aree esplorabili.
+- Gli oggetti già esaminati restano invisibili finché non vengono nuovamente individuati.
+- Nessun totale delle aree nascoste viene mostrato: il portale indica solo quanti elementi sono già stati esaminati.
 
 ## Pubblicazione su GitHub Pages
 
-Sostituisci i file del repository con il contenuto di questa cartella. Poi fai commit. GitHub Pages pubblicherà automaticamente la nuova versione.
+Sostituisci i file della versione precedente con tutto il contenuto di questa cartella. In GitHub: **Settings → Pages → Deploy from a branch → main → /(root)**.
 
-Se avevi già iniziato il Caso 001, usa **Ricomincia caso** per testare la V5 da zero.
+Dopo l'aggiornamento è consigliato usare **Ricomincia caso** per testare il Caso 001 dall'inizio.
+
+## Struttura
+
+- `index.html` — interfaccia del portale
+- `css/style.css` — grafica e comportamento visivo delle scene
+- `js/` — motore dell'indagine e salvataggio locale
+- `cases/` — catalogo e contenuti dei casi
+- `assets/locations/` — fotografie/illustrazioni delle scene

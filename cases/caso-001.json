@@ -20,212 +20,244 @@
     {
       "id": "room317",
       "name": "Stanza 317",
-      "description": "La camera della vittima. Nessun segno di effrazione; la serratura elettronica si blocca automaticamente quando la porta si chiude.",
+      "description": "La camera in cui è stato trovato Andrea Romano. Esplora l’ambiente con attenzione: gli elementi investigabili non sono segnalati finché non li individui.",
       "hotspots": [
         {
           "id": "glasses",
           "label": "1",
           "title": "I due bicchieri",
           "description": "Un calice da vino presenta una traccia di rossetto borgogna. Un tumbler contiene residui di amaro. Le impronte visibili vengono repertate separatamente.",
-          "x": 68,
-          "y": 58,
+          "x": 88,
+          "y": 48,
           "unlocks": [
             "lipstick-glass",
             "tumbler"
-          ]
+          ],
+          "w": 8,
+          "h": 13
         },
         {
           "id": "phone",
           "label": "2",
           "title": "Telefono di Andrea",
           "description": "Lo smartphone è bloccato. Nella schermata notifiche compare un messaggio delle 23:18 da 'L.': «Dobbiamo parlare. È l'ultima volta.»",
-          "x": 35,
-          "y": 64,
+          "x": 94,
+          "y": 50,
           "unlocks": [
             "laura-message",
             "victim-phone"
-          ]
+          ],
+          "w": 6,
+          "h": 12
         },
         {
           "id": "minibar",
           "label": "3",
           "title": "Minibar",
           "description": "Una bottiglietta di amaro è aperta e quasi vuota. Il tappo è appoggiato sul ripiano, non avvitato.",
-          "x": 20,
-          "y": 47,
+          "x": 0,
+          "y": 23,
           "unlocks": [
             "minibar-bottle"
-          ]
+          ],
+          "w": 23,
+          "h": 68
         },
         {
           "id": "door",
           "label": "4",
           "title": "Serratura elettronica",
           "description": "La porta non era chiusa con catenaccio o blocco interno. Il sistema registra solo aperture tramite tessera, non quando la porta viene aperta dall'interno.",
-          "x": 10,
-          "y": 37,
+          "x": 8,
+          "y": 3,
           "unlocks": [
             "door-log"
-          ]
+          ],
+          "w": 15,
+          "h": 47
         },
         {
           "id": "desk",
           "label": "5",
           "title": "Scrivania",
           "description": "Nel cestino c'è un foglio strappato con la sigla «M.E.C.» e una cifra: 180.000. Il portatile della vittima non è nella stanza.",
-          "x": 48,
-          "y": 35,
+          "x": 25,
+          "y": 17,
           "unlocks": [
             "torn-note"
-          ]
+          ],
+          "w": 25,
+          "h": 43
         },
         {
           "id": "watch",
           "label": "6",
           "title": "Smartwatch",
           "description": "Il dispositivo registra un aumento anomalo della frequenza cardiaca alle 23:27 e l'ultimo movimento significativo alle 23:33.",
-          "x": 58,
-          "y": 70,
+          "x": 87,
+          "y": 61,
           "unlocks": [
             "watch-data"
-          ]
+          ],
+          "w": 12,
+          "h": 13
         }
       ],
-      "image": "assets/locations/room317.svg"
+      "image": "assets/locations/room317.png"
     },
     {
       "id": "bar",
       "name": "Bar dell'hotel",
-      "description": "Il bar al piano terra era aperto fino a mezzanotte. Il barista ricorda diversi membri del gruppo aziendale.",
+      "description": "Il bar dell’hotel era ancora aperto la sera dell’omicidio. Sul bancone e nelle apparecchiature di servizio possono esserci tracce utili.",
       "hotspots": [
         {
           "id": "receipt",
           "label": "1",
           "title": "Scontrino delle 22:36",
           "description": "Due calici di vino rosso risultano pagati da Laura De Santis alle 22:36. Il barista ricorda che li ha portati via su un vassoio piccolo.",
-          "x": 28,
-          "y": 58,
+          "x": 17,
+          "y": 44,
           "unlocks": [
             "bar-receipt"
-          ]
+          ],
+          "w": 22,
+          "h": 20
         },
         {
           "id": "camera",
           "label": "2",
-          "title": "Telecamera del bar",
+          "title": "Sistema di videosorveglianza del bar",
           "description": "Le registrazioni mostrano Laura tornare al bar alle 23:05 senza bicchieri e restarvi fino alle 23:34.",
-          "x": 78,
-          "y": 22,
+          "x": 3,
+          "y": 3,
           "unlocks": [
             "bar-cctv"
-          ]
+          ],
+          "w": 12,
+          "h": 14
         },
         {
           "id": "bartender",
           "label": "3",
-          "title": "Registro personale",
+          "title": "Postazione del barista",
           "description": "Il barista annota una richiesta insolita: alle 23:17 Marco Esposito telefona dalla sua camera chiedendo ghiaccio, poi annulla l'ordine due minuti dopo.",
-          "x": 60,
-          "y": 65,
+          "x": 35,
+          "y": 30,
           "unlocks": [
             "ice-call"
-          ]
+          ],
+          "w": 20,
+          "h": 24
         }
       ],
-      "image": "assets/locations/bar.svg"
+      "image": "assets/locations/bar.png"
     },
     {
       "id": "corridor",
       "name": "Terzo piano e corridoio",
-      "description": "Il corridoio delle camere 301-320 ha una telecamera all'ascensore e copertura Wi-Fi separata per piano.",
+      "description": "Il corridoio del terzo piano collega ascensore e camere 315-317. Qui contano soprattutto accessi, spostamenti e ciò che può aver visto o registrato il piano.",
       "hotspots": [
         {
           "id": "elevatorcam",
           "label": "1",
-          "title": "Telecamera ascensore",
+          "title": "Sistema di ripresa del corridoio",
           "description": "La telecamera riprende Marco Esposito uscire dall'ascensore al terzo piano alle 23:07 e rientrarvi alle 23:16. Non viene ripreso davanti alla 317, fuori dall'inquadratura.",
-          "x": 32,
-          "y": 28,
+          "x": 38,
+          "y": 3,
           "unlocks": [
             "elevator-cctv"
-          ]
+          ],
+          "w": 17,
+          "h": 16
         },
         {
           "id": "wifi",
           "label": "2",
-          "title": "Access point del terzo piano",
+          "title": "Nodo di rete del terzo piano",
           "description": "Il log Wi-Fi colloca il telefono di Marco sul nodo del terzo piano dalle 23:08 alle 23:15. Il suo telefono si ricollega al quarto piano alle 23:19.",
-          "x": 72,
-          "y": 25,
+          "x": 53,
+          "y": 4,
           "unlocks": [
             "marco-wifi"
-          ]
+          ],
+          "w": 18,
+          "h": 15
         },
         {
           "id": "keylog",
           "label": "3",
-          "title": "Console serrature",
+          "title": "Serratura elettronica della 317",
           "description": "Tra le 22:30 e le 23:42 nessuna chiave master apre la 317. La tessera di Andrea apre la camera alle 22:31; poi non risultano altri accessi con tessera fino al ritrovamento.",
-          "x": 52,
-          "y": 67,
+          "x": 76,
+          "y": 22,
           "unlocks": [
             "key-audit"
-          ]
+          ],
+          "w": 17,
+          "h": 55
         },
         {
           "id": "guest315",
           "label": "4",
           "title": "Camera 315",
           "description": "L’ospite della camera 315 riferisce di aver sentito due voci maschili nel corridoio poco dopo le 23:10, senza vedere chi fosse nella 317.",
-          "x": 88,
-          "y": 58,
+          "x": 4,
+          "y": 17,
           "unlocks": [
             "corridor-witness"
-          ]
+          ],
+          "w": 20,
+          "h": 58
         }
       ],
-      "image": "assets/locations/corridor.svg"
+      "image": "assets/locations/corridor.png"
     },
     {
       "id": "lounge",
       "name": "Business lounge",
-      "description": "Andrea aveva lavorato qui prima di salire in camera. Il suo portatile e una stampante condivisa sono ancora presenti.",
+      "description": "La business lounge è stata usata da Andrea nelle ore precedenti al delitto. Postazioni di lavoro e documenti possono ricostruire ciò su cui stava indagando.",
       "hotspots": [
         {
           "id": "laptop",
           "label": "1",
           "title": "Portatile di Andrea",
           "description": "Il computer è protetto da password, ma il tecnico aziendale può acquisirne un'immagine forense senza alterare i dati.",
-          "x": 40,
-          "y": 55,
+          "x": 23,
+          "y": 48,
           "unlocks": [
             "victim-laptop"
-          ]
+          ],
+          "w": 20,
+          "h": 19
         },
         {
           "id": "printer",
           "label": "2",
           "title": "Coda della stampante",
           "description": "Alle 22:12 Andrea ha stampato un documento di otto pagine intitolato «Riconciliazione fornitori Q3». Le copie cartacee non sono più nella vaschetta.",
-          "x": 72,
-          "y": 49,
+          "x": 62,
+          "y": 35,
           "unlocks": [
             "printer-log"
-          ]
+          ],
+          "w": 17,
+          "h": 23
         },
         {
           "id": "shredder",
           "label": "3",
           "title": "Distruggidocumenti",
           "description": "Tra i frammenti si ricompongono parti di fatture intestate a una società chiamata M.E.C. Servizi.",
-          "x": 20,
-          "y": 68,
+          "x": 10,
+          "y": 58,
           "unlocks": [
             "mec-fragments"
-          ]
+          ],
+          "w": 15,
+          "h": 29
         }
       ],
-      "image": "assets/locations/lounge.svg"
+      "image": "assets/locations/lounge.png"
     }
   ],
   "evidence": [

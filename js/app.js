@@ -194,48 +194,90 @@
     const location = locations.find(l => l.id === locationId) || locations[0];
     if (!location) { view.innerHTML = card('<h2>Nessun luogo investigabile</h2>'); return; }
     currentLocationId = location.id;
+
     const tabs = locations.map(l => {
       const done = (l.hotspots || []).filter(h => GameState.data.examinedHotspots.includes(`${l.id}:${h.id}`)).length;
-      return `<button class="location-tab ${l.id === location.id ? 'active' : ''}" data-location="${escapeHtml(l.id)}" type="button"><span>${escapeHtml(l.name || l.label || 'Luogo')}</span><small>${done}/${(l.hotspots || []).length}</small></button>`;
+      return `<button class="location-tab ${l.id === location.id ? 'active' : ''}" data-location="${escapeHtml(l.id)}" type="button"><span>${escapeHtml(l.name || l.label || 'Luogo')}</span><small>${done ? `${done} esaminati` : 'Da esplorare'}</small></button>`;
     }).join('');
+
     const hotspots = (location.hotspots || []).map(h => {
       const examined = GameState.data.examinedHotspots.includes(`${location.id}:${h.id}`);
-      return `<button class="hotspot ${examined ? 'examined' : ''}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${Number(h.x)}%;top:${Number(h.y)}%" aria-label="Seleziona ${escapeHtml(h.title || h.label)}"><span class="hotspot-number">${escapeHtml(h.label)}</span><span class="hotspot-tooltip">${escapeHtml(h.title || 'Punto da esaminare')}<small>${examined ? 'Già esaminato' : 'Tocca per vedere'}</small></span></button>`;
+      const hasBox = Number.isFinite(Number(h.w)) && Number.isFinite(Number(h.h));
+      const left = hasBox ? Number(h.x) : Number(h.x) - 3;
+      const top = hasBox ? Number(h.y) : Number(h.y) - 4;
+      const width = hasBox ? Number(h.w) : 6;
+      const height = hasBox ? Number(h.h) : 8;
+      return `<button class="hotspot-region ${examined ? 'examined' : ''}" type="button" data-hotspot="${escapeHtml(h.id)}" style="left:${left}%;top:${top}%;width:${width}%;height:${height}%" aria-label="Individua ${escapeHtml(h.title || h.label)}">
+        <span class="hotspot-frame" aria-hidden="true"></span>
+        <span class="hotspot-tooltip"><strong>${escapeHtml(h.title || 'Elemento da esaminare')}</strong><small>${examined ? 'Già esaminato · clicca per rileggere' : 'Clicca per osservare'}</small></span>
+      </button>`;
     }).join('');
-    const bg = location.image ? `<img class="scene-image" src="${escapeHtml(location.image)}" alt="${escapeHtml(location.name || 'Luogo investigativo')}">` : `<div class="scene-placeholder"><strong>${escapeHtml(location.name || location.label || 'Luogo')}</strong><span>${escapeHtml(location.description || 'Esamina i punti indicati.')}</span></div>`;
+
+    const bg = location.image
+      ? `<img class="scene-image" src="${escapeHtml(location.image)}" alt="${escapeHtml(location.name || 'Luogo investigativo')}">`
+      : `<div class="scene-placeholder"><strong>${escapeHtml(location.name || location.label || 'Luogo')}</strong><span>${escapeHtml(location.description || 'Osserva attentamente la scena.')}</span></div>`;
+
     const examinedCount = (location.hotspots || []).filter(h => GameState.data.examinedHotspots.includes(`${location.id}:${h.id}`)).length;
     view.innerHTML = `
       <div class="scene-page-head">
-        <div><p class="eyebrow">SCENE E LUOGHI</p><h2>Esplorazione della scena</h2><p>Seleziona un indicatore per sapere cosa stai osservando. <strong>L'esame vero avviene solo quando premi “Esamina elemento”.</strong></p></div>
-        <span class="scene-progress">${examinedCount}/${(location.hotspots || []).length} elementi esaminati</span>
+        <div><p class="eyebrow">SCENE E LUOGHI</p><h2>Esplorazione della scena</h2><p><strong>Non ci sono marcatori visibili.</strong> Muovi il mouse lentamente sulla fotografia: quando individui qualcosa di interessante, l'oggetto si incornicia. Su telefono usa <em>Aiuto ricerca</em> se serve.</p></div>
+        <span class="scene-progress">${examinedCount} elementi esaminati</span>
       </div>
       <div class="location-tabs location-tabs-v4">${tabs}</div>
       <section class="scene-stage">
-        <div class="scene-caption"><div><span class="eyebrow">${escapeHtml(location.name || location.label || 'LUOGO')}</span><h3>${escapeHtml(location.name || location.label || 'Luogo')}</h3><p>${escapeHtml(location.description || 'Osservate attentamente la scena.')}</p></div><div class="scene-key"><span><i></i>Da esaminare</span><span class="done"><i></i>Esaminato</span></div></div>
-        <div class="scene-box">${bg}<div class="scene-vignette"></div>${hotspots}</div>
+        <div class="scene-caption">
+          <div><span class="eyebrow">${escapeHtml(location.name || location.label || 'LUOGO')}</span><h3>${escapeHtml(location.name || location.label || 'Luogo')}</h3><p>${escapeHtml(location.description || 'Osservate attentamente la scena.')}</p></div>
+          <button id="revealHotspots" class="scene-search-help" type="button" aria-pressed="false"><span>⌕</span> Aiuto ricerca</button>
+        </div>
+        <div id="sceneBox" class="scene-box scene-search-mode">${bg}<div class="scene-vignette"></div>${hotspots}<div class="scan-instruction"><span>⌖</span><strong>Esplora la scena</strong><small>Muovi il puntatore sugli oggetti</small></div></div>
       </section>
-      <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Seleziona un punto</h3><p>Prima di esaminare un elemento puoi leggerne il nome. In questo modo sai sempre su cosa stai cliccando senza anticipare ciò che scoprirai.</p></div></div>
+      <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Nessun elemento selezionato</h3><p>Esplora la fotografia. Quando il cursore incontra un elemento investigabile, questo verrà evidenziato senza anticiparti ciò che nasconde.</p></div></div>
       <div id="sceneResult"></div>`;
+
     document.querySelectorAll('[data-location]').forEach(btn => btn.addEventListener('click', () => renderScene(btn.dataset.location)));
+
+    const sceneBox = document.getElementById('sceneBox');
+    const helpBtn = document.getElementById('revealHotspots');
+    helpBtn?.addEventListener('click', () => {
+      const on = sceneBox.classList.toggle('reveal-search');
+      helpBtn.setAttribute('aria-pressed', String(on));
+      helpBtn.classList.toggle('active', on);
+      helpBtn.innerHTML = on ? '<span>×</span> Nascondi aiuto' : '<span>⌕</span> Aiuto ricerca';
+    });
+
     document.querySelectorAll('[data-hotspot]').forEach(btn => btn.addEventListener('click', () => {
       const hotspot = (location.hotspots || []).find(h => h.id === btn.dataset.hotspot);
       if (!hotspot) return;
-      document.querySelectorAll('.hotspot').forEach(x => x.classList.remove('selected'));
+      document.querySelectorAll('.hotspot-region').forEach(x => x.classList.remove('selected'));
       btn.classList.add('selected');
+      sceneBox?.classList.remove('reveal-search');
+      if (helpBtn) {
+        helpBtn.classList.remove('active');
+        helpBtn.setAttribute('aria-pressed', 'false');
+        helpBtn.innerHTML = '<span>⌕</span> Aiuto ricerca';
+      }
       const examined = GameState.data.examinedHotspots.includes(`${location.id}:${hotspot.id}`);
       const inspector = document.getElementById('sceneInspector');
-      inspector.className = 'scene-inspector';
-      inspector.innerHTML = `<div><span class="eyebrow">ELEMENTO ${escapeHtml(hotspot.label)}</span><h3>${escapeHtml(hotspot.title)}</h3><p>${examined ? 'Questo elemento è già stato esaminato. Puoi rileggere il risultato senza modificare l’indagine.' : 'Elemento individuato nella scena. Esaminalo quando la squadra è pronta.'}</p></div><button class="btn ${examined ? 'secondary' : 'primary'}" id="inspectSelected" type="button">${examined ? 'Rileggi risultato' : 'Esamina elemento'}</button>`;
+      inspector.className = 'scene-inspector scene-inspector-active';
+      inspector.innerHTML = `<div><span class="eyebrow">ELEMENTO INDIVIDUATO</span><h3>${escapeHtml(hotspot.title)}</h3><p>${examined ? 'Questo elemento è già stato esaminato. Puoi rileggere il risultato senza modificare l’indagine.' : 'Avete individuato qualcosa che può essere osservato più da vicino. L’indizio verrà rivelato solo dopo l’esame.'}</p></div><button class="btn ${examined ? 'secondary' : 'primary'}" id="inspectSelected" type="button">${examined ? 'Rileggi risultato' : 'Esamina elemento'}</button>`;
+      inspector.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
+
       document.getElementById('inspectSelected')?.addEventListener('click', () => {
         const before = new Set(GameState.data.unlockedEvidence);
         const h = Investigation.examineHotspot(location.id, hotspot.id);
         if (!h) return;
         btn.classList.add('examined');
         const newly = (h.newlyUnlocked || []).filter(id => !before.has(id));
-        document.getElementById('sceneResult').innerHTML = card(`<div class="discovery-head"><span class="discovery-icon">✦</span><div><p class="eyebrow">ELEMENTO ESAMINATO</p><h3>${escapeHtml(h.title)}</h3></div></div><p class="discovery-text">${escapeHtml(h.description)}</p>${newly.length ? `<div class="new-evidence-list"><strong>${newly.length === 1 ? 'Nuovo reperto acquisito' : 'Nuovi reperti acquisiti'}</strong>${newly.map(id => `<span>${escapeHtml(evidenceById(id)?.title || id)}</span>`).join('')}</div>` : '<p class="muted">Nessun nuovo reperto, ma l’osservazione è stata registrata.</p>'}`, 'discovery-card');
-        if (newly.length) { const first = evidenceById(newly[0]); showToast(first?.title || 'Nuovo reperto', newly.length > 1 ? `+${newly.length - 1} altri elementi` : 'Aggiunto alla sezione Prove'); }
+        document.getElementById('sceneResult').innerHTML = card(`<div class="discovery-head"><span class="discovery-icon">✦</span><div><p class="eyebrow">SCOPERTA DALLA SCENA</p><h3>${escapeHtml(h.title)}</h3></div></div><p class="discovery-text">${escapeHtml(h.description)}</p>${newly.length ? `<div class="new-evidence-list"><strong>${newly.length === 1 ? 'Nuovo reperto acquisito' : 'Nuovi reperti acquisiti'}</strong>${newly.map(id => `<span>${escapeHtml(evidenceById(id)?.title || id)}</span>`).join('')}</div>` : '<p class="muted">Nessun nuovo reperto, ma l’osservazione è stata registrata.</p>'}`, 'discovery-card');
+        if (newly.length) {
+          const first = evidenceById(newly[0]);
+          showToast(first?.title || 'Nuovo reperto', newly.length > 1 ? `+${newly.length - 1} altri elementi` : 'Aggiunto alla sezione Prove');
+        }
         const count = (location.hotspots || []).filter(x => GameState.data.examinedHotspots.includes(`${location.id}:${x.id}`)).length;
-        document.querySelector('.scene-progress').textContent = `${count}/${(location.hotspots || []).length} elementi esaminati`;
+        const progress = document.querySelector('.scene-progress');
+        if (progress) progress.textContent = `${count} elementi esaminati`;
+        const tab = document.querySelector(`[data-location="${CSS.escape(location.id)}"] small`);
+        if (tab) tab.textContent = `${count} esaminati`;
       });
     }));
   }
