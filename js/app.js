@@ -518,22 +518,60 @@
       svg.setAttribute('width', width);
       svg.setAttribute('height', height);
       const pieces = [];
-      visibleRelations.forEach((rel, idx) => {
+
+      const relativeRect = el => {
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left - base.left + canvas.scrollLeft,
+          top: r.top - base.top + canvas.scrollTop,
+          width: r.width,
+          height: r.height,
+          right: r.right - base.left + canvas.scrollLeft,
+          bottom: r.bottom - base.top + canvas.scrollTop,
+          cx: r.left - base.left + canvas.scrollLeft + r.width / 2,
+          cy: r.top - base.top + canvas.scrollTop + r.height / 2
+        };
+      };
+
+      visibleRelations.forEach(rel => {
         const a = canvas.querySelector(`[data-board-entity="${CSS.escape(rel.from)}"]`);
         const b = canvas.querySelector(`[data-board-entity="${CSS.escape(rel.to)}"]`);
         if (!a || !b) return;
-        const ra = a.getBoundingClientRect();
-        const rb = b.getBoundingClientRect();
-        const ax = ra.left - base.left + ra.width / 2 + canvas.scrollLeft;
-        const ay = ra.top - base.top + 18 + canvas.scrollTop;
-        const bx = rb.left - base.left + rb.width / 2 + canvas.scrollLeft;
-        const by = rb.top - base.top + 18 + canvas.scrollTop;
-        const midY = (ay + by) / 2;
-        const bend = Math.max(26, Math.min(90, Math.abs(by - ay) * .22));
-        const d = `M ${ax} ${ay} C ${ax} ${midY - bend}, ${bx} ${midY + bend}, ${bx} ${by}`;
+        const ra = relativeRect(a);
+        const rb = relativeRect(b);
+        const sameRow = Math.abs(ra.top - rb.top) < 40;
+        let d, lx, ly;
+
+        if (sameRow) {
+          /* Collegamenti della stessa riga: usano la corsia libera sopra le schede. */
+          const y = Math.max(12, Math.min(ra.top, rb.top) - 17);
+          const ax = ra.cx;
+          const bx = rb.cx;
+          const ay = ra.top - 3;
+          const by = rb.top - 3;
+          d = `M ${ax} ${ay} L ${ax} ${y} L ${bx} ${y} L ${bx} ${by}`;
+          lx = (ax + bx) / 2;
+          ly = y;
+        } else {
+          /* Righe diverse: la linea scorre nel corridoio verticale/orizzontale tra i pannelli. */
+          const aAbove = ra.top < rb.top;
+          const upper = aAbove ? ra : rb;
+          const lower = aAbove ? rb : ra;
+          const ux = upper.cx;
+          const lx2 = lower.cx;
+          const uy = upper.bottom + 3;
+          const ly2 = lower.top - 3;
+          const corridorY = uy + Math.max(16, (ly2 - uy) / 2);
+          const path = `M ${ux} ${uy} L ${ux} ${corridorY} L ${lx2} ${corridorY} L ${lx2} ${ly2}`;
+          d = path;
+          lx = (ux + lx2) / 2;
+          ly = corridorY;
+        }
+
         pieces.push(`<path class="board-link-line" d="${d}"></path>`);
-        const lx = (ax + bx) / 2, ly = (ay + by) / 2;
-        pieces.push(`<g class="board-link-label"><rect x="${lx - 58}" y="${ly - 11}" width="116" height="22" rx="11"></rect><text x="${lx}" y="${ly + 3}" text-anchor="middle">${escapeHtml(rel.label || 'collegamento')}</text></g>`);
+        const label = escapeHtml(rel.label || 'collegamento');
+        const labelWidth = Math.max(86, Math.min(148, 18 + label.length * 5.4));
+        pieces.push(`<g class="board-link-label"><rect x="${lx - labelWidth/2}" y="${ly - 10}" width="${labelWidth}" height="20" rx="10"></rect><text x="${lx}" y="${ly + 3}" text-anchor="middle">${label}</text></g>`);
       });
       svg.innerHTML = pieces.join('');
     };

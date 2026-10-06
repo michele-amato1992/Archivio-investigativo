@@ -503,3 +503,39 @@ html, body { height: 100%; }
 @media (min-width: 900px){
   #view{ scrollbar-gutter:stable; }
 }
+
+
+/* V11.2 — collegamenti della Mappa Investigativa sempre leggibili */
+.mind-board-grid{
+  padding-top:34px;
+  row-gap:3.25rem;
+}
+.board-connections{
+  z-index:3;
+}
+.board-cluster{
+  z-index:2;
+}
+.board-link-line{
+  stroke:#b4914f;
+  stroke-width:1.8;
+  opacity:.82;
+  filter:drop-shadow(0 0 5px rgba(210,174,97,.22));
+}
+.board-link-label{
+  pointer-events:none;
+}
+.board-link-label rect{
+  fill:#0b1117;
+  stroke:#80683b;
+  stroke-width:1;
+  opacity:.99;
+}
+.board-link-label text{
+  fill:#e0c37d;
+  font-size:9px;
+  font-weight:900;
+}
+@media(max-width:700px){
+  .mind-board-grid{padding-top:26px;row-gap:2rem;}
+}

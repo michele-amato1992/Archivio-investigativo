@@ -72,7 +72,11 @@ Dopo l'aggiornamento è consigliato usare **Ricomincia caso** per testare il Cas
 - Mantiene la correzione V10 del tutorial iniziale: non ricompare al semplice refresh della pagina.
 
 
-## V11.1
+## V11.2
 - Corretto il reset del caso: dopo **Ricomincia caso** il portale torna all'archivio e il caso risulta **Nuovo caso / Apri fascicolo**, non più erroneamente **In corso / Continua indagine**.
 - Migliorata la leggibilità del testo nella parte bassa dei pannelli della **Mappa Investigativa**.
 - Aumentati contrasto, spaziatura e padding delle aree vuote dei pannelli per evitare testi tagliati o quasi invisibili.
+
+
+## V11.2
+- Corretto il routing dei collegamenti nella Mappa Investigativa: linee ed etichette ora passano negli spazi tra le schede e non vengono più coperte dai pannelli.
