@@ -459,7 +459,7 @@
     const entityCard = entity => {
       const clues = grouped[entity.id] || [];
       const suspect = entity.kind === 'suspect' ? suspectById(entity.id) : null;
-      const image = entity.image || suspect?.image;
+      const image = entity.image || (entity.kind === 'victim' ? data.victim?.image : '') || suspect?.image;
       const interviewFacts = suspect ? (suspect.interrogation || []).filter(topic => GameState.data.askedTopics.includes(`${suspect.id}:${topic.id}`)) : [];
       const clueHtml = clues.length ? clues.map(e => {
         const isNew = !(GameState.data.seenEvidence || []).includes(e.id);

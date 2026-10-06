@@ -80,3 +80,8 @@ Dopo l'aggiornamento è consigliato usare **Ricomincia caso** per testare il Cas
 
 ## V11.2
 - Corretto il routing dei collegamenti nella Mappa Investigativa: linee ed etichette ora passano negli spazi tra le schede e non vengono più coperte dai pannelli.
+
+
+## V11.5
+- Aggiunto ritratto realistico della vittima Andrea Romano nella Mappa Investigativa.
+- Corretti definitivamente i riferimenti Laura/Marco e aggiunto cache-busting alle immagini per evitare foto vecchie da GitHub Pages/browser.

@@ -565,3 +565,10 @@ html, body { height: 100%; }
   fill:#f0d393;
   font-size:9.5px;
 }
+
+/* V11.5 — portrait cache refresh + victim portrait */
+.board-cluster-head img,
+.suspect-photo img,
+.interview-photo img {
+  object-position:center top;
+}

@@ -14,7 +14,8 @@
   "victim": {
     "name": "Andrea Romano",
     "age": 42,
-    "occupation": "Consulente e socio fondatore"
+    "occupation": "Consulente e socio fondatore",
+    "image": "assets/victim/andrea-romano.png?v=115"
   },
   "locations": [
     {
@@ -869,7 +870,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/marco.png",
+      "image": "assets/suspects/laura.png?v=115",
       "interviewProfile": "Emotiva, inizialmente sulla difensiva. Ammette dettagli personali solo quando messa davanti a prove concrete."
     },
     {
@@ -944,7 +945,7 @@
           "note": "Marco ammette la presenza ma continua a negare il contatto con la bevanda."
         }
       ],
-      "image": "assets/suspects/laura.png",
+      "image": "assets/suspects/marco.png?v=115",
       "interviewProfile": "Controllato e preciso. Tende a minimizzare le incongruenze temporali e a spostare l’attenzione su altri."
     },
     {
@@ -972,7 +973,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/sara.png",
+      "image": "assets/suspects/sara.png?v=115",
       "interviewProfile": "Tesa ma collaborativa. Protegge soprattutto la propria reputazione e la relazione passata con Andrea."
     },
     {
@@ -1000,7 +1001,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/davide.png",
+      "image": "assets/suspects/davide.png?v=115",
       "interviewProfile": "Diretto e irritabile. La tensione familiare è reale, ma il suo racconto è verificabile."
     },
     {
@@ -1036,7 +1037,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/elisa.png",
+      "image": "assets/suspects/elisa.png?v=115",
       "interviewProfile": "Professionale e prudente. Difende l’hotel, anche a costo di omettere dettagli imbarazzanti."
     },
     {
@@ -1074,7 +1075,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/tommaso.png",
+      "image": "assets/suspects/tommaso.png?v=115",
       "interviewProfile": "Curioso e ambiguo. Nasconde una fonte e un contatto con Andrea per proteggere il proprio lavoro."
     }
   ],
@@ -1256,7 +1257,8 @@
         "id": "victim",
         "label": "Vittima",
         "kind": "victim",
-        "title": "Andrea Romano"
+        "title": "Andrea Romano",
+        "image": "assets/victim/andrea-romano.png?v=115"
       },
       {
         "id": "room317",
@@ -1275,42 +1277,42 @@
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Laura De Santis",
-        "image": "assets/suspects/laura.png"
+        "image": "assets/suspects/laura.png?v=115"
       },
       {
         "id": "marco",
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Marco Esposito",
-        "image": "assets/suspects/marco.png"
+        "image": "assets/suspects/marco.png?v=115"
       },
       {
         "id": "sara",
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Sara Vitale",
-        "image": "assets/suspects/sara.png"
+        "image": "assets/suspects/sara.png?v=115"
       },
       {
         "id": "davide",
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Davide Romano",
-        "image": "assets/suspects/davide.png"
+        "image": "assets/suspects/davide.png?v=115"
       },
       {
         "id": "elisa",
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Elisa Borrelli",
-        "image": "assets/suspects/elisa.png"
+        "image": "assets/suspects/elisa.png?v=115"
       },
       {
         "id": "tommaso",
         "label": "Persona di interesse",
         "kind": "suspect",
         "title": "Tommaso Greco",
-        "image": "assets/suspects/tommaso.png"
+        "image": "assets/suspects/tommaso.png?v=115"
       }
     ],
     "relations": [
