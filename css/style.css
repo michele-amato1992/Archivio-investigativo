@@ -474,3 +474,32 @@ html, body { height: 100%; }
 @media(max-width:1280px){.mind-board-grid{grid-template-columns:repeat(2,minmax(230px,1fr));min-width:580px}.mind-board-v11{grid-template-columns:minmax(0,1fr) 250px}}
 @media(max-width:1000px){.mind-board-v11{grid-template-columns:1fr}.board-events-panel{position:static}.board-events-list{max-height:260px}.mind-board-canvas{min-height:520px}}
 @media(max-width:700px){.mind-board-grid{grid-template-columns:1fr;min-width:0}.board-link-label{display:none}.mind-board-canvas{padding:.75rem}.board-legend small{width:100%;margin-left:0}.board-cluster{transform:none!important}.board-clue-stack{max-height:none}}
+
+
+/* V11.1 fixes */
+.board-empty{
+  color:#b7c0c8;
+  font-size:.8rem;
+  line-height:1.5;
+  margin:.25rem 0 .2rem;
+  padding:.65rem .75rem;
+  background:rgba(255,255,255,.025);
+  border:1px dashed #34414c;
+  border-radius:7px;
+}
+.board-clue-stack{
+  min-height:78px;
+  padding-bottom:.8rem;
+}
+.board-cluster{
+  min-height:0;
+}
+.board-cluster .board-clue-stack:last-child{
+  margin-bottom:0;
+}
+.mind-board-canvas{
+  padding-bottom:1.4rem;
+}
+@media (min-width: 900px){
+  #view{ scrollbar-gutter:stable; }
+}

@@ -655,11 +655,16 @@
   resetBtn.addEventListener('click', () => {
     if (!currentCaseMeta) return;
     if (confirm('Vuoi davvero cancellare progressi, appunti e valutazioni di questo caso?')) {
-      GameState.reset(currentCaseMeta.id);
-      GameState.load(currentCaseMeta.id);
-      Investigation.unlockEvidence(data.evidence.filter(e => e.initial).map(e => e.id));
-      navButtons.forEach(b => b.classList.toggle('active', b.dataset.view === 'briefing'));
-      renderBriefing();
+      const caseId = currentCaseMeta.id;
+      GameState.reset(caseId);
+      // Non ricarichiamo subito lo stato: load() creerebbe un nuovo startedAt e il portale
+      // mostrerebbe erroneamente il caso come "In corso". Dopo il reset torniamo invece
+      // all'archivio, dove il caso risulta davvero nuovo.
+      history.pushState({}, '', location.pathname);
+      currentCaseMeta = null;
+      data = null;
+      currentLocationId = null;
+      renderPortal();
     }
   });
 
