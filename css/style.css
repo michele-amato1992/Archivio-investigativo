@@ -539,3 +539,29 @@ html, body { height: 100%; }
 @media(max-width:700px){
   .mind-board-grid{padding-top:26px;row-gap:2rem;}
 }
+
+/* V11.3 — fix finale collegamenti e ritratti corretti */
+.board-connections{
+  z-index:8;
+}
+.board-cluster{
+  position:relative;
+  z-index:2;
+}
+.board-link-line{
+  stroke:#c5a15a;
+  stroke-width:2.2;
+  opacity:.92;
+}
+.board-link-label{
+  opacity:1;
+}
+.board-link-label rect{
+  fill:#0c1218;
+  stroke:#a38245;
+  stroke-width:1.1;
+}
+.board-link-label text{
+  fill:#f0d393;
+  font-size:9.5px;
+}
