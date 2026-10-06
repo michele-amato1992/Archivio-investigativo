@@ -28,6 +28,25 @@ const GameState = {
     return `case-files-state-v5-${caseId}`;
   },
 
+  onboardingKey(caseId = this.caseId) {
+    return `case-files-onboarding-v1-${caseId}`;
+  },
+
+  hasSeenOnboarding(caseId = this.caseId) {
+    if (!caseId) return false;
+    if (localStorage.getItem(this.onboardingKey(caseId)) === '1') return true;
+    return !!(caseId === this.caseId && this.data?.onboardingSeen);
+  },
+
+  markOnboardingSeen(caseId = this.caseId) {
+    if (!caseId) return;
+    localStorage.setItem(this.onboardingKey(caseId), '1');
+    if (caseId === this.caseId && this.data) {
+      this.data.onboardingSeen = true;
+      this.save();
+    }
+  },
+
   legacyKeys(caseId = this.caseId) {
     return [`case-files-state-v4-${caseId}`, `case-files-state-v3-${caseId}`, `case-files-state-v2-${caseId}`];
   },
@@ -82,6 +101,7 @@ const GameState = {
   reset(caseId = this.caseId) {
     if (!caseId) return;
     localStorage.removeItem(this.key(caseId));
+    localStorage.removeItem(this.onboardingKey(caseId));
     this.legacyKeys(caseId).forEach(key => localStorage.removeItem(key));
     if (caseId === this.caseId) this.data = this.defaultData();
   }

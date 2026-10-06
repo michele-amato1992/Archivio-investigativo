@@ -1,8 +1,8 @@
-# Archivio Investigativo — V7
+# Archivio Investigativo — V11
 
 Portale web cooperativo per casi investigativi, pensato per essere giocato da un gruppo su un unico PC, tablet o telefono.
 
-## Novità V7
+## Novità V11
 
 - Tooltip degli hotspot ora **sempre contenuti nella fotografia**: vengono posizionati dinamicamente e non possono più uscire/tagliarsi sopra o ai lati della scena.
 - Business lounge rifatta con una nuova immagine coerente: **portatile, stampante e distruggidocumenti sono realmente visibili** e gli hotspot coincidono con gli oggetti.
@@ -37,3 +37,36 @@ Dopo l'aggiornamento è consigliato usare **Ricomincia caso** per testare il Cas
 - Risposte già ottenute restano consultabili come trascrizione.
 - Reperti con simbologia visiva diversa per categoria.
 - Migliore leggibilità su PC, tablet e telefono.
+
+
+## V8
+- Layout più vicino a una vera app: su desktop il portale resta dentro una cornice fissa, evitando lo scorrimento dell'intera pagina.
+- Ritocchi alle dimensioni dei pannelli per usare meglio lo spazio disponibile.
+- Ritratti dei sospettati sostituiti con immagini **fotorealistiche** nel Caso 001.
+
+
+## V9
+- Gestione degli indizi resa meno ripetitiva: i testi nella scena ora sono contestuali all'oggetto selezionato.
+- Tolta la formula ripetitiva “clicca per rilevare/esaminare”: ogni hotspot mostra una breve osservazione naturale.
+- Pulsante di azione semplificato in “Esamina” / “Rivedi osservazione”.
+- Tooltip degli hotspot alleggeriti con testi più discreti e meno meccanici.
+
+
+## V10
+- Nuova sezione **Mappa Investigativa**: si popola automaticamente con prove, persone di interesse, testimonianze e fatti verificati già emersi durante il caso.
+- I collegamenti sono raggruppati per vittima, scena, sospettati e piste tematiche, senza anticipare elementi non ancora scoperti.
+- Le risposte già ottenute negli interrogatori entrano automaticamente nella mappa come verbali.
+- Le nuove scoperte indicano anche che la Mappa Investigativa è stata aggiornata.
+- Corretto il bug del tutorial iniziale: dopo essere stato visto una volta per un caso, non ricompare più al semplice aggiornamento della pagina.
+- Il comando **Ricomincia caso** azzera anche lo stato del tutorial, coerentemente con un vero nuovo inizio.
+
+
+## V11 — Mappa Investigativa rifinita
+- Mappa riprogettata come vera parete investigativa digitale.
+- Ritratti fotorealistici dei sospettati integrati nei nodi.
+- Collegamenti visuali automatici tra persone, luoghi e piste, mostrati solo quando supportati da prove scoperte.
+- Nuove schede indizio con simbologia, stato NUOVO e mini-gerarchia visiva.
+- Valutazione manuale della squadra riportata direttamente sui sospettati nella mappa.
+- Filo temporale laterale più compatto e leggibile.
+- Layout responsive: linee e schede si adattano anche a tablet e telefono.
+- Mantiene la correzione V10 del tutorial iniziale: non ricompare al semplice refresh della pagina.

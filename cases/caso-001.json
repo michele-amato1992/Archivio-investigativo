@@ -34,7 +34,11 @@
             "tumbler"
           ],
           "w": 8,
-          "h": 13
+          "h": 13,
+          "observation": "Due bicchieri lasciati sul piano, uno con un evidente alone sul bordo.",
+          "hoverText": "Dettaglio sul piano del minibar",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "phone",
@@ -48,7 +52,11 @@
             "victim-phone"
           ],
           "w": 6,
-          "h": 12
+          "h": 12,
+          "observation": "Il telefono è appoggiato sul tavolo, come se fosse stato usato di recente.",
+          "hoverText": "Oggetto elettronico in vista",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "minibar",
@@ -61,7 +69,11 @@
             "minibar-bottle"
           ],
           "w": 23,
-          "h": 68
+          "h": 68,
+          "observation": "Lo sportello del minibar non sembra completamente richiuso.",
+          "hoverText": "Controllo rapido del minibar",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "door",
@@ -74,7 +86,11 @@
             "door-log"
           ],
           "w": 15,
-          "h": 47
+          "h": 47,
+          "observation": "La serratura e la maniglia possono confermare chi è entrato e uscito.",
+          "hoverText": "Punto di accesso della stanza",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "desk",
@@ -87,7 +103,11 @@
             "torn-note"
           ],
           "w": 25,
-          "h": 43
+          "h": 43,
+          "observation": "Sulla scrivania restano materiali di lavoro e segni di un’attività interrotta.",
+          "hoverText": "Area di lavoro da verificare",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "watch",
@@ -100,7 +120,11 @@
             "watch-data"
           ],
           "w": 12,
-          "h": 13
+          "h": 13,
+          "observation": "Uno smartwatch è rimasto sul piano, ancora agganciato al caricatore.",
+          "hoverText": "Dispositivo personale visibile",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         }
       ],
       "image": "assets/locations/room317.png"
@@ -121,7 +145,11 @@
             "bar-receipt"
           ],
           "w": 22,
-          "h": 20
+          "h": 20,
+          "observation": "Vicino alla cassa c’è uno scontrino che potrebbe fissare un orario utile.",
+          "hoverText": "Documento lasciato al banco",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "camera",
@@ -134,7 +162,11 @@
             "bar-cctv"
           ],
           "w": 12,
-          "h": 14
+          "h": 14,
+          "observation": "La videosorveglianza del bar potrebbe aver ripreso un passaggio importante.",
+          "hoverText": "Copertura video della zona",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "bartender",
@@ -147,7 +179,11 @@
             "ice-call"
           ],
           "w": 20,
-          "h": 24
+          "h": 24,
+          "observation": "La postazione del barista può offrire un riscontro diretto sui clienti serviti.",
+          "hoverText": "Possibile riscontro testimoniale",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         }
       ],
       "image": "assets/locations/bar.png"
@@ -168,7 +204,11 @@
             "elevator-cctv"
           ],
           "w": 17,
-          "h": 16
+          "h": 16,
+          "observation": "Il sistema di ripresa del corridoio controlla i movimenti verso le camere.",
+          "hoverText": "Punto di osservazione del piano",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "wifi",
@@ -181,7 +221,11 @@
             "marco-wifi"
           ],
           "w": 18,
-          "h": 15
+          "h": 15,
+          "observation": "Un nodo di rete del piano può registrare presenze e collegamenti recenti.",
+          "hoverText": "Traccia tecnica disponibile",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "keylog",
@@ -194,7 +238,11 @@
             "key-audit"
           ],
           "w": 17,
-          "h": 55
+          "h": 55,
+          "observation": "La serratura elettronica conserva un registro essenziale degli accessi.",
+          "hoverText": "Verifica degli ingressi",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "guest315",
@@ -207,7 +255,11 @@
             "corridor-witness"
           ],
           "w": 20,
-          "h": 58
+          "h": 58,
+          "observation": "Dalla camera 315 qualcuno potrebbe aver notato rumori o movimenti insoliti.",
+          "hoverText": "Possibile testimone vicino",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         }
       ],
       "image": "assets/locations/corridor.png"
@@ -228,7 +280,11 @@
           "h": 18,
           "unlocks": [
             "victim-laptop"
-          ]
+          ],
+          "observation": "Il portatile è rimasto aperto sulla postazione di lavoro della lounge.",
+          "hoverText": "Dispositivo ancora presente",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "printer",
@@ -241,7 +297,11 @@
           "h": 18,
           "unlocks": [
             "printer-log"
-          ]
+          ],
+          "observation": "La stampante potrebbe conservare la coda degli ultimi documenti inviati.",
+          "hoverText": "Controllo dei file stampati",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         },
         {
           "id": "shredder",
@@ -254,7 +314,11 @@
           "h": 25,
           "unlocks": [
             "mec-fragments"
-          ]
+          ],
+          "observation": "Sotto la scrivania c’è un distruggidocumenti che potrebbe contenere residui utili.",
+          "hoverText": "Residui cartacei da verificare",
+          "actionLabel": "Esamina",
+          "revisitLabel": "Rivedi osservazione"
         }
       ],
       "image": "assets/locations/lounge.png"
@@ -266,7 +330,12 @@
       "title": "Verbale di primo intervento",
       "category": "VERBALE",
       "initial": true,
-      "description": "Ore 23:42: il personale dell’hotel entra nella 317 dopo una segnalazione. Andrea Romano è a terra accanto al letto. La porta non presenta segni di effrazione; nella stanza ci sono due bicchieri, una bottiglietta di amaro aperta e lo smartphone della vittima."
+      "description": "Ore 23:42: il personale dell’hotel entra nella 317 dopo una segnalazione. Andrea Romano è a terra accanto al letto. La porta non presenta segni di effrazione; nella stanza ci sono due bicchieri, una bottiglietta di amaro aperta e lo smartphone della vittima.",
+      "board": {
+        "owner": "room317",
+        "theme": "Scena",
+        "ownerLabel": "Stanza 317"
+      }
     },
     {
       "id": "cause",
@@ -280,6 +349,11 @@
         "unlocks": [
           "toxicology"
         ]
+      },
+      "board": {
+        "owner": "victim",
+        "theme": "Medico-legale",
+        "ownerLabel": "Andrea Romano"
       }
     },
     {
@@ -287,14 +361,24 @@
       "title": "Elenco presenti al congresso",
       "category": "DOCUMENTO",
       "description": "I sei sospettati risultano tutti in hotel tra le 22:30 e le 23:42.",
-      "initial": true
+      "initial": true,
+      "board": {
+        "owner": "case",
+        "theme": "Presenze",
+        "ownerLabel": "Caso"
+      }
     },
     {
       "id": "lipstick-glass",
       "title": "Calice con rossetto",
       "category": "REPERTO",
       "description": "La tonalità borgogna è compatibile con il rossetto di Laura. Sul calice sono presenti impronte di Andrea e Laura.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "laura",
+        "theme": "Relazioni",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "tumbler",
@@ -308,6 +392,11 @@
         "unlocks": [
           "tumbler-toxic"
         ]
+      },
+      "board": {
+        "owner": "room317",
+        "theme": "Reperti",
+        "ownerLabel": "Stanza 317"
       }
     },
     {
@@ -315,7 +404,12 @@
       "title": "Messaggio delle 23:18",
       "category": "TELEFONO",
       "description": "Laura scrive: «Dobbiamo parlare. È l'ultima volta.» Il messaggio è successivo al suo ritorno al bar.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "laura",
+        "theme": "Messaggi",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "victim-phone",
@@ -330,6 +424,11 @@
           "accountant-message",
           "sara-call"
         ]
+      },
+      "board": {
+        "owner": "victim",
+        "theme": "Digitale",
+        "ownerLabel": "Andrea Romano"
       }
     },
     {
@@ -345,6 +444,11 @@
           "bitter-residue",
           "cap-trace"
         ]
+      },
+      "board": {
+        "owner": "room317",
+        "theme": "Reperti",
+        "ownerLabel": "Stanza 317"
       }
     },
     {
@@ -352,63 +456,108 @@
       "title": "Caratteristiche della porta",
       "category": "TECNICO",
       "description": "La serratura è auto-bloccante: chiunque sia uscito dalla stanza avrebbe potuto lasciare la porta apparentemente chiusa senza usare una chiave.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "room317",
+        "theme": "Accessi",
+        "ownerLabel": "Stanza 317"
+      }
     },
     {
       "id": "torn-note",
       "title": "Foglio strappato: M.E.C. 180.000",
       "category": "DOCUMENTO",
       "description": "La sigla M.E.C. e la cifra 180.000 sembrano riferirsi a un controllo contabile.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "mec",
+        "theme": "M.E.C.",
+        "ownerLabel": "Pista M.E.C."
+      }
     },
     {
       "id": "watch-data",
       "title": "Dati smartwatch",
       "category": "DIGITALE",
       "description": "Picco cardiaco alle 23:27; perdita progressiva di attività; ultimo movimento significativo alle 23:33.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "victim",
+        "theme": "Cronologia",
+        "ownerLabel": "Andrea Romano"
+      }
     },
     {
       "id": "bar-receipt",
       "title": "Scontrino del bar",
       "category": "DOCUMENTO",
       "description": "Laura acquista due calici di vino alle 22:36 e li porta fuori dal bar.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "laura",
+        "theme": "Bar",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "bar-cctv",
       "title": "Video del bar",
       "category": "VIDEO",
       "description": "Laura ricompare al bar alle 23:05 e rimane visibile quasi continuativamente fino alle 23:34.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "laura",
+        "theme": "Video",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "ice-call",
       "title": "Telefonata per il ghiaccio",
       "category": "REGISTRO",
       "description": "Dalla camera 411 di Marco parte una chiamata al bar alle 23:17; l'ordine viene annullato alle 23:19.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Orari",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "elevator-cctv",
       "title": "Video ascensore",
       "category": "VIDEO",
       "description": "Marco è al terzo piano tra le 23:07 e le 23:16, in contrasto con il suo alibi iniziale.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Video",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "marco-wifi",
       "title": "Log Wi-Fi di Marco",
       "category": "DIGITALE",
       "description": "Il telefono di Marco risulta collegato al nodo del terzo piano dalle 23:08 alle 23:15 e al quarto piano dalle 23:19.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Digitale",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "key-audit",
       "title": "Audit delle chiavi elettroniche",
       "category": "TECNICO",
       "description": "Nessun accesso tramite master key alla 317 prima del ritrovamento. Il dato non esclude l'ingresso di una persona fatta entrare da Andrea.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "elisa",
+        "theme": "Accessi",
+        "ownerLabel": "Elisa Borrelli"
+      }
     },
     {
       "id": "victim-laptop",
@@ -423,6 +572,11 @@
           "financial-shell",
           "draft-board"
         ]
+      },
+      "board": {
+        "owner": "victim",
+        "theme": "Digitale",
+        "ownerLabel": "Andrea Romano"
       }
     },
     {
@@ -430,140 +584,240 @@
       "title": "Registro stampante",
       "category": "DIGITALE",
       "description": "Andrea stampa alle 22:12 otto pagine della riconciliazione fornitori. Il documento non viene più trovato integro.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "tommaso",
+        "theme": "Documenti",
+        "ownerLabel": "Tommaso Greco"
+      }
     },
     {
       "id": "mec-fragments",
       "title": "Frammenti di fatture M.E.C.",
       "category": "DOCUMENTO",
       "description": "Le fatture ricostruite mostrano servizi generici e importi ripetuti. Una sigla di autorizzazione corrisponde alle iniziali di Marco Esposito.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "mec",
+        "theme": "M.E.C.",
+        "ownerLabel": "Pista M.E.C."
+      }
     },
     {
       "id": "toxicology",
       "title": "Tossicologia completa",
       "category": "MEDICO",
       "description": "Nel sangue di Andrea è presente una dose elevata di un glicoside cardiaco. L'effetto è compatibile con l'alterazione del ritmo cardiaco osservata dallo smartwatch.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "victim",
+        "theme": "Medico-legale",
+        "ownerLabel": "Andrea Romano"
+      }
     },
     {
       "id": "tumbler-toxic",
       "title": "Amaro contaminato",
       "category": "LABORATORIO",
       "description": "Il tumbler contiene tracce dello stesso composto trovato nel sangue. Il vino non presenta contaminazioni.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "room317",
+        "theme": "Laboratorio",
+        "ownerLabel": "Stanza 317"
+      }
     },
     {
       "id": "accountant-message",
       "title": "Messaggio al commercialista",
       "category": "TELEFONO",
       "description": "Alle 23:23 Andrea scrive: «Domattina chiudiamo la storia M.E.C. e porto tutto al consiglio». È l'ultimo messaggio inviato dalla vittima.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "mec",
+        "theme": "Messaggi",
+        "ownerLabel": "Pista M.E.C."
+      }
     },
     {
       "id": "sara-call",
       "title": "Chiamata con Sara",
       "category": "TELEFONO",
       "description": "Alle 22:58 Andrea e Sara parlano per 38 secondi. Sara inizialmente aveva negato contatti dopo le 22:30.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "sara",
+        "theme": "Chiamate",
+        "ownerLabel": "Sara Vitale"
+      }
     },
     {
       "id": "bitter-residue",
       "title": "Contaminazione della bottiglietta",
       "category": "LABORATORIO",
       "description": "Il composto è presente nella bottiglietta di amaro ma assente nelle altre bevande del minibar: è stato introdotto deliberatamente.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "room317",
+        "theme": "Laboratorio",
+        "ownerLabel": "Stanza 317"
+      }
     },
     {
       "id": "financial-shell",
       "title": "Flussi verso M.E.C. Servizi",
       "category": "FINANZIARIO",
       "description": "In nove mesi 180.000 euro sono stati trasferiti a M.E.C. Servizi per consulenze difficili da verificare. I documenti collegano la società a un prestanome vicino a Marco.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "mec",
+        "theme": "Finanziario",
+        "ownerLabel": "Pista M.E.C."
+      }
     },
     {
       "id": "draft-board",
       "title": "Bozza al consiglio",
       "category": "E-MAIL",
       "description": "Andrea aveva preparato una segnalazione formale per il consiglio d'amministrazione, da inviare alle 08:30 del mattino successivo, indicando Marco come responsabile dei pagamenti sospetti.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "mec",
+        "theme": "M.E.C.",
+        "ownerLabel": "Pista M.E.C."
+      }
     },
     {
       "id": "marco-call-log",
       "title": "Log della videoconferenza",
       "category": "DIGITALE",
       "description": "Marco entra nella riunione di lavoro alle 23:21, non alle 22:55 come aveva dichiarato. Resta collegato fino alle 23:39 con microfono disattivato per la maggior parte del tempo.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Orari",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "marco-search",
       "title": "Cronologia del tablet di Marco",
       "category": "DIGITALE",
       "description": "Nel pomeriggio Marco aveva consultato pagine riguardanti interazioni pericolose tra farmaci cardiaci e alcol. La ricerca da sola non dimostra il delitto, ma acquista peso insieme alla tossicologia.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Digitale",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "laura-admission",
       "title": "Ammissione di Laura",
       "category": "TESTIMONIANZA",
       "description": "Laura ammette di essere stata nella 317 dalle 22:42 circa alle 23:03. Aveva mentito per nascondere una discussione privata con l'ex compagno.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "laura",
+        "theme": "Testimonianza",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "sara-admission",
       "title": "Ammissione di Sara",
       "category": "TESTIMONIANZA",
       "description": "Sara ammette la telefonata delle 22:58: voleva dimettersi e temeva che Andrea rendesse pubblica una loro relazione passata. Non risulta al terzo piano nella finestra del delitto.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "sara",
+        "theme": "Testimonianza",
+        "ownerLabel": "Sara Vitale"
+      }
     },
     {
       "id": "davide-alibi",
       "title": "Alibi verificato di Davide",
       "category": "VIDEO",
       "description": "Le telecamere della hall mostrano Davide quasi continuamente dalle 23:02 alle 23:38, salvo un intervallo di meno di un minuto vicino ai distributori automatici al piano terra.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "davide",
+        "theme": "Alibi",
+        "ownerLabel": "Davide Romano"
+      }
     },
     {
       "id": "marco-contradiction",
       "title": "Contraddizione nell'alibi di Marco",
       "category": "TESTIMONIANZA",
       "description": "Confrontato con log Wi-Fi e videoconferenza, Marco ammette di essere salito al terzo piano ma sostiene di aver solo cercato Andrea senza entrare nella 317.",
-      "initial": false
+      "initial": false,
+      "board": {
+        "owner": "marco",
+        "theme": "Contraddizione",
+        "ownerLabel": "Marco Esposito"
+      }
     },
     {
       "id": "laura-envelope",
       "title": "Busta recuperata da Laura",
       "category": "DOCUMENTO",
       "initial": false,
-      "description": "Laura ammette di aver preso dalla scrivania una busta con bozze relative alla separazione. Il gesto spiega perché aveva negato di essere salita nella 317, ma il contenuto non riguarda M.E.C. né la morte di Andrea."
+      "description": "Laura ammette di aver preso dalla scrivania una busta con bozze relative alla separazione. Il gesto spiega perché aveva negato di essere salita nella 317, ma il contenuto non riguarda M.E.C. né la morte di Andrea.",
+      "board": {
+        "owner": "laura",
+        "theme": "Documenti",
+        "ownerLabel": "Laura De Santis"
+      }
     },
     {
       "id": "tommaso-admission",
       "title": "Ammissione di Tommaso",
       "category": "TESTIMONIANZA",
       "initial": false,
-      "description": "Tommaso ammette di aver sottratto alcune pagine dalla stampante della lounge per proteggere una fonte. I frammenti mancanti riguardano irregolarità aziendali generiche, non la sostanza trovata nella stanza."
+      "description": "Tommaso ammette di aver sottratto alcune pagine dalla stampante della lounge per proteggere una fonte. I frammenti mancanti riguardano irregolarità aziendali generiche, non la sostanza trovata nella stanza.",
+      "board": {
+        "owner": "tommaso",
+        "theme": "Testimonianza",
+        "ownerLabel": "Tommaso Greco"
+      }
     },
     {
       "id": "elisa-alibi",
       "title": "Alibi verificato di Elisa",
       "category": "REGISTRO",
       "initial": false,
-      "description": "Il gestionale reception registra operazioni effettuate con le credenziali personali di Elisa dalle 23:09 alle 23:31. Una telecamera interna la mostra al banco nello stesso intervallo."
+      "description": "Il gestionale reception registra operazioni effettuate con le credenziali personali di Elisa dalle 23:09 alle 23:31. Una telecamera interna la mostra al banco nello stesso intervallo.",
+      "board": {
+        "owner": "elisa",
+        "theme": "Alibi",
+        "ownerLabel": "Elisa Borrelli"
+      }
     },
     {
       "id": "cap-trace",
       "title": "Traccia sul tappo dell’amaro",
       "category": "LABORATORIO",
       "initial": false,
-      "description": "La traccia sul tappo è troppo incompleta per un’identificazione certa. Il laboratorio può però escludere Laura, Sara e Davide. Da sola non consente di attribuire il reperto a Marco."
+      "description": "La traccia sul tappo è troppo incompleta per un’identificazione certa. Il laboratorio può però escludere Laura, Sara e Davide. Da sola non consente di attribuire il reperto a Marco.",
+      "board": {
+        "owner": "room317",
+        "theme": "Laboratorio",
+        "ownerLabel": "Stanza 317"
+      }
     },
     {
       "id": "corridor-witness",
       "title": "Testimonianza ospite camera 315",
       "category": "TESTIMONIANZA",
       "initial": false,
-      "description": "Un ospite ricorda di aver sentito due voci maschili provenire dalla zona della 317 poco dopo le 23:10, senza riuscire a distinguere le parole né vedere chi fosse presente."
+      "description": "Un ospite ricorda di aver sentito due voci maschili provenire dalla zona della 317 poco dopo le 23:10, senza riuscire a distinguere le parole né vedere chi fosse presente.",
+      "board": {
+        "owner": "room317",
+        "theme": "Testimonianza",
+        "ownerLabel": "Stanza 317"
+      }
     }
   ],
   "suspects": [
@@ -615,7 +869,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/laura.svg",
+      "image": "assets/suspects/laura.png",
       "interviewProfile": "Emotiva, inizialmente sulla difensiva. Ammette dettagli personali solo quando messa davanti a prove concrete."
     },
     {
@@ -690,7 +944,7 @@
           "note": "Marco ammette la presenza ma continua a negare il contatto con la bevanda."
         }
       ],
-      "image": "assets/suspects/marco.svg",
+      "image": "assets/suspects/marco.png",
       "interviewProfile": "Controllato e preciso. Tende a minimizzare le incongruenze temporali e a spostare l’attenzione su altri."
     },
     {
@@ -718,7 +972,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/sara.svg",
+      "image": "assets/suspects/sara.png",
       "interviewProfile": "Tesa ma collaborativa. Protegge soprattutto la propria reputazione e la relazione passata con Andrea."
     },
     {
@@ -746,7 +1000,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/davide.svg",
+      "image": "assets/suspects/davide.png",
       "interviewProfile": "Diretto e irritabile. La tensione familiare è reale, ma il suo racconto è verificabile."
     },
     {
@@ -782,7 +1036,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/elisa.svg",
+      "image": "assets/suspects/elisa.png",
       "interviewProfile": "Professionale e prudente. Difende l’hotel, anche a costo di omettere dettagli imbarazzanti."
     },
     {
@@ -820,7 +1074,7 @@
           ]
         }
       ],
-      "image": "assets/suspects/tommaso.svg",
+      "image": "assets/suspects/tommaso.png",
       "interviewProfile": "Curioso e ambiguo. Nasconde una fonte e un contatto con Andrea per proteggere il proprio lavoro."
     }
   ],
@@ -987,5 +1241,150 @@
       "accountant-message"
     ]
   },
-  "caseVersion": "5.0"
+  "caseVersion": "5.0",
+  "investigationBoard": {
+    "title": "Mappa Investigativa",
+    "subtitle": "Un quadro dinamico del caso: persone, prove, verbali e collegamenti verificati compaiono automaticamente durante l’indagine.",
+    "entities": [
+      {
+        "id": "case",
+        "label": "Caso 001",
+        "kind": "case",
+        "title": "La stanza 317"
+      },
+      {
+        "id": "victim",
+        "label": "Vittima",
+        "kind": "victim",
+        "title": "Andrea Romano"
+      },
+      {
+        "id": "room317",
+        "label": "Luogo chiave",
+        "kind": "location",
+        "title": "Stanza 317"
+      },
+      {
+        "id": "mec",
+        "label": "Pista economica",
+        "kind": "topic",
+        "title": "M.E.C. Servizi"
+      },
+      {
+        "id": "laura",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Laura De Santis",
+        "image": "assets/suspects/laura.png"
+      },
+      {
+        "id": "marco",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Marco Esposito",
+        "image": "assets/suspects/marco.png"
+      },
+      {
+        "id": "sara",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Sara Vitale",
+        "image": "assets/suspects/sara.png"
+      },
+      {
+        "id": "davide",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Davide Romano",
+        "image": "assets/suspects/davide.png"
+      },
+      {
+        "id": "elisa",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Elisa Borrelli",
+        "image": "assets/suspects/elisa.png"
+      },
+      {
+        "id": "tommaso",
+        "label": "Persona di interesse",
+        "kind": "suspect",
+        "title": "Tommaso Greco",
+        "image": "assets/suspects/tommaso.png"
+      }
+    ],
+    "relations": [
+      {
+        "from": "case",
+        "to": "victim",
+        "label": "vittima del caso",
+        "always": true
+      },
+      {
+        "from": "victim",
+        "to": "room317",
+        "label": "ritrovato nella 317",
+        "requiresEvidence": [
+          "scene-report"
+        ]
+      },
+      {
+        "from": "laura",
+        "to": "room317",
+        "label": "presenza collegata ai bicchieri",
+        "requiresAnyEvidence": [
+          "lipstick-glass",
+          "bar-cctv",
+          "laura-admission"
+        ]
+      },
+      {
+        "from": "marco",
+        "to": "room317",
+        "label": "presenza al terzo piano",
+        "requiresAnyEvidence": [
+          "elevator-cctv",
+          "marco-wifi",
+          "marco-contradiction"
+        ]
+      },
+      {
+        "from": "victim",
+        "to": "mec",
+        "label": "stava indagando su M.E.C.",
+        "requiresAnyEvidence": [
+          "torn-note",
+          "accountant-message",
+          "draft-board"
+        ]
+      },
+      {
+        "from": "marco",
+        "to": "mec",
+        "label": "collegamento economico",
+        "requiresAnyEvidence": [
+          "financial-shell",
+          "mec-fragments"
+        ]
+      },
+      {
+        "from": "tommaso",
+        "to": "mec",
+        "label": "documenti cercati",
+        "requiresAnyEvidence": [
+          "printer-log",
+          "tommaso-admission"
+        ]
+      },
+      {
+        "from": "elisa",
+        "to": "room317",
+        "label": "accessi con chiavi master",
+        "requiresAnyEvidence": [
+          "key-audit",
+          "elisa-alibi"
+        ]
+      }
+    ]
+  }
 }

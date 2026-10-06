@@ -42,6 +42,22 @@
     return s?.image ? `<img src="${escapeHtml(s.image)}" alt="Ritratto investigativo di ${escapeHtml(s.name)}">` : escapeHtml(initials(s?.name || ''));
   }
 
+  function hotspotObservation(hotspot, examined = false) {
+    if (!hotspot) return '';
+    if (examined) return hotspot.revisitText || 'Elemento già esaminato. Puoi riaprire l’osservazione senza modificare l’indagine.';
+    return hotspot.observation || 'Qualcosa in questa zona merita un controllo più attento.';
+  }
+
+  function hotspotActionLabel(hotspot, examined = false) {
+    if (!hotspot) return examined ? 'Rivedi osservazione' : 'Esamina';
+    return examined ? (hotspot.revisitLabel || 'Rivedi osservazione') : (hotspot.actionLabel || 'Esamina');
+  }
+
+  function hoverSupportText(hotspot, examined = false) {
+    if (!hotspot) return '';
+    return examined ? 'Elemento già repertato' : (hotspot.hoverText || 'Seleziona per osservarlo');
+  }
+
   function showToast(title, text = '') {
     let toast = document.getElementById('discoveryToast');
     if (!toast) {
@@ -52,7 +68,7 @@
       toast.setAttribute('aria-live', 'polite');
       document.body.appendChild(toast);
     }
-    toast.innerHTML = `<span class="discovery-toast-kicker">NUOVA SCOPERTA</span><strong>${escapeHtml(title)}</strong>${text ? `<small>${escapeHtml(text)}</small>` : ''}`;
+    toast.innerHTML = `<span class="discovery-toast-kicker">NUOVA SCOPERTA</span><strong>${escapeHtml(title)}</strong>${text ? `<small>${escapeHtml(text)}</small>` : ''}${currentCaseMeta ? '<small class="toast-board-update">Mappa Investigativa aggiornata</small>' : ''}`;
     toast.classList.add('show');
     clearTimeout(showToast.timer);
     showToast.timer = setTimeout(() => toast.classList.remove('show'), 4200);
@@ -156,11 +172,10 @@
     navButtons.forEach(b => b.classList.toggle('active', b.dataset.view === 'briefing'));
     renderBriefing();
 
-    if (!GameState.data.onboardingSeen) {
-      GameState.data.onboardingSeen = true;
-      GameState.save();
+    if (!GameState.hasSeenOnboarding(meta.id)) {
+      GameState.markOnboardingSeen(meta.id);
       setTimeout(() => {
-        if (typeof onboardingDialog.showModal === 'function') onboardingDialog.showModal();
+        if (typeof onboardingDialog.showModal === 'function' && !onboardingDialog.open) onboardingDialog.showModal();
       }, 150);
     }
   }
@@ -247,9 +262,9 @@
           <div><span class="eyebrow">${escapeHtml(location.name || location.label || 'LUOGO')}</span><h3>${escapeHtml(location.name || location.label || 'Luogo')}</h3><p>${escapeHtml(location.description || 'Osservate attentamente la scena.')}</p></div>
           <button id="revealHotspots" class="scene-search-help" type="button" aria-pressed="false"><span>⌕</span> Aiuto ricerca</button>
         </div>
-        <div id="sceneBox" class="scene-box scene-search-mode">${bg}<div class="scene-vignette"></div>${hotspots}<div id="sceneHoverTip" class="scene-hover-tip" role="status" aria-live="polite"></div><div class="scan-instruction"><span>⌖</span><strong>Esplora la scena</strong><small>Muovi il puntatore sugli oggetti</small></div></div>
+        <div id="sceneBox" class="scene-box scene-search-mode">${bg}<div class="scene-vignette"></div>${hotspots}<div id="sceneHoverTip" class="scene-hover-tip" role="status" aria-live="polite"></div><div class="scan-instruction"><span>⌖</span><strong>Esplora la scena</strong><small>Cerca dettagli utili nella fotografia</small></div></div>
       </section>
-      <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Nessun elemento selezionato</h3><p>Esplora la fotografia. Quando il cursore incontra un elemento investigabile, questo verrà evidenziato senza anticiparti ciò che nasconde.</p></div></div>
+      <div id="sceneInspector" class="scene-inspector empty"><div><span class="eyebrow">ISPETTORE SCENA</span><h3>Nessun elemento selezionato</h3><p>Esplora la fotografia. Quando individui un punto interessante vedrai solo l’oggetto: il dettaglio utile emergerà soltanto dopo l’esame.</p></div></div>
       <div id="sceneResult"></div>`;
 
     document.querySelectorAll('[data-location]').forEach(btn => btn.addEventListener('click', () => renderScene(btn.dataset.location)));
@@ -261,7 +276,7 @@
     const positionHoverTip = (btn, hotspot) => {
       if (!sceneBox || !hoverTip || !btn || !hotspot) return;
       const examined = GameState.data.examinedHotspots.includes(`${location.id}:${hotspot.id}`);
-      hoverTip.innerHTML = `<strong>${escapeHtml(hotspot.title || 'Elemento da esaminare')}</strong><small>${examined ? 'Già esaminato · clicca per rileggere' : 'Clicca per osservare'}</small>`;
+      hoverTip.innerHTML = `<strong>${escapeHtml(hotspot.title || 'Elemento da esaminare')}</strong><small>${escapeHtml(hoverSupportText(hotspot, examined))}</small>`;
       hoverTip.classList.add('show');
       requestAnimationFrame(() => {
         const box = sceneBox.getBoundingClientRect();
@@ -310,7 +325,7 @@
       const examined = GameState.data.examinedHotspots.includes(`${location.id}:${hotspot.id}`);
       const inspector = document.getElementById('sceneInspector');
       inspector.className = 'scene-inspector scene-inspector-active';
-      inspector.innerHTML = `<div><span class="eyebrow">ELEMENTO INDIVIDUATO</span><h3>${escapeHtml(hotspot.title)}</h3><p>${examined ? 'Questo elemento è già stato esaminato. Puoi rileggere il risultato senza modificare l’indagine.' : 'Avete individuato qualcosa che può essere osservato più da vicino. L’indizio verrà rivelato solo dopo l’esame.'}</p></div><button class="btn ${examined ? 'secondary' : 'primary'}" id="inspectSelected" type="button">${examined ? 'Rileggi risultato' : 'Esamina elemento'}</button>`;
+      inspector.innerHTML = `<div><span class="eyebrow">ELEMENTO INDIVIDUATO</span><h3>${escapeHtml(hotspot.title)}</h3><p>${escapeHtml(hotspotObservation(hotspot, examined))}</p></div><button class="btn ${examined ? 'secondary' : 'primary'}" id="inspectSelected" type="button">${escapeHtml(hotspotActionLabel(hotspot, examined))}</button>`;
       inspector.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
 
       document.getElementById('inspectSelected')?.addEventListener('click', () => {
@@ -408,6 +423,136 @@
     }));
   }
 
+  function renderInvestigationMap() {
+    const board = data.investigationBoard || {};
+    const unlocked = (data.evidence || []).filter(e => Investigation.hasEvidence(e.id));
+    const visibleTimeline = Investigation.visibleTimeline();
+    const entityDefs = (board.entities && board.entities.length) ? board.entities : [
+      { id:'case', label:`Caso ${data.caseNumber || ''}`, kind:'case', title:data.title || 'Caso' },
+      { id:'victim', label:'Vittima', kind:'victim', title:data.victim?.name || 'Vittima' },
+      ...(data.suspects || []).map(s => ({ id:s.id, label:'Persona di interesse', kind:'suspect', title:s.name, image:s.image || '' }))
+    ];
+    const grouped = {};
+    unlocked.forEach(e => {
+      const owner = e.board?.owner || 'case';
+      (grouped[owner] ||= []).push(e);
+    });
+
+    const coreKinds = new Set(['case','victim','location']);
+    const visibleEntities = entityDefs.filter(entity => {
+      if (coreKinds.has(entity.kind) || entity.kind === 'suspect') return true;
+      return (grouped[entity.id] || []).length > 0;
+    });
+    const visibleEntityIds = new Set(visibleEntities.map(x => x.id));
+
+    const hasAllEvidence = ids => (ids || []).every(id => Investigation.hasEvidence(id));
+    const hasAnyEvidence = ids => !(ids || []).length || (ids || []).some(id => Investigation.hasEvidence(id));
+    const visibleRelations = (board.relations || []).filter(rel => {
+      if (!visibleEntityIds.has(rel.from) || !visibleEntityIds.has(rel.to)) return false;
+      if (rel.always) return true;
+      if (rel.requiresEvidence && !hasAllEvidence(rel.requiresEvidence)) return false;
+      if (rel.requiresAnyEvidence && !hasAnyEvidence(rel.requiresAnyEvidence)) return false;
+      return !!(rel.requiresEvidence || rel.requiresAnyEvidence);
+    });
+
+    const suspectById = id => (data.suspects || []).find(s => s.id === id);
+    const entityCard = entity => {
+      const clues = grouped[entity.id] || [];
+      const suspect = entity.kind === 'suspect' ? suspectById(entity.id) : null;
+      const image = entity.image || suspect?.image;
+      const interviewFacts = suspect ? (suspect.interrogation || []).filter(topic => GameState.data.askedTopics.includes(`${suspect.id}:${topic.id}`)) : [];
+      const clueHtml = clues.length ? clues.map(e => {
+        const isNew = !(GameState.data.seenEvidence || []).includes(e.id);
+        return `<div class="board-clue ${isNew ? 'is-new' : ''}" data-board-evidence="${escapeHtml(e.id)}">
+          <span class="board-clue-icon" aria-hidden="true">${escapeHtml(evidenceSymbol(e.category))}</span>
+          <div><small>${escapeHtml(e.board?.theme || e.category || 'INDIZIO')}</small><strong>${escapeHtml(e.title)}</strong><p>${escapeHtml(e.description)}</p></div>
+          ${isNew ? '<em>NUOVO</em>' : ''}
+        </div>`;
+      }).join('') : '';
+      const interviewHtml = interviewFacts.map(topic => `<div class="board-clue board-interview-fact"><span class="board-clue-icon" aria-hidden="true">❝</span><div><small>VERBALE</small><strong>${escapeHtml(topic.question)}</strong><p>${escapeHtml(topic.answer)}</p></div></div>`).join('');
+      const contentHtml = clueHtml + interviewHtml || '<p class="board-empty">Nessun elemento specifico collegato finora.</p>';
+      const kindLabel = entity.label || ({suspect:'Persona di interesse',victim:'Vittima',location:'Luogo',topic:'Pista',case:'Caso'}[entity.kind] || 'Nodo');
+      const status = suspect ? (GameState.data.noteBoard?.suspectStatuses?.[suspect.id] || 'Da valutare') : '';
+      return `<article class="board-cluster board-kind-${escapeHtml(entity.kind || 'generic')}" data-board-entity="${escapeHtml(entity.id)}">
+        <span class="board-tack" aria-hidden="true"></span>
+        <header class="board-cluster-head">
+          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(entity.title)}">` : `<span class="board-node-symbol">${entity.kind === 'victim' ? 'V' : entity.kind === 'location' ? '⌖' : entity.kind === 'topic' ? '∑' : entity.kind === 'case' ? '◆' : '•'}</span>`}
+          <div><small>${escapeHtml(kindLabel)}</small><h3>${escapeHtml(entity.title)}</h3>${suspect ? `<p>${escapeHtml(suspect.relationship || '')}</p>` : ''}</div>
+          <b>${clues.length + interviewFacts.length}</b>
+        </header>
+        ${status ? `<div class="board-status"><span>Valutazione squadra</span><strong>${escapeHtml(status)}</strong></div>` : ''}
+        <div class="board-clue-stack">${contentHtml}</div>
+      </article>`;
+    };
+
+    const events = visibleTimeline.map(item => `<div class="board-event"><time>${escapeHtml(item.time)}</time><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.description)}</small></div></div>`).join('');
+    const linkedCount = unlocked.filter(e => e.board?.owner).length;
+    const interviewFactCount = (data.suspects || []).reduce((sum, s) => sum + (s.interrogation || []).filter(t => GameState.data.askedTopics.includes(`${s.id}:${t.id}`)).length, 0);
+    const newCount = unlocked.filter(e => !(GameState.data.seenEvidence || []).includes(e.id)).length;
+
+    view.innerHTML = `
+      <div class="section-head board-page-head">
+        <div><p class="eyebrow">QUADRO DEDUTTIVO AUTOMATICO</p><h2>${escapeHtml(board.title || 'Mappa Investigativa')}</h2><p class="muted">${escapeHtml(board.subtitle || 'La mappa raccoglie automaticamente persone, luoghi, prove ed eventi già emersi durante l’indagine.')}</p></div>
+        <div class="board-stats"><span><strong>${linkedCount}</strong> indizi</span><span><strong>${visibleRelations.length}</strong> collegamenti</span><span><strong>${interviewFactCount}</strong> verbali</span><span><strong>${visibleTimeline.length}</strong> eventi</span>${newCount ? `<span class="board-new-stat"><strong>${newCount}</strong> nuovi</span>` : ''}</div>
+      </div>
+      <div class="board-legend"><span><i class="legend-person"></i>Persone</span><span><i class="legend-place"></i>Luoghi</span><span><i class="legend-topic"></i>Piste</span><span><i class="legend-new"></i>Nuove scoperte</span><small>Le linee compaiono solo quando un collegamento è supportato da ciò che avete scoperto.</small></div>
+      <section class="mind-board mind-board-v11">
+        <div class="mind-board-canvas" id="mindBoardCanvas">
+          <svg id="boardConnections" class="board-connections" aria-hidden="true"></svg>
+          <div class="mind-board-grid">${visibleEntities.map(entityCard).join('')}</div>
+        </div>
+        <aside class="board-events-panel">
+          <div class="board-events-head"><p class="eyebrow">FILO TEMPORALE</p><h3>Eventi verificati</h3><span>${visibleTimeline.length}</span></div>
+          <div class="board-events-list">${events || '<p class="board-empty">La cronologia si popolerà quando avrete verificato orari e movimenti.</p>'}</div>
+        </aside>
+      </section>`;
+
+    const drawBoardConnections = () => {
+      const canvas = document.getElementById('mindBoardCanvas');
+      const svg = document.getElementById('boardConnections');
+      if (!canvas || !svg) return;
+      const base = canvas.getBoundingClientRect();
+      const width = canvas.scrollWidth;
+      const height = canvas.scrollHeight;
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.setAttribute('width', width);
+      svg.setAttribute('height', height);
+      const pieces = [];
+      visibleRelations.forEach((rel, idx) => {
+        const a = canvas.querySelector(`[data-board-entity="${CSS.escape(rel.from)}"]`);
+        const b = canvas.querySelector(`[data-board-entity="${CSS.escape(rel.to)}"]`);
+        if (!a || !b) return;
+        const ra = a.getBoundingClientRect();
+        const rb = b.getBoundingClientRect();
+        const ax = ra.left - base.left + ra.width / 2 + canvas.scrollLeft;
+        const ay = ra.top - base.top + 18 + canvas.scrollTop;
+        const bx = rb.left - base.left + rb.width / 2 + canvas.scrollLeft;
+        const by = rb.top - base.top + 18 + canvas.scrollTop;
+        const midY = (ay + by) / 2;
+        const bend = Math.max(26, Math.min(90, Math.abs(by - ay) * .22));
+        const d = `M ${ax} ${ay} C ${ax} ${midY - bend}, ${bx} ${midY + bend}, ${bx} ${by}`;
+        pieces.push(`<path class="board-link-line" d="${d}"></path>`);
+        const lx = (ax + bx) / 2, ly = (ay + by) / 2;
+        pieces.push(`<g class="board-link-label"><rect x="${lx - 58}" y="${ly - 11}" width="116" height="22" rx="11"></rect><text x="${lx}" y="${ly + 3}" text-anchor="middle">${escapeHtml(rel.label || 'collegamento')}</text></g>`);
+      });
+      svg.innerHTML = pieces.join('');
+    };
+
+    requestAnimationFrame(() => requestAnimationFrame(drawBoardConnections));
+    window.setTimeout(drawBoardConnections, 180);
+    document.querySelectorAll('[data-board-evidence]').forEach(el => el.addEventListener('click', () => {
+      markEvidenceSeen(el.dataset.boardEvidence);
+      el.classList.remove('is-new');
+      el.querySelector('em')?.remove();
+      const stat = document.querySelector('.board-new-stat');
+      if (stat) {
+        const remaining = unlocked.filter(e => !(GameState.data.seenEvidence || []).includes(e.id)).length;
+        if (remaining) stat.innerHTML = `<strong>${remaining}</strong> nuovi`;
+        else stat.remove();
+      }
+    }));
+  }
+
   function renderTimeline() {
     const visible = Investigation.visibleTimeline();
     view.innerHTML = `<div class="section-head"><div><p class="eyebrow">RICOSTRUZIONE TEMPORALE</p><h2>Cronologia</h2><p class="muted">La linea temporale si completa automaticamente quando emergono elementi verificabili.</p></div></div><div class="timeline">${visible.map(item => `<div class="timeline-item"><time>${escapeHtml(item.time)}</time><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.description)}</p></div></div>`).join('') || '<p>Nessun evento verificato.</p>'}</div>`;
@@ -486,7 +631,7 @@
     });
   }
 
-  const renderers = { briefing: renderBriefing, scene: renderScene, evidence: renderEvidence, suspects: renderSuspects, interrogations: renderInterrogations, timeline: renderTimeline, notes: renderNotes, accusation: renderAccusation };
+  const renderers = { briefing: renderBriefing, scene: renderScene, evidence: renderEvidence, suspects: renderSuspects, interrogations: renderInterrogations, timeline: renderTimeline, map: renderInvestigationMap, notes: renderNotes, accusation: renderAccusation };
 
   function activateView(name) {
     const btn = navButtons.find(b => b.dataset.view === name);
